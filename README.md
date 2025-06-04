@@ -1,1 +1,20 @@
-[![Open in Visual Studio Code](https://classroom.github.com/assets/open-in-vscode-2e0aaae1b6195c2367325f4f02e2d04e9abb55f0b24a779b69b11b9e10269abc.svg)](https://classroom.github.com/online_ide?assignment_repo_id=19670050&assignment_repo_type=AssignmentRepo)
+
+# GitGood
+
+A powerful web app that helps developers level up their GitHub presence with AI-powered tools, beginner-friendly issue discovery, README feedback, and personalized GitHub growth tools.
+```
+.
+├── docs                    # Documentation files
+│   ├── proposal            # Project proposal
+│   ├── design              # Design documentation
+│   ├── final               # Final report and deliverables
+│   ├── communication       # Meeting notes and communication logs
+│   ├── ai-disclosure       # AI usage disclosures      
+├── src                     # Source files 
+│   ├── app                 # Main application code
+│   ├── public              # Static assets (png, svg, jpeg, etc.)
+│   └── ...                 # Additional source components      
+├── test                    # Automated tests
+├── tools                   # Development tools and utilities
+└── README.md               # Project overview (this file)
+```
