@@ -1,7 +1,7 @@
 
 # GitGood
 
-A powerful web app that helps developers level up their GitHub presence with AI-powered tools, beginner-friendly issue discovery, README feedback, and personalized GitHub growth tools.
+A web app that helps developers level up their GitHub presence with AI-powered tools, beginner-friendly issue discovery, README feedback, and personalized GitHub growth tools.
 ```
 .
 ├── docs                    # Documentation files
