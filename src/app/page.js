@@ -11,10 +11,10 @@ export default function Home() {
 
 }
 export function Hero() {
-  return <HeroParallax products={products} />;
+  return <HeroParallax products={repos} />;
 
 }
-export const products = [
+export const repos = [
   {
     title: "React",
     link: "https://github.com/facebook/react",
