@@ -3,7 +3,7 @@ import { HeroParallax } from "@/components/ui/hero-parallax";
 import React from "react";
 export default function Home() {
   return (
-  <div className="w-full h-auto dark bg-black">
+  <div className="">
   <Hero></Hero>
 
   </div>
