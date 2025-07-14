@@ -66,7 +66,7 @@ export default function IssueSelector() {
                 AI Issue Selector
                 </h2>
                 <p className="text-sm font-semibold">
-                Can't pick? Let AI decide.
+                Can not pick? Let AI decide.
                 </p>
 
                 <Input placeholder="Tell us what kind of issue you want..." disabled={true} className="w-64" />
