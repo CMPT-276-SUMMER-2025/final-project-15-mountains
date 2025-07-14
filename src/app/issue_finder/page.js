@@ -20,6 +20,9 @@ export default function IssueSelector() {
 
     const fetchIssues = async () => {
         setLoading(true);
+        const response = await fetch("/api/github_api/issue_finder");
+        const data = await response.json();
+        console.log(data);
         setLoading(false);
     };
     return (
