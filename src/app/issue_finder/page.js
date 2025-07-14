@@ -78,11 +78,11 @@ export default function IssueSelector() {
             <div className="border-0 bg-transparent w-200 mt-5">
                 {issues.map((issue, i) => (
                 <Card key={issue.id} id={`issue-${i}`} className={"p-4 transition-all duration-300 mb-5"}>
-                    <a href={issue.html_url} className="underline font-medium text-lg">{issue.title}</a>
+                    <a href={issue.html_url} target="_blank" className="underline font-medium text-lg">{issue.title}</a>
                     <div className="text-sm text-gray-200 mt-2">
                         <p><strong>Repo:</strong> <a href={issue.repository.html_url} target="_blank" className="underline">{issue.repository.name}</a></p>
                         <p><strong>Repo Description:</strong> {issue.repository.description || "No description"}</p>
-                        <p><strong>Stars:</strong> {issue.repository.stargazers_count} &nbsp;&nbsp; <strong>|| Forks:</strong> {issue.repository.forks_count}</p>
+
                     </div>
                 </Card>
             ))}
