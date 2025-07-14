@@ -61,7 +61,7 @@ export default function IssueSelector() {
             </div>
 
             
-            <div className="space-y-4 w-90 border-l-5 flex flex-col justify-center items-center ">
+            <div className="space-y-4 w-90 border-l-5 flex flex-col justify-center items-center  text-gray-500">
                 <h2 className="text-xl font-semibold">
                 AI Issue Selector
                 </h2>
@@ -71,7 +71,7 @@ export default function IssueSelector() {
 
                 <Input placeholder="Tell us what kind of issue you want..." disabled={true} className="w-64" />
                 <Button disabled={true} className="hover:cursor-pointer">
-                    Ask AI to Choose
+                    Coming soon
                 </Button>
             </div>
             </Card>
@@ -82,7 +82,7 @@ export default function IssueSelector() {
                     <div className="text-sm text-gray-200 mt-2">
                         <p><strong>Repo:</strong> <a href={issue.repository.html_url} target="_blank" className="underline">{issue.repository.name}</a></p>
                         <p><strong>Repo Description:</strong> {issue.repository.description || "No description"}</p>
-                        <p><strong>Stars:</strong> {issue.repository.stargazers_count} &nbsp;&nbsp; <strong>🍴 Forks:</strong> {issue.repository.forks_count}</p>
+                        <p><strong>Stars:</strong> {issue.repository.stargazers_count} &nbsp;&nbsp; <strong>|| Forks:</strong> {issue.repository.forks_count}</p>
                     </div>
                 </Card>
             ))}
