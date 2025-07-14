@@ -15,7 +15,36 @@ export async function GET(req) {
 
     const res = await fetch(url, { headers: authHeaders });
     const data = await res.json();
-    console.log(data);
 
-    return NextResponse.json(data);
+    const issues = data.items;
+    const filtered = [];
+
+    for (const issue of issues) {
+        const repoUrl = issue.repository_url;
+
+        const repoRes = await fetch(repoUrl, { headers: authHeaders });
+        if (!repoRes.ok) continue;
+
+        const repoData = await repoRes.json();
+
+        if (repoData.stargazers_count >= 100) {
+        filtered.push({
+            id: issue.id,
+            html_url: issue.html_url,
+            title: issue.title,
+            repository: {
+            name: repoData.full_name,
+            description: repoData.description,
+            stargazers_count: repoData.stargazers_count,
+            forks_count: repoData.forks_count,
+            html_url: repoData.html_url,
+            },
+        });
+
+        }
+
+        if (filtered.length >= 10) break;
+    }
+
+    return NextResponse.json(filtered);
 }
