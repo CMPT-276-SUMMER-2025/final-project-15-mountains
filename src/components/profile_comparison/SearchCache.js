@@ -18,12 +18,12 @@ export function SearchCache(input, stableInput, cacheRef) {
         cacheRef.current = pruned;
         localStorage.setItem("searchCache", JSON.stringify(pruned));
 
-        console.log(`Pruned searchCache entries: ${removed}`);
+        console.log(`[!] Pruned Entries: ${removed}`);
         Object.entries(pruned).forEach(([key, value]) => {
             console.log(`"${key}" expires @ ${(new Date(value.timestamp + TTL)).toLocaleTimeString()}`);
         });
 
-        console.log("Initial Cache");
+        console.log("[!] Initial Cache:");
         console.table(cacheRef.current);
     }, [cacheRef]);
 
