@@ -1,16 +1,18 @@
 "use client";
 import { useState, useEffect } from "react";
+import { Debounce } from "@/components/profile_comparison/Debounce";
 
 export default function SearchBar({ onSelect }) {
     const [input, setInput] = useState("");
+    const stableInput = Debounce(input, 500);
 
     useEffect(() => {
-        if (!input) return;
+        if (!stableInput) return;
 
         fetch("/api/github_api/profile_comparison", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ username: input }),
+            body: JSON.stringify({ username: stableInput }),
         })
             .then(res => res.json())
             .then(json => {
@@ -19,7 +21,7 @@ export default function SearchBar({ onSelect }) {
                 if (user?.login) onSelect(user);
             })
             .catch(err => console.error(err));
-    }, [input]);
+    }, [stableInput]);
 
     return (
         <div>
