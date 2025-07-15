@@ -14,7 +14,7 @@ export default function ProfileComparison() {
     };
 
     return (
-        <div className="border border-red-500 m-10 p-5">
+        <div className="border border-red-500 m-10 p-5 mt-25">
             <ComparisonHeader />
 
             <div className="border border-red-500">
