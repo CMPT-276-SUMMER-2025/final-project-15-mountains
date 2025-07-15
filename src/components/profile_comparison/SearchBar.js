@@ -61,7 +61,7 @@ export default function SearchBar({ onSelect, cache }) {
                 )}
 
                 {resultsVisible && results.length > 0 && (
-                    <ul className="absolute top-full left-0 mt-1 bg-white w-full border rounded shadow">
+                    <ul className="absolute top-full left-0 mt-1 bg-white w-full border rounded shadow z-1">
                         {results.map((user) => (
                             <li
                                 key={user.id}
