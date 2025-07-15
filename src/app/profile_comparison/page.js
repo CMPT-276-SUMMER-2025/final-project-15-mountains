@@ -1,11 +1,11 @@
 "use client";
-
-import { useState } from "react";
+import { useState, useRef } from "react";
 import ComparisonHeader from "@/components/profile_comparison/ComparisonHeader";
 import SearchBar from "@/components/profile_comparison/SearchBar";
 
 export default function ProfileComparison() {
     const [users, setUsers] = useState([null, null]);
+    const cacheRef = useRef({});
 
     const updateUser = (userObject, index) => {
         const updated = [...users];
@@ -24,12 +24,15 @@ export default function ProfileComparison() {
                             key={index}
                             className="border border-red-500 flex flex-col items-center gap-5 p-5"
                         >
-                            <SearchBar onSelect={(user) => updateUser(user, index)} />
+                            <SearchBar
+                                onSelect={(user) => updateUser(user, index)}
+                                cache={cacheRef}
+                            />
 
                             {user && (
                                 <div className="border border-red-500 flex flex-col items-center">
                                     <img
-                                        src={user.avatarUrl}
+                                        src={user.avatar_url}
                                         alt={user.login}
                                         className="border-red-500 border-2 w-30 h-30 rounded-full"
                                     />
