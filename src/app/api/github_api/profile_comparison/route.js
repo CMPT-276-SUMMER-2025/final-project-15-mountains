@@ -44,6 +44,7 @@ export async function POST(req) {
 
     const json = await res.json();
     const user = json.data?.user || {};
+    const rateLimit = json.data?.rateLimit || {};
 
     return NextResponse.json({
         user: {
@@ -62,6 +63,7 @@ export async function POST(req) {
             remaining: rateLimit.remaining || 0,
             cost: rateLimit.cost || 0,
             resetAt: rateLimit.resetAt || null,
-        }
+        },
     });
+
 }
