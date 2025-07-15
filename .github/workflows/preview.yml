@@ -38,5 +38,5 @@ jobs:
         run: |
           DEPLOYMENT_URL=$(vercel deploy --token="${{ secrets.VERCEL_TOKEN }}" --yes)
           echo "deployment_url=$DEPLOYMENT_URL" >> $GITHUB_OUTPUT
-          echo " 🟥🟥🟥Deployed to: $DEPLOYMENT_URL🟥🟥🟥"
+          echo " 🟥🟥🟥   Deployed to: $DEPLOYMENT_URL   🟥🟥🟥"
       
