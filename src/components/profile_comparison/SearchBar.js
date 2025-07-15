@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import { Debounce } from "@/components/profile_comparison/Debounce";
 import { SearchCache } from "@/components/profile_comparison/SearchCache";
+import { FaGithub, FaArrowRight } from "react-icons/fa";
 
 export default function SearchBar({ onSelect, cache }) {
     const [input, setInput] = useState("");
@@ -21,38 +22,64 @@ export default function SearchBar({ onSelect, cache }) {
         setResultsVisible(false);
     };
 
-    return (
-        <div className="relative">
-            <input
-                type="text"
-                placeholder="Search GitHub users..."
-                value={input}
-                onChange={(e) => setInput(e.target.value)}
-                onFocus={() => { if (results.length > 0) setResultsVisible(true); }}
-                onBlur={() => { setTimeout(() => setResultsVisible(false), 100); }}
-                className="w-full flex justify-center border rounded px-3 py-2"
-            />
+    const handleAnalyze = (e) => {
+        e.preventDefault();
+        if (results.length > 0) handleSelect(results[0]);
+    }
 
-            {resultsVisible && results.length > 0 && (
-                <ul className="absolute bg-white w-full border rounded shadow">
-                    {results.map((user) => (
-                        <li
-                            key={user.id}
-                            onMouseDown={() => handleSelect(user)}
-                            className="cursor-pointer rounded px-3 py-2 hover:bg-gray-100"
-                        >
-                            <div className="flex items-center gap-3">
-                                <img
-                                    src={user.avatar_url}
-                                    alt={user.login}
-                                    className="w-6 h-6 rounded-full"
-                                />
-                                <span className="truncate">{user.login}</span>
-                            </div>
-                        </li>
-                    ))}
-                </ul>
-            )}
-        </div>
+    return (
+        <form
+            onSubmit={handleAnalyze}
+            className="flex items-center w-full gap-4"
+        >
+            <div
+                className="relative flex items-center border rounded px-4 py-3 bg-white">
+                <FaGithub className="text-gray-700 text-xl mr-3 h-6 w-6"/>
+                <input
+                    type="text"
+                    placeholder="Search GitHub users..."
+                    value={input}
+                    onChange={(e) => setInput(e.target.value)}
+                    onFocus={() => {
+                        if (results.length > 0) setResultsVisible(true);
+                    }}
+                    onBlur={() => {
+                        setTimeout(() => setResultsVisible(false), 100);
+                    }}
+                    className="outline-none text-gray-800"
+                />
+
+                {resultsVisible && results.length > 0 && (
+                    <ul className="absolute top-full left-0 mt-1 bg-white w-full border rounded shadow">
+                        {results.map((user) => (
+                            <li
+                                key={user.id}
+                                onMouseDown={() => handleSelect(user)}
+                                className="cursor-pointer rounded px-3 py-2 hover:bg-gray-100"
+                            >
+                                <div className="flex items-center gap-3">
+                                    <img
+                                        src={user.avatar_url}
+                                        alt={user.login}
+                                        className="w-6 h-6 rounded-full"
+                                    />
+                                    <span className="truncate">{user.login}</span>
+                                </div>
+                            </li>
+                        ))}
+                    </ul>
+                )}
+            </div>
+
+            <button
+                type="submit"
+                className={`flex items-center gap-2 px-6 py-3 rounded-lg text-white font-bold transition 
+                            bg-red-500 hover:bg-red-600 active:bg-red-700`}
+            >
+                <FaArrowRight className="text-white"/>
+                ANALYZE
+            </button>
+        </form>
+
     );
 }
