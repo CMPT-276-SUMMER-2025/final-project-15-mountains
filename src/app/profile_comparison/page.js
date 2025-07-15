@@ -16,6 +16,10 @@ export default function ProfileComparison() {
         }
     };
 
+    const removeUser = (login) => {
+        setUsers(users.filter((u) => u.login !== login));
+    };
+
     return (
         <div className="border border-red-500 m-10 p-5 mt-25">
             <ComparisonHeader />
@@ -25,7 +29,7 @@ export default function ProfileComparison() {
                         <SearchBar onSelect={addUser} cache={cacheRef}/>
                     </div>
                 </div>
-                <UserSlot users={users}/>
+                <UserSlot users={users} removeUser={removeUser} />
             </div>
         </div>
     );
