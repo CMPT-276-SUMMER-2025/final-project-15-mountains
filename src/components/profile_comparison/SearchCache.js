@@ -7,13 +7,22 @@ export function SearchCache(input, stableInput, cacheRef) {
 
     useEffect(() => {
         const stored = JSON.parse(localStorage.getItem("searchCache") || "{}");
+
         const pruned = Object.fromEntries(
             Object.entries(stored).filter(
                 ([_, value]) => Date.now() - value.timestamp < TTL
             )
         );
+
+        const removed = Object.keys(stored).length - Object.keys(pruned).length;
         cacheRef.current = pruned;
         localStorage.setItem("searchCache", JSON.stringify(pruned));
+
+        console.log(`Pruned searchCache entries: ${removed}`);
+        Object.entries(pruned).forEach(([key, value]) => {
+            console.log(`"${key}" expires @ ${(new Date(value.timestamp + TTL)).toLocaleTimeString()}`);
+        });
+
         console.log("Initial Cache");
         console.table(cacheRef.current);
     }, [cacheRef]);
