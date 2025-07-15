@@ -49,6 +49,17 @@ export default function SearchBar({ onSelect, cache }) {
                     className="outline-none text-gray-800"
                 />
 
+                {input && (
+                    <button
+                        type="button"
+                        onClick={() => setInput("")}
+                        className="absolute flex items-center justify-center rounded right-3 w-6 h-6
+                                   hover:cursor-pointer hover:bg-gray-100 transition"
+                    >
+                        <span className="text-lg text-gray-800">&times;</span>
+                    </button>
+                )}
+
                 {resultsVisible && results.length > 0 && (
                     <ul className="absolute top-full left-0 mt-1 bg-white w-full border rounded shadow">
                         {results.map((user) => (

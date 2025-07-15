@@ -21,7 +21,7 @@ export default function ProfileComparison() {
             <ComparisonHeader />
             <div className="border border-red-500 flex flex-col gap-5">
                 <div className="border border-red-500 flex justify-center">
-                    <div className="border border-red-500 w-1/3">
+                    <div className="w-1/3">
                         <SearchBar onSelect={addUser} cache={cacheRef}/>
                     </div>
                 </div>
