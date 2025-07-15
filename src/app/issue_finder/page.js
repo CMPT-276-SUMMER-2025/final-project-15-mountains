@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert";
 
 export default function IssueSelector() {
     const [selectedLang, setSelectedLang] = useState("JavaScript");
@@ -19,13 +20,25 @@ export default function IssueSelector() {
     const [loading,setLoading] = useState(false);
     const [issues,setIssues] = useState([]);
 
+    const [error,setError] = useState(false);
+    const [errorMessage,setErrorMessage] = useState("");
     const fetchIssues = async () => {
         setLoading(true);
-        const res = await fetch(`/api/github_api/issue_finder?lang=${selectedLang}`);
-        const data = await res.json();
-        setIssues(data);
-        setLoading(false);
+        setError(false);
+        try {
+            const res = await fetch(`/api/github_api/issue_finder?lang=${selectedLang}`);
+            if (!res.ok) throw new Error("Failed to fetch");
+            const data = await res.json();
+            setIssues(data);
+        } catch (err) {
+            setErrorMessage("Failed to fetch issues. Please try again after a few mins");
+            setError(true);
+            setIssues([]);
+        } finally {
+            setLoading(false);
+        }
     };
+
     return (
         <div>
         <div className="flex flex-col justify-end items-center h-[20vh] mb-15">
@@ -75,6 +88,15 @@ export default function IssueSelector() {
                 </Button>
             </div>
             </Card>
+            {error && (
+            <Alert variant="destructive" className="mt-4 w-[600px]">
+                <AlertTitle>Error</AlertTitle>
+                <AlertDescription>
+                {errorMessage}
+                </AlertDescription>
+            </Alert>
+            )}
+
             <div className="border-0 bg-transparent w-200 mt-5">
                 {issues.map((issue, i) => (
                 <Card key={issue.id} id={`issue-${i}`} className={"p-4 transition-all duration-300 mb-5"}>

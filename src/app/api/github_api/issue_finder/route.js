@@ -5,16 +5,18 @@ export async function GET(req) {
     const language = searchParams.get("lang") || "JavaScript";
 
     const query = `language:${language} label:"good first issue" label:"help wanted" state:open`;
-    const url = `https://api.github.com/search/issues?q=${encodeURIComponent(
-        query
-    )}&per_page=50&sort=created&order=desc`;
+    const url = `https://api.github.com/search/issues?q=${encodeURIComponent(query)}&per_page=50&sort=created&order=desc`;
 
     const authHeaders = {
         Authorization: `Bearer ${token}`,
     };
 
     const res = await fetch(url, { headers: authHeaders });
+    if(!res.ok){
+        throw new Error(`GitHub issue fetch failed: ${res.status}`);
+    }
     const data = await res.json();
+
 
     const issues = data.items;
     const filtered = [];
@@ -23,7 +25,9 @@ export async function GET(req) {
         const repoUrl = issue.repository_url;
 
         const repoRes = await fetch(repoUrl, { headers: authHeaders });
-        if (!repoRes.ok) continue;
+        if(!res.ok){
+            throw new Error(`GitHub Repo fetch failed: ${res.status}`);
+        }
 
         const repoData = await repoRes.json();
 
