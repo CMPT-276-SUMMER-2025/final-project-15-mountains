@@ -56,7 +56,7 @@ export default function IssueSelector() {
                 </p>
 
                 <Select value={selectedLang} onValueChange={setSelectedLang}>
-                <SelectTrigger className="w-64">
+                <SelectTrigger data-testid="language-select" className="w-64">
                     <SelectValue placeholder="Select a language" />
                 </SelectTrigger>
                 <SelectContent>
