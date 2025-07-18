@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-const token = process.env.GITHUB_TOKEN;
+const token = process.env.GH_TOKEN;
 export async function GET(req) {
     const { searchParams } = new URL(req.url);
     const language = searchParams.get("lang");
