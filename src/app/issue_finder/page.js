@@ -141,15 +141,15 @@ export default function IssueSelector() {
                 {issues.map((issue, i) => (
                 <Card key={issue.id} id={`issue-${i}`} className={`p-4 transition-all duration-300 mb-5 ${highlightedIndex === i ? "border-2 border-green-500 scale-110 m-6 shadow-xl/20 shadow-green-600" : ""
       }`}>
-                    <a href={issue.html_url} target="_blank" className="underline font-medium text-lg">{issue.title}</a>
-                    <div className="text-sm text-gray-200 mt-2">
+                    <a href={issue.html_url} target="_blank" className="underline font-medium text-lg text-black dark:text-white">{issue.title}</a>
+                    <div className="text-sm dark:text-gray-200 mt-2">
                         <p><strong>Repo:</strong> <a href={issue.repository.html_url} target="_blank" className="underline">{issue.repository.name}</a></p>
                         <p><strong>Repo Description:</strong> {issue.repository.description || "No description"}</p>
 
                     </div>
                     {highlightedIndex === i && aimessage != "" && (
-                        <div className=" mt-2 p-4 border-l-4 border-green-500 bg-green-100 dark:bg-green-900/40 text-sm rounded-md shadow-md text-xs">
-                            <strong className="block mb-1 text-green-800 dark:text-green-300 ">
+                        <div className=" mt-2 p-4 border-l-4 border-green-500 bg-green-100 dark:bg-green-900/40 rounded-md shadow-md text-xs">
+                            <strong className=" mb-1 text-green-800 dark:text-green-300 ">
                             Why AI chose this:
                             </strong>
                             <p className="text-gray-800 dark:text-gray-100">{aimessage}</p>
