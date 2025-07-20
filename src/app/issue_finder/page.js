@@ -26,6 +26,8 @@ export default function IssueSelector() {
 
     const [AIloading,setAILoading] = useState(false);
     const [userPrompt,setUserPrompt] = useState("");
+    const [highlightedIndex,setHighlightedIndex] = useState(0);
+    const [aimessage,setAImessage] = useState("");
 
     const fetchIssues = async () => {
         setLoading(true);
@@ -48,13 +50,32 @@ export default function IssueSelector() {
         setAILoading(true);
         setError(false);
         try {
+            const res = await fetch('/api/ai_api/issue_suggestion',{
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ prompt: userPrompt, issues }),
+                
+            });
+            if (!res.ok) throw new Error("Failed to fetch");
+            const data = await res.json();
+            setHighlightedIndex(data.index);
+            setAImessage(data.explanation);
+            console.log(data);
         } catch (err) {
             setErrorMessage("Failed to generate suggestion. Please try again after a few mins");
             setError(true);
         } finally {
-            setLoading(false);
+            setAILoading(false);
         }
     };
+    useEffect(() => {
+        if (highlightedIndex !== null) {
+        const element = document.getElementById(`issue-${highlightedIndex}`);
+        if (element) {
+            element.scrollIntoView({ behavior: "smooth", block: "center" });
+        }
+        }
+    }, [highlightedIndex]);
 
     return (
         <div>
