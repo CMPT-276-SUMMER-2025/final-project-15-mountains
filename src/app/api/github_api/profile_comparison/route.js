@@ -12,9 +12,23 @@ export async function POST(req) {
         avatarUrl
         location
         url
-        repositories(privacy: PUBLIC) {
+        repositories(first: 100, privacy: PUBLIC, ownerAffiliations: OWNER) {
           totalCount
-        }
+          nodes {
+            stargazerCount
+            forkCount
+            defaultBranchRef {
+              target {
+                __typename
+                ... on Commit {
+                  history {
+                    totalCount
+                  }
+                }
+              }
+            }
+          }
+        } 
         followers {
           totalCount
         }
@@ -62,12 +76,27 @@ export async function POST(req) {
     const json = await res.json();
     const user = json.data?.user || {};
     const calendar = user.contributionsCollection?.contributionCalendar || {};
+
     const contributions = calendar.weeks?.flatMap((week) => week.contributionDays)
         .map((day) => ({
             date: day.date,
             count: day.contributionCount,
             color: day.color,
         })) || [];
+
+    const repos = user.repositories?.nodes || [];
+
+    let totalStars = 0;
+    let totalForks = 0;
+    let totalCommits = 0;
+
+    for (const repo of repos) {
+        totalStars += repo.stargazerCount || 0;
+        totalForks += repo.forkCount || 0;
+        const commitCount =
+            repo.defaultBranchRef?.target?.history?.totalCount || 0;
+        totalCommits += commitCount;
+    }
 
     const rateLimit = json.data?.rateLimit || {};
 
@@ -84,8 +113,11 @@ export async function POST(req) {
             following: user.following?.totalCount || 0,
             openIssues: user.issues?.totalCount || 0,
             pullRequests: user.pullRequests?.totalCount || 0,
-            contributions,
             totalContributions: calendar.totalContributions || 0,
+            contributions,
+            totalStars,
+            totalForks,
+            totalCommits,
         },
         rateLimit: {
             limit: rateLimit.limit || 0,
@@ -94,5 +126,4 @@ export async function POST(req) {
             resetAt: rateLimit.resetAt || null,
         },
     });
-
 }
