@@ -19,14 +19,46 @@ export default function UserOverview({ userProfile }) {
     if (!user) return null;
 
     const stats = [
-        { label: "Followers", value: user.followers, icon: <FaUsers className="text-green-500" /> },
-        { label: "Following", value: user.following, icon: <FaUserPlus className="text-purple-500" /> },
-        { label: "Public Repos", value: user.publicRepos, icon: <FaBook className="text-blue-500" /> },
-        { label: "Open Issues", value: user.openIssues, icon: <IssueOpenedIcon size={18} className="text-red-500" /> },
-        { label: "Pull Requests", value: user.pullRequests, icon: <GitPullRequestIcon size={18} className="text-pink-500" /> },
-        { label: "Total Commits", value: user.totalCommits, icon: <GitCommitIcon size={18} className="text-indigo-500" /> },
-        { label: "Stars", value: user.totalStars, icon: <StarIcon size={18} className="text-yellow-500" /> },
-        { label: "Forks", value: user.totalForks, icon: <RepoForkedIcon size={18} className="text-gray-500" /> },
+        {
+            label: "Followers",
+            value: user.followers,
+            icon: <FaUsers className="text-green-500" />
+        },
+        {
+            label: "Following",
+            value: user.following,
+            icon: <FaUserPlus className="text-purple-500" />
+        },
+        {
+            label: "Public Repos",
+            value: user.publicRepos,
+            icon: <FaBook className="text-blue-500" />
+        },
+        {
+            label: "Open Issues",
+            value: user.openIssues,
+            icon: <IssueOpenedIcon size={18} className="text-red-500" />
+        },
+        {
+            label: "Pull Requests",
+            value: user.pullRequests,
+            icon: <GitPullRequestIcon size={18} className="text-pink-500" />
+        },
+        {
+            label: "Total Commits",
+            value: user.totalCommits,
+            icon: <GitCommitIcon size={18} className="text-indigo-500" />
+        },
+        {
+            label: "Stars",
+            value: user.totalStars,
+            icon: <StarIcon size={18} className="text-yellow-500" />
+        },
+        {
+            label: "Forks",
+            value: user.totalForks,
+            icon: <RepoForkedIcon size={18} className="text-gray-500" />
+        },
     ];
 
     return (

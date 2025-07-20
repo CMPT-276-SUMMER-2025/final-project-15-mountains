@@ -81,10 +81,15 @@ export default function ProfileComparison() {
 
             {showAnalysis && (
                 <div className="mt-5">
-                    <div className="flex bg-gray-50 rounded-lg border border-2 border-grey-400">
-                        <div className="m-5 bg-white border border-grey-200 p-5 w-fit h-fit rounded-xl">
-                            <UserOverview userProfile={userProfiles[0]} />
-                        </div>
+                    <div className="flex bg-gray-50 rounded-lg border border-2 border-grey-400 gap-3 p-3">
+                        {userProfiles.map((profile) => (
+                            <div
+                                key={profile.login}
+                                className="bg-white border border-grey-200 p-5 rounded-xl w-fit h-fit"
+                            >
+                                <UserOverview userProfile={profile} />
+                            </div>
+                        ))}
                     </div>
                 </div>
             )}
