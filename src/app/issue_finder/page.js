@@ -34,11 +34,22 @@ export default function IssueSelector() {
         setAImessage("");
         setLoading(true);
         setError(false);
+
         try {
-            const res = await fetch(`/api/github_api/issue_finder?lang=${selectedLang}`);
-            if (!res.ok) throw new Error("Failed to fetch");
-            const data = await res.json();
-            setIssues(data);
+            const cached = localStorage.getItem(selectedLang);
+
+            if (!cached) {
+                const res = await fetch(`/api/github_api/issue_finder?lang=${selectedLang}`);
+                if (!res.ok) throw new Error("Failed to fetch");
+
+                const data = await res.json();
+                setIssues(data);
+
+                
+                localStorage.setItem(selectedLang, JSON.stringify(data));
+            } else {
+                setIssues(JSON.parse(cached));
+            }
         } catch (err) {
             setErrorMessage("Failed to fetch issues. Please try again after a few mins");
             setError(true);
@@ -109,7 +120,7 @@ export default function IssueSelector() {
 
                 </Select>
                 <Button onClick={fetchIssues} disabled={loading} className="hover:cursor-pointer">
-                    {loading ? "searching..." : "Find Issues"}
+                    {loading ? "Searching..." : "Find Issues"}
                 </Button>
             </div>
 
