@@ -21,7 +21,18 @@ export async function POST(req) {
         following {
           totalCount
         }
-      }
+        contributionsCollection {
+          contributionCalendar {
+            weeks {
+              contributionDays {
+                date
+                contributionCount
+                color
+              }
+            }
+          }
+        }
+      } 
       rateLimit {
         limit
         remaining
@@ -44,6 +55,14 @@ export async function POST(req) {
 
     const json = await res.json();
     const user = json.data?.user || {};
+    const calendar = user.contributionsCollection?.contributionCalendar || {};
+    const contributions = calendar.weeks?.flatMap((week) => week.contributionDays)
+        .map((day) => ({
+            date: day.date,
+            count: day.contributionCount,
+            color: day.color,
+        })) || [];
+
     const rateLimit = json.data?.rateLimit || {};
 
     return NextResponse.json({
@@ -57,6 +76,8 @@ export async function POST(req) {
             publicRepos: user.repositories?.totalCount || 0,
             followers: user.followers?.totalCount || 0,
             following: user.following?.totalCount || 0,
+            contributions,
+            totalContributions: calendar.totalContributions || 0,
         },
         rateLimit: {
             limit: rateLimit.limit || 0,
