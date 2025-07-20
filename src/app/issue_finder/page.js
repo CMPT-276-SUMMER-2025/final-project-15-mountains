@@ -30,6 +30,8 @@ export default function IssueSelector() {
     const [aimessage,setAImessage] = useState("");
 
     const fetchIssues = async () => {
+        setHighlightedIndex(-1);
+        setAImessage("");
         setLoading(true);
         setError(false);
         try {
@@ -78,7 +80,7 @@ export default function IssueSelector() {
     }, [highlightedIndex]);
 
     return (
-        <div>
+        <div className="h-[100vh]">
         <div className="flex flex-col justify-end items-center h-[20vh] mb-15">
             <h1 className="text-7xl">Issue Finder</h1>
         </div>
@@ -145,6 +147,14 @@ export default function IssueSelector() {
                         <p><strong>Repo Description:</strong> {issue.repository.description || "No description"}</p>
 
                     </div>
+                    {highlightedIndex === i && aimessage != "" && (
+                        <div className=" mt-2 p-4 border-l-4 border-green-500 bg-green-100 dark:bg-green-900/40 text-sm rounded-md shadow-md text-xs">
+                            <strong className="block mb-1 text-green-800 dark:text-green-300 ">
+                            Why AI chose this:
+                            </strong>
+                            <p className="text-gray-800 dark:text-gray-100">{aimessage}</p>
+                        </div>
+                        )}
                 </Card>
             ))}
                 </div>
