@@ -22,6 +22,11 @@ export default function IssueSelector() {
 
     const [error,setError] = useState(false);
     const [errorMessage,setErrorMessage] = useState("");
+
+
+    const [AIloading,setAILoading] = useState(false);
+    const [userPrompt,setUserPrompt] = useState("");
+
     const fetchIssues = async () => {
         setLoading(true);
         setError(false);
@@ -34,6 +39,19 @@ export default function IssueSelector() {
             setErrorMessage("Failed to fetch issues. Please try again after a few mins");
             setError(true);
             setIssues([]);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const getAISuggestion = async () => {
+        setAILoading(true);
+        setError(false);
+        try {
+            
+        } catch (err) {
+            setErrorMessage("Failed to generate suggestion. Please try again after a few mins");
+            setError(true);
         } finally {
             setLoading(false);
         }
@@ -74,7 +92,7 @@ export default function IssueSelector() {
             </div>
 
             
-            <div className="space-y-4 w-90 border-l-5 flex flex-col justify-center items-center  text-gray-500">
+            <div className="space-y-4 w-90 border-l-5 flex flex-col justify-center items-center  ">
                 <h2 className="text-xl font-semibold">
                 AI Issue Selector
                 </h2>
@@ -82,9 +100,9 @@ export default function IssueSelector() {
                 Can not pick? Let AI decide.
                 </p>
 
-                <Input placeholder="Tell us what kind of issue you want..." disabled={true} className="w-64" />
-                <Button disabled={true} className="hover:cursor-pointer">
-                    Coming soon
+                <Input placeholder="Tell us what kind of issue you want..." value={userPrompt} onChange={(e) => setUserPrompt(e.target.value)} disabled={!issues.length} className="w-64"/>
+                <Button onClick={getAISuggestion} disabled={!issues.length || AIloading} className="hover:cursor-pointer">
+                    {AIloading ? "Loading..." :"Get AI Suggestion"}
                 </Button>
             </div>
             </Card>
