@@ -48,7 +48,6 @@ export default function IssueSelector() {
         setAILoading(true);
         setError(false);
         try {
-            
         } catch (err) {
             setErrorMessage("Failed to generate suggestion. Please try again after a few mins");
             setError(true);
