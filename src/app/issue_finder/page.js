@@ -26,7 +26,7 @@ export default function IssueSelector() {
 
     const [AIloading,setAILoading] = useState(false);
     const [userPrompt,setUserPrompt] = useState("");
-    const [highlightedIndex,setHighlightedIndex] = useState(0);
+    const [highlightedIndex,setHighlightedIndex] = useState(-1);
     const [aimessage,setAImessage] = useState("");
 
     const fetchIssues = async () => {
@@ -137,7 +137,8 @@ export default function IssueSelector() {
 
             <div className="border-0 bg-transparent w-200 mt-5">
                 {issues.map((issue, i) => (
-                <Card key={issue.id} id={`issue-${i}`} className={"p-4 transition-all duration-300 mb-5"}>
+                <Card key={issue.id} id={`issue-${i}`} className={`p-4 transition-all duration-300 mb-5 ${highlightedIndex === i ? "border-2 border-green-500 scale-110 m-6 shadow-xl/20 shadow-green-600" : ""
+      }`}>
                     <a href={issue.html_url} target="_blank" className="underline font-medium text-lg">{issue.title}</a>
                     <div className="text-sm text-gray-200 mt-2">
                         <p><strong>Repo:</strong> <a href={issue.repository.html_url} target="_blank" className="underline">{issue.repository.name}</a></p>
