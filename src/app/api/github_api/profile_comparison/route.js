@@ -21,6 +21,12 @@ export async function POST(req) {
         following {
           totalCount
         }
+        issues(states: OPEN) {
+            totalCount
+        }
+        pullRequests {
+            totalCount
+        }
         contributionsCollection {
           contributionCalendar {
             weeks {
@@ -76,6 +82,8 @@ export async function POST(req) {
             publicRepos: user.repositories?.totalCount || 0,
             followers: user.followers?.totalCount || 0,
             following: user.following?.totalCount || 0,
+            openIssues: user.issues?.totalCount || 0,
+            pullRequests: user.pullRequests?.totalCount || 0,
             contributions,
             totalContributions: calendar.totalContributions || 0,
         },
