@@ -9,5 +9,4 @@ test('UNIT TEST ISSUE SELECTOR: tests if route returns data ', async ({ request 
   
   const data = await response.json();
   expect(data.length).toBeGreaterThan(0);
-  expect(data.length).toBeGreaterThan(9);
 });

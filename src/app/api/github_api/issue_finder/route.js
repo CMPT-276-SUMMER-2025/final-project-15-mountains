@@ -21,7 +21,6 @@ export async function GET(req) {
 
 
     const issues = data.items;
-    console.log(issues.length);
     const filtered = [];
     let pass = 0;
     for (const issue of issues) {
@@ -57,7 +56,6 @@ export async function GET(req) {
 
         if (filtered.length >= 20) break;
     }
-    console.log(pass);
 
     return NextResponse.json(filtered);
 }
