@@ -5,6 +5,7 @@ import SearchBar from "@/components/profile_comparison/SearchBar";
 import UserSlot from "@/components/profile_comparison/UserSlot";
 import {FaArrowRight} from "react-icons/fa";
 import UserOverview from "@/components/profile_comparison/UserOverview";
+import ContributionHeatmap from "@/components/profile_comparison/ContributionHeatmap";
 
 export default function ProfileComparison() {
     const [users, setUsers] = useState([]);
@@ -80,16 +81,22 @@ export default function ProfileComparison() {
             </div>
 
             {showAnalysis && (
-                <div className="mt-5">
-                    <div className="flex bg-gray-50 rounded-lg border border-2 border-grey-400 gap-3 p-3">
-                        {userProfiles.map((profile) => (
-                            <div
-                                key={profile.login}
-                                className="bg-white border border-grey-200 p-5 rounded-xl w-fit h-fit"
-                            >
-                                <UserOverview userProfile={profile} />
-                            </div>
-                        ))}
+                <div className="flex bg-gray-50 rounded-lg border border-2 border-grey-400 p-3 mt-5">
+                    <div className="flex flex-col gap-3">
+                        <div className="flex flex-row gap-3">
+                            {userProfiles.map((profile) => (
+                                <div
+                                    key={profile.login}
+                                    className="bg-white border border-grey-200 p-5 rounded-xl w-fit h-fit"
+                                >
+                                    <UserOverview userProfile={profile}/>
+                                </div>
+                            ))}
+                        </div>
+                        <div>
+                            <ContributionHeatmap userProfiles={userProfiles}/>
+
+                        </div>
                     </div>
                 </div>
             )}
