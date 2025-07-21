@@ -24,6 +24,9 @@ export async function GET(req) {
     const filtered = [];
 
     for (const issue of issues) {
+        if (issue.assignees && issue.assignees.length > 0 && issue.comments < 1) {
+            continue;
+        }
         const repoUrl = issue.repository_url;
 
         const repoRes = await fetch(repoUrl, { headers: authHeaders });
