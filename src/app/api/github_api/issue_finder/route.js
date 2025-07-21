@@ -50,7 +50,7 @@ export async function GET(req) {
 
         }
 
-        if (filtered.length >= 10) break;
+        if (filtered.length >= 20) break;
     }
 
     return NextResponse.json(filtered);
