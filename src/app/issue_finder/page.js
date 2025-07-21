@@ -92,8 +92,9 @@ export default function IssueSelector() {
 
     return (
         <div className="h-[100vh]">
-        <div className="flex flex-col justify-end items-center h-[20vh] mb-15">
+        <div className="flex flex-col justify-end items-center h-[25vh] mb-10">
             <h1 className="text-7xl">Issue Finder</h1>
+            <h3 className="text-md mt-5">Discover beginner-friendly GitHub issues in your favorite language.</h3> <h3> Use AI to pick the best one based on your interests and goals.</h3>
         </div>
         <div className="flex flex-col justify-center items-center mt-5">
         <Card className="p-6 flex flex-row justify-center px-10 mb-3">
