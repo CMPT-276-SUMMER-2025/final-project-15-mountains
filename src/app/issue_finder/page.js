@@ -151,7 +151,7 @@ export default function IssueSelector() {
             <div className="border-0 bg-transparent w-200 mt-5">
                 {issues.map((issue, i) => (
                 <Card onClick={() => window.open(issue.html_url, "_blank")} key={issue.id} id={`issue-${i}`} className={`p-4 hover:cursor-pointer transition-all duration-300 mb-5 ${highlightedIndex === i ? "border-2 border-green-500 scale-110 m-6 shadow-xl/20 shadow-green-600" : 
-                    "border-1 hover:border-white hover:scale-110 hover:m-6 hover:shadow-xl/20 hover:shadow-white "
+                    "border-1 hover:border-white hover:shadow-xl/20 hover:shadow-white "
       }`}>
                     <a href={issue.html_url} target="_blank" className="underline font-medium text-lg text-black dark:text-white">{issue.title}</a>
                     <div className="text-sm dark:text-gray-200 mt-2">

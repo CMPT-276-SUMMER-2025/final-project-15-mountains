@@ -20,7 +20,7 @@ export async function POST(req) {
         - Then a short explanation (on the second line) about why this issue fits best
 
         Issues:
-        ${issues.map((issue, i) => `${i}. ${issue.title} - ${issue.html_url}`).join("\n")}
+        ${issues.map((issue, i) => `${i}. ${issue.title} - ${issue.body}`).join("\n")}
 
         User input:
         "${prompt}"

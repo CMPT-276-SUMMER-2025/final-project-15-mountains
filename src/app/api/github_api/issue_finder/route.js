@@ -38,6 +38,7 @@ export async function GET(req) {
             id: issue.id,
             html_url: issue.html_url,
             title: issue.title,
+            body: issue.body,
             repository: {
             name: repoData.full_name,
             description: repoData.description,
