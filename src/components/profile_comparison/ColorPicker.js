@@ -17,9 +17,12 @@ export default function ColorPicker({ color, onChange, currentUser, allUsers }) 
         <Popover.Root open={open} onOpenChange={setOpen}>
             <Popover.Trigger asChild>
                 <button
-                    className="w-6 h-6 rounded-full border shadow-inner transition-transform duration-200 ease-in-out
-                               hover:scale-110 hover:shadow-lg"
-                    style={{ backgroundColor: color }}
+                    className="w-8 h-8 rounded-full border shadow-inner transition-transform duration-200 ease-in-out
+                               hover:scale-120"
+                    style={{
+                        backgroundColor: color,
+                        cursor: "pointer"
+                    }}
                 />
             </Popover.Trigger>
             <Popover.Portal>
