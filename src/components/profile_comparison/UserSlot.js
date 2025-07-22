@@ -40,13 +40,13 @@ export default function UserSlot({ users, removeUser, onColorChange }) {
     };
 
     return (
-        <div className="border border-red-500 flex flex-wrap justify-center gap-5">
+        <div className="flex flex-wrap justify-center gap-5">
             {users.map((user, index) => {
                 colorMap[user.login] || getUserColorScheme(user.login);
                 return (
                     <div
                         key={index}
-                        className="border border-red-500 relative flex flex-col items-center gap-5 p-5"
+                        className="relative flex flex-col items-center gap-5 p-5"
                     >
                         <button
                             type="button"
@@ -60,9 +60,9 @@ export default function UserSlot({ users, removeUser, onColorChange }) {
                         <img
                             src={user.avatar_url}
                             alt={user.login}
-                            className="border-red-500 border-2 w-30 h-30 rounded-full"
+                            className="border border-gray-350 border-1 shadow-sm w-30 h-30 rounded-full"
                         />
-                        <p className="border border-red-500 mt-2 font-semibold">
+                        <p className="mt-2 font-semibold">
                             @{user.login}
                         </p>
 

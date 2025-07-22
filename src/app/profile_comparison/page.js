@@ -73,9 +73,9 @@ export default function ProfileComparison() {
     };
 
     return (
-        <div className="m-10 p-5 mt-25">
+        <div className="m-10 p-5 mt-40">
             <ComparisonHeader />
-            <div className="flex flex-col gap-5">
+            <div className="flex flex-col gap-15 mb-10">
                 <div className="flex justify-center">
                     <div className="flex flex-row justify-center w-1/3 gap-5">
                         <SearchBar onSelect={addUser} onRemove={removeUser} cache={cacheRef}/>
