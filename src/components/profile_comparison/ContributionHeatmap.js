@@ -2,7 +2,7 @@
 import React from "react";
 import ActivityCalendar from "react-activity-calendar";
 
-export default function ContributionHeatmap({ userProfiles }) {
+export default function ContributionHeatmap({ userProfiles, getUserColor }) {
     if (!userProfiles?.length) return null;
 
     const todayUTC = new Date(new Date().toISOString().split("T")[0]);
@@ -49,8 +49,7 @@ export default function ContributionHeatmap({ userProfiles }) {
                                 showWeekdayLabels={true}
                                 showMonthLabels={true}
                                 theme={{
-                                    light: ["#ebedf0", "#9be9a8", "#40c463", "#30a14e", "#216e39"],
-                                    dark: ["#161b22", "#0e4429", "#006d32", "#26a641", "#39d353"],
+                                    light: getUserColor(profile.login),
                                 }}
                                 labels={{
                                     totalCount: `${getTotalCount(raw, inferredYear)} contributions in ${inferredYear}`,
