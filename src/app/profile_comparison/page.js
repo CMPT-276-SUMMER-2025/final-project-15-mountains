@@ -6,23 +6,33 @@ import UserSlot from "@/components/profile_comparison/UserSlot";
 import {FaArrowRight} from "react-icons/fa";
 import UserOverview from "@/components/profile_comparison/UserOverview";
 import ContributionHeatmap from "@/components/profile_comparison/ContributionHeatmap";
+import { removeUserColor } from "@/app/profile_comparison/userColorManager";
+
+import {
+    getUserColorScheme,
+    initializeUserColor
+} from "./userColorManager";
 
 export default function ProfileComparison() {
     const [users, setUsers] = useState([]);
     const [userProfiles, setUserProfiles] = useState([]);
     const [showAnalysis, setShowAnalysis] = useState(false);
+    const [colorChangeTrigger, setColorChangeTrigger] = useState(0);
 
     const cacheRef = useRef({});
 
     const addUser = (userObject) => {
         if (users.length >= 4) return;
 
-        if (!users.some((u) => u.login === userObject.login))
+        if (!users.some((u) => u.login === userObject.login)) {
+            initializeUserColor(userObject.login);
             setUsers([...users, userObject]);
+        }
     };
 
     const removeUser = (login) => {
         setUsers(users.filter((u) => u.login !== login));
+        removeUserColor(login);
     };
 
     const handleAnalysis = async () => {
@@ -58,6 +68,10 @@ export default function ProfileComparison() {
         if (users.length === 0) setShowAnalysis(false);
     }, [users]);
 
+    const handleColorUpdate = () => {
+        setColorChangeTrigger((prev) => prev + 1);
+    };
+
     return (
         <div className="m-10 p-5 mt-25">
             <ComparisonHeader />
@@ -77,7 +91,7 @@ export default function ProfileComparison() {
                     </div>
                 </div>
 
-                <UserSlot users={users} removeUser={removeUser}/>
+                <UserSlot users={users} removeUser={removeUser} onColorChange={handleColorUpdate} />
             </div>
 
             {showAnalysis && (
@@ -94,8 +108,11 @@ export default function ProfileComparison() {
                             ))}
                         </div>
                         <div>
-                            <ContributionHeatmap userProfiles={userProfiles}/>
-
+                            <ContributionHeatmap
+                                key={colorChangeTrigger}
+                                userProfiles={userProfiles}
+                                getUserColor={getUserColorScheme}
+                            />
                         </div>
                     </div>
                 </div>
