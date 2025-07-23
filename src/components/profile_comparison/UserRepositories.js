@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { StarIcon, RepoForkedIcon } from "@primer/octicons-react";
+import { StarIcon, RepoForkedIcon, ClockIcon } from "@primer/octicons-react";
 
 export default function UserRepositories({ repos }) {
     if (!repos || repos.length === 0) {
@@ -27,7 +27,6 @@ export default function UserRepositories({ repos }) {
                             {repo.name}
                         </a>
 
-
                         {repo.description && (
                             <p className="text-gray-600">{repo.description}</p>
                         )}
@@ -36,7 +35,7 @@ export default function UserRepositories({ repos }) {
                             <div className="flex items-center gap-1 text-xs text-gray-600 mt-1">
                                 <span
                                     className="w-2.5 h-2.5 rounded-full"
-                                    style={{ backgroundColor: repo.primaryLanguage.color }}
+                                    style={{backgroundColor: repo.primaryLanguage.color}}
                                 />
                                 <span>{repo.primaryLanguage.name}</span>
                             </div>
@@ -44,14 +43,27 @@ export default function UserRepositories({ repos }) {
 
                         <div className="flex items-center gap-4 text-xs text-gray-500 mt-1">
                             <div className="flex items-center gap-1">
-                                <StarIcon size={14} className="text-yellow-500" />
+                                <StarIcon size={14} className="text-yellow-500"/>
                                 {repo.stargazerCount}
                             </div>
                             <div className="flex items-center gap-1">
-                                <RepoForkedIcon size={14} className="text-gray-500" />
+                                <RepoForkedIcon size={14} className="text-gray-500"/>
                                 {repo.forkCount}
                             </div>
                         </div>
+
+                        <div className="flex items-center gap-1 text-xs text-gray-500 mt-1">
+                            <ClockIcon size={12}/>
+                            <span>
+                                Updated{" "}
+                                {new Date(repo.updatedAt).toLocaleDateString(undefined, {
+                                    year: "numeric",
+                                    month: "short",
+                                    day: "numeric",
+                                })}
+                            </span>
+                        </div>
+
                     </div>
                 ))}
             </div>
