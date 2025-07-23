@@ -10,6 +10,11 @@ export function getUserColorScheme(login) {
     return entry ? entry.scheme : getDefaultColorScheme();
 }
 
+export function getUserColor(login) {
+    const entry = userColors.get(login);
+    return entry ? entry.scheme[2] : "#30a14e";
+}
+
 export function removeUserColor(login) {
     const entry = userColors.get(login);
     if (entry && typeof entry.index === "number") {
