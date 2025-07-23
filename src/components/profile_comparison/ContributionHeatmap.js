@@ -21,7 +21,7 @@ export default function ContributionHeatmap({ userProfiles, getUserColor }) {
         <div className="bg-white border border-gray-200 p-4 rounded-lg w-fit">
             <div className="mt-5 flex flex-col gap-6">
                 {userProfiles.map((profile) => {
-                    const user = profile?.data?.user;
+                    const user = profile?.data;
                     const raw = user?.contributions || [];
 
                     const counts = Object.fromEntries(

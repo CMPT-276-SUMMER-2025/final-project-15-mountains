@@ -13,9 +13,10 @@ import {
     RepoForkedIcon,
     GitCommitIcon
 } from "@primer/octicons-react";
+import UserRepositories from "@/components/profile_comparison/UserRepositories"
 
-export default function UserOverview({ userProfile }) {
-    const user = userProfile?.data?.user;
+export default function UserOverview({ userProfile, repos }) {
+    const user = userProfile;
     if (!user) return null;
 
     const stats = [
@@ -95,6 +96,9 @@ export default function UserOverview({ userProfile }) {
                     </div>
                 ))}
             </div>
+
+            <UserRepositories repos={repos} />
+
         </div>
     );
 }

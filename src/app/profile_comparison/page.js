@@ -41,7 +41,7 @@ export default function ProfileComparison() {
         try {
             const userData = await Promise.all(
                 users.map(async (user) => {
-                    const res = await fetch("/api/github_api/profile_comparison", {
+                    const profileRes = await fetch("/api/github_api/profile_comparison", {
                         method: "POST",
                         headers: {
                             "Content-Type": "application/json",
@@ -49,10 +49,12 @@ export default function ProfileComparison() {
                         body: JSON.stringify({ username: user.login }),
                     });
 
-                    const json = await res.json();
+                    const profileJson = await profileRes.json();
+
                     return {
                         login: user.login,
-                        data: json,
+                        data: profileJson.user,
+                        repos: profileJson.repos,
                     };
                 })
             );
@@ -103,7 +105,7 @@ export default function ProfileComparison() {
                                     key={profile.login}
                                     className="bg-white border border-grey-200 p-5 rounded-xl w-fit h-fit"
                                 >
-                                    <UserOverview userProfile={profile}/>
+                                    <UserOverview userProfile={profile.data} repos={profile.repos} />
                                 </div>
                             ))}
                         </div>
