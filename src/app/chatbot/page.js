@@ -13,6 +13,8 @@ export default function ChatbotPage() {
     const [inputMessage, setInputMessage] = useState('');
     const [isGenerating, setIsGenerating] = useState(false);
     const [abortController, setAbortController] = useState(null);
+    const [editIndex, setEditIndex] = useState(null); // Track which message is being edited
+    const [originalMessages, setOriginalMessages] = useState(null); // Store original messages for cancel
     const messagesEndRef = useRef(null);
     const inputRef = useRef(null);
 
@@ -24,19 +26,55 @@ export default function ChatbotPage() {
         scrollToBottom();
     }, [messages]);
 
+    const handleEditMessage = (index) => {
+        setInputMessage(messages[index].content);
+        setEditIndex(index);
+        setOriginalMessages(messages); // Save current messages for cancel
+        // Remove all messages after the one being edited
+        setMessages(prev => prev.slice(0, index + 1));
+        setTimeout(() => {
+            inputRef.current?.focus();
+        }, 0);
+    };
+
+    const handleCancelEdit = () => {
+        if (originalMessages) {
+            setMessages(originalMessages);
+        }
+        setEditIndex(null);
+        setInputMessage('');
+        setOriginalMessages(null);
+    };
+
     const handleSendMessage = async () => {
         if (!inputMessage.trim() || isGenerating) return;
 
-        const userMessage = {
-            id: Date.now(),
-            role: 'user',
-            content: inputMessage.trim(),
-            timestamp: new Date()
-        };
-
-        setMessages(prev => [...prev, userMessage]);
-        setInputMessage('');
-        setIsGenerating(true);
+        if (editIndex !== null) {
+            // Update the edited message
+            setMessages(prev => {
+                const updated = [...prev];
+                updated[editIndex] = {
+                    ...updated[editIndex],
+                    content: inputMessage.trim(),
+                    timestamp: new Date()
+                };
+                return updated;
+            });
+            setEditIndex(null);
+            setInputMessage('');
+            setIsGenerating(true);
+            // Continue to fetch assistant response as if new message
+        } else {
+            const userMessage = {
+                id: Date.now(),
+                role: 'user',
+                content: inputMessage.trim(),
+                timestamp: new Date()
+            };
+            setMessages(prev => [...prev, userMessage]);
+            setInputMessage('');
+            setIsGenerating(true);
+        }
 
         // Create new abort controller for this request
         const controller = new AbortController();
@@ -49,12 +87,7 @@ export default function ChatbotPage() {
             
             // TODO:Simulate API call - replace with our actual API endpoint
             const response = await fetch('/api/ai_api/chatbot', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ message: userMessage.content }),
-                signal: controller.signal
+                // TODO: implement this when we have the API endpoint
             });
 
             if (!response.ok) {
@@ -117,25 +150,40 @@ export default function ChatbotPage() {
             {/* Messages Container */}
             <div className="flex-1 overflow-y-auto p-4 space-y-4 mt-8 flex justify-center">
                 <div className="w-4/5 space-y-4">
-                    {messages.map((message) => (
+                    {messages.map((message, idx) => (
                         <div
                             key={message.id}
-                            className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
+                            className={`group flex flex-col ${message.role === 'user' ? 'items-end' : 'items-start'}`}
                         >
                             <div
-                                className={`max-w-[80%] rounded-lg px-4 py-3 ${
+                                className={`max-w-[80%] rounded-lg px-4 py-3 relative ${
                                     message.role === 'user'
                                         ? 'bg-blue-600 text-white'
                                         : 'bg-gray-800 text-white'
                                 }`}
                             >
-                            <div className="whitespace-pre-wrap">{message.content}</div>
-                            <div className="text-xs opacity-70 mt-1">
-                                {message.timestamp.toLocaleTimeString()}
+                                <div className="whitespace-pre-wrap flex items-center">
+                                    <span>{message.content}</span>
+                                </div>
+                                <div className="text-xs opacity-70 mt-1">
+                                    {message.timestamp.toLocaleTimeString()}
+                                </div>
                             </div>
+                            {/* Edit button below, only for user messages, only on hover, only if not editing or generating */}
+                            {message.role === 'user' && idx === messages.findLastIndex(m => m.role === 'user') && !isGenerating && editIndex === null && (
+                                <div className="mt-1 flex justify-end w-full">
+                                    <button
+                                        className="hidden group-hover:inline-flex text-xs px-2 py-1 bg-gray-700 hover:bg-gray-600 rounded transition-colors duration-150 items-center"
+                                        onClick={() => handleEditMessage(idx)}
+                                        title="Edit message"
+                                    >
+                                        <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.232 5.232l3.536 3.536M9 13l6.586-6.586a2 2 0 112.828 2.828L11.828 15.828a4 4 0 01-1.414.828l-4 1a1 1 0 01-1.213-1.213l1-4a4 4 0 01.828-1.414z" /></svg>
+                                        Edit
+                                    </button>
+                                </div>
+                            )}
                         </div>
-                    </div>
-                ))}
+                    ))}
                 
                 {/* Loading indicator */}
                 {isGenerating && (
@@ -185,16 +233,26 @@ export default function ChatbotPage() {
                             <span>Cancel</span>
                         </button>
                     ) : (
+                        <>
                         <button
                             onClick={handleSendMessage}
                             disabled={!inputMessage.trim()}
-                            className="px-4 py-3 bg-blue-600 hover:bg-blue-700 disabled:bg-gray-600 disabled:cursor-not-allowed text-white rounded-lg transition-colors duration-200 flex items-center space-x-2"
+                            className={`px-4 py-3 ${editIndex !== null ? 'bg-yellow-500 hover:bg-yellow-600' : 'bg-blue-600 hover:bg-blue-700'} disabled:bg-gray-600 disabled:cursor-not-allowed text-white rounded-lg transition-colors duration-200 flex items-center space-x-2`}
                         >
                             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
                             </svg>
-                            <span>Send</span>
+                            <span>{editIndex !== null ? 'Update' : 'Send'}</span>
                         </button>
+                        {editIndex !== null && (
+                            <button
+                                onClick={handleCancelEdit}
+                                className="px-4 py-3 bg-gray-500 hover:bg-gray-600 text-white rounded-lg transition-colors duration-200 flex items-center space-x-2 ml-2"
+                            >
+                                Cancel
+                            </button>
+                        )}
+                        </>
                     )}
                 </div>
                 
