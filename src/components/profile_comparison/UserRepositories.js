@@ -26,9 +26,22 @@ export default function UserRepositories({ repos }) {
                         >
                             {repo.name}
                         </a>
+
+
                         {repo.description && (
                             <p className="text-gray-600">{repo.description}</p>
                         )}
+
+                        {repo.primaryLanguage && (
+                            <div className="flex items-center gap-1 text-xs text-gray-600 mt-1">
+                                <span
+                                    className="w-2.5 h-2.5 rounded-full"
+                                    style={{ backgroundColor: repo.primaryLanguage.color }}
+                                />
+                                <span>{repo.primaryLanguage.name}</span>
+                            </div>
+                        )}
+
                         <div className="flex items-center gap-4 text-xs text-gray-500 mt-1">
                             <div className="flex items-center gap-1">
                                 <StarIcon size={14} className="text-yellow-500" />
