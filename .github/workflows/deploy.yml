@@ -27,6 +27,16 @@ jobs:
           cd src
           npm ci
 
+      - name: Cache npm and Next.js build cache
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.npm
+            src/.next/cache
+          key: ${{ runner.os }}-nextjs-${{ hashFiles('src/package-lock.json') }}-${{ hashFiles('src/**/*.js', 'src/**/*.jsx') }}
+          restore-keys: |
+            ${{ runner.os }}-nextjs-${{ hashFiles('src/package-lock.json') }}-
+            
       - name: Install Playwright
         run: |
           cd src
@@ -47,6 +57,16 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
+    
+      - name: Cache npm and Next.js build cache
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.npm
+            src/.next/cache
+          key: ${{ runner.os }}-nextjs-${{ hashFiles('src/package-lock.json') }}-${{ hashFiles('src/**/*.js', 'src/**/*.jsx') }}
+          restore-keys: |
+            ${{ runner.os }}-nextjs-${{ hashFiles('src/package-lock.json') }}-
 
       - name: Install dependencies
         run: |
