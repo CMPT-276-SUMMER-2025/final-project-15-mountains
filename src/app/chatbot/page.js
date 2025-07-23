@@ -173,7 +173,7 @@ export default function ChatbotPage() {
                             {message.role === 'user' && idx === messages.findLastIndex(m => m.role === 'user') && !isGenerating && editIndex === null && (
                                 <div className="mt-1 flex justify-end w-full">
                                     <button
-                                        className="hidden group-hover:inline-flex text-xs px-2 py-1 bg-gray-700 hover:bg-gray-600 rounded transition-colors duration-150 items-center"
+                                        className="inline-flex text-xs px-2 py-1 bg-gray-700 hover:bg-gray-600 rounded transition-colors duration-150 items-center opacity-0 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto"
                                         onClick={() => handleEditMessage(idx)}
                                         title="Edit message"
                                     >
