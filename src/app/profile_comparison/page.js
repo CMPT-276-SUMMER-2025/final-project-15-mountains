@@ -13,12 +13,14 @@ import {
     getUserColor,
     initializeUserColor,
 } from "@/app/profile_comparison/userColorManager";
+import { ClipLoader } from "react-spinners";
 
 export default function ProfileComparison() {
     const [users, setUsers] = useState([]);
     const [userProfiles, setUserProfiles] = useState([]);
     const [showAnalysis, setShowAnalysis] = useState(false);
     const [colorChangeTrigger, setColorChangeTrigger] = useState(0);
+    const [loading, setLoading] = useState(false);
 
     const cacheRef = useRef({});
 
@@ -38,6 +40,7 @@ export default function ProfileComparison() {
 
     const handleAnalysis = async () => {
         if (users.length === 0) return;
+        setLoading(true);
 
         try {
             const userData = await Promise.all(
@@ -64,6 +67,8 @@ export default function ProfileComparison() {
             setShowAnalysis(true);
         } catch (err) {
             console.error(err);
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -85,11 +90,14 @@ export default function ProfileComparison() {
                         <button
                             type="submit"
                             onClick={handleAnalysis}
-                            className={`flex items-center gap-2 px-6 py-3 rounded-lg text-white font-bold transition 
-                            bg-red-500 hover:bg-red-600 active:bg-red-700`}
+                            className={`w-[160px] flex items-center gap-2 px-6 py-3 rounded-lg font-bold border-none
+                                        transition-transform duration-150 text-white justify-center
+                                        ${loading ? "bg-gray-700 cursor-not-allowed" 
+                                                  : "bg-black hover:bg-black-900 active:bg-gray-800 hover:scale-105"}`}
                         >
-                            <FaArrowRight className="text-white"/>
-                            ANALYZE
+                            {loading ? <ClipLoader size={20} color="#fff" /> : <FaArrowRight className="text-white" />}
+                            {loading ? "" : "Analyze"}
+
                         </button>
                     </div>
                 </div>
