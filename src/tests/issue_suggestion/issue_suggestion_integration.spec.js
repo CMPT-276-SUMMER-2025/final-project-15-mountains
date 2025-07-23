@@ -19,7 +19,7 @@ test('INTEGRATION TEST ISSUE SUGGESTION: loads AI explanation after entering pro
   await page.getByText('Get AI Suggestion').click();
 
 
-  const explanation = await page.locator('text=Why AI chose this:').first();
+  const explanation = await page.getByText('Why AI chose this:').first();
   await expect(explanation).toBeVisible();
 
 });
