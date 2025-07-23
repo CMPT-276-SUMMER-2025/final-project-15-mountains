@@ -170,7 +170,7 @@ export default function ChatbotPage() {
                                 </div>
                             </div>
                             {/* Edit button below, only for user messages, only on hover, only if not editing or generating */}
-                            {message.role === 'user' && idx === messages.findLastIndex(m => m.role === 'user') && !isGenerating && editIndex === null && (
+                            {message.role === 'user' && !isGenerating && editIndex === null && (
                                 <div className="mt-1 flex justify-end w-full">
                                     <button
                                         className="inline-flex text-xs px-2 py-1 bg-gray-700 hover:bg-gray-600 rounded transition-colors duration-150 items-center opacity-0 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto"
