@@ -12,11 +12,21 @@ export async function POST(req) {
         avatarUrl
         location
         url
-        repositories(first: 100, privacy: PUBLIC, ownerAffiliations: OWNER) {
+        repositories(first: 100, privacy: PUBLIC, ownerAffiliations: OWNER, orderBy: {field: UPDATED_AT, direction: DESC}) {
           totalCount
           nodes {
+            name
+            description
+            url
+            createdAt
+            updatedAt
+            isFork
             stargazerCount
             forkCount
+            primaryLanguage {
+              name
+              color
+            }
             defaultBranchRef {
               target {
                 __typename
@@ -28,7 +38,7 @@ export async function POST(req) {
               }
             }
           }
-        } 
+        }
         followers {
           totalCount
         }
@@ -119,6 +129,7 @@ export async function POST(req) {
             totalForks,
             totalCommits,
         },
+        repos,
         rateLimit: {
             limit: rateLimit.limit || 0,
             remaining: rateLimit.remaining || 0,
