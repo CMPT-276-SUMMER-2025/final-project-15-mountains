@@ -7,7 +7,7 @@ import { Textarea } from "@/components/ui/textarea";
 
 export default function page() {
   return (
-    <div className="w-full h-250 dark bg-gradient-to-t from-black to-gray-800 text-white">
+    <div className="w-full h-250">
         {/* Header */}
         <div className="flex flex-col mx-auto py-30 text-center">
             <h1 className="text-4xl text-center">README Viewer</h1>
@@ -24,13 +24,13 @@ export default function page() {
 
                 {/* The Left side of the Card */}
                 <div className="w-1/2 flex flex-col">
-                    <div className="flex-1 h-full p-4  text-white rounded-xl overflow-auto">
+                    <div className="flex-1 h-full p-4 rounded-xl overflow-auto">
                     </div>
                 </div>
 
                 {/* The Right side of the card */}
                 <div className="w-1/2 flex flex-col">
-                    <Textarea className="flex-1 resize-none h-full  text-white rounded-xl" ></Textarea>
+                    <Textarea className="flex-1 resize-none h-full rounded-xl" ></Textarea>
                 </div>
                 
             </Card>
