@@ -92,8 +92,8 @@ export default function IssueSelector() {
 
     return (
         <div className="h-[100vh]">
-        <div className="flex flex-col justify-end items-center h-[25vh] mb-10">
-            <h1 className="text-7xl">Issue Finder</h1>
+        <div className="flex flex-col justify-end items-center h-60 mb-10">
+            <h1 className="lg:text-7xl">Issue Finder</h1>
             <h3 className="text-md mt-5">Discover beginner-friendly GitHub issues in your favorite language.</h3> <h3> Use AI to pick the best one based on your interests and goals.</h3>
         </div>
         <div className="flex flex-col justify-center items-center mt-5">
@@ -134,7 +134,7 @@ export default function IssueSelector() {
                 Can not pick? Let AI decide.
                 </p>
 
-                <Input placeholder="Tell us what kind of issue you want..." value={userPrompt} onChange={(e) => setUserPrompt(e.target.value)} disabled={!issues.length} className="w-64"/>
+                <Input data-testid="AI-Input" placeholder="Tell us what kind of issue you want..." value={userPrompt} onChange={(e) => setUserPrompt(e.target.value)} disabled={!issues.length} className="w-64"/>
                 <Button onClick={getAISuggestion} disabled={!issues.length || AIloading} className="hover:cursor-pointer">
                     {AIloading ? "Loading..." :"Get AI Suggestion"}
                 </Button>
