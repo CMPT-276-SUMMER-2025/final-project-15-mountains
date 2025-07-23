@@ -1,19 +1,59 @@
 "use client";
-import React from "react";
+import React, {useState} from "react";
 import { StarIcon, RepoForkedIcon, ClockIcon } from "@primer/octicons-react";
 
+const SORT_OPTIONS = [
+    { label: "Popularity", value: "popularity" },
+    { label: "Stars", value: "stars" },
+    { label: "Forks", value: "forks" },
+    { label: "Recent", value: "recent" },
+];
+
 export default function UserRepositories({ repos }) {
+    const [sortBy, setSortBy] = useState("popularity");
+
     if (!repos || repos.length === 0) {
         return (
             <p className="text-sm text-gray-500 mt-2">No public repositories found.</p>
         );
     }
 
+    const sortedRepos = [...repos].sort((a, b) => {
+        const ageA = (new Date() - new Date(a.createdAt)) / (1000 * 60 * 60 * 24);
+        const ageB = (new Date() - new Date(b.createdAt)) / (1000 * 60 * 60 * 24);
+
+        switch (sortBy) {
+            case "stars":
+                return b.stargazerCount - a.stargazerCount;
+            case "forks":
+                return b.forkCount - a.forkCount;
+            case "recent":
+                return new Date(b.updatedAt) - new Date(a.updatedAt);
+            case "popularity":
+            default:
+                return (b.stargazerCount / ageB) - (a.stargazerCount / ageA);
+        }
+    });
+
     return (
         <div className="mt-4">
-            <h3 className="font-semibold text-gray-800 mb-2">Repositories</h3>
+            <div className="flex justify-between items-center mb-2">
+                <h3 className="font-semibold text-gray-800">Repositories</h3>
+                <select
+                    className="text-sm border border-gray-300 rounded px-2 py-1"
+                    value={sortBy}
+                    onChange={(e) => setSortBy(e.target.value)}
+                >
+                    {SORT_OPTIONS.map((option) => (
+                        <option key={option.value} value={option.value}>
+                            Sort by {option.label}
+                        </option>
+                    ))}
+                </select>
+            </div>
+
             <div className="max-h-48 overflow-y-auto pr-1 space-y-2">
-                {repos.map((repo) => (
+                {sortedRepos.map((repo) => (
                     <div
                         key={repo.name}
                         className="p-2 bg-gray-100 rounded-md shadow-sm text-sm hover:bg-gray-200 transition"
