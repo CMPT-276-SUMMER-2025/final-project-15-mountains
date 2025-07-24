@@ -105,6 +105,7 @@ export default function ProfileComparison() {
                 return user.data.totalStars ?? 0;
             case "forks":
                 return user.data.totalForks ?? 0;
+            case "prAcceptance":  return getPRAcceptance(user);
             default:
                 return 0;
         }
@@ -128,6 +129,12 @@ export default function ProfileComparison() {
         observer.observe(leftRef.current);
         return () => observer.disconnect();
     }, [userProfiles, colorChangeTrigger]);
+
+    const getPRAcceptance = (profile) => {
+        const opened = profile.data.pullRequests ?? 0;
+        const merged = profile.data.mergedPullRequests ?? 0;
+        return opened > 0 ? (merged / opened) * 100 : 0;
+    };
 
     return (
         <div className="container mx-auto px-4 py-6 mt-40">
@@ -198,6 +205,7 @@ export default function ProfileComparison() {
                                     activeMetric={activeMetric}
                                     getMetricValue={getMetricValue}
                                     sortProfiles={sortProfiles}
+                                    getPRAcceptance={getPRAcceptance}
                                 />
                             </>
                         )}
