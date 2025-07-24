@@ -7,7 +7,6 @@ import {FaArrowRight} from "react-icons/fa";
 import UserOverview from "@/components/profile_comparison/UserOverview";
 import ContributionHeatmap from "@/components/profile_comparison/ContributionHeatmap";
 import { removeUserColor } from "@/app/profile_comparison/userColorManager";
-import ContributionPieChart from "@/components/profile_comparison/ContributionPieChart";
 import {
     getUserColorScheme,
     getUserColor,
@@ -187,11 +186,6 @@ export default function ProfileComparison() {
                                 />
                             </>
                         )}
-
-                        <div className="flex flex-col items-center bg-white border border-grey-200 pt-5
-                                        rounded-xl w-fit h-fit">
-                            <ContributionPieChart userProfiles={userProfiles} getUserColor={getUserColor}/>
-                        </div>
                     </div>
                 </div>
             )}
