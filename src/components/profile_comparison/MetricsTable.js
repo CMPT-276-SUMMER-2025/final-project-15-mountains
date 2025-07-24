@@ -2,8 +2,9 @@
 import { getUserColor } from "@/app/profile_comparison/userColorManager";
 import MetricsPieChart from "@/components/profile_comparison/MetricsPieChart";
 import { formatMetricLabel } from "@/app/profile_comparison/formatMetricLabel"
+import PRAcceptanceBarChart from "@/components/profile_comparison/PRAcceptanceBarChart"
 
-export default function MetricsTable({ userProfiles, activeMetric, getMetricValue, sortProfiles }) {
+export default function MetricsTable({ userProfiles, activeMetric, getMetricValue, sortProfiles, getPRAcceptance }) {
     const sorted = sortProfiles(userProfiles, activeMetric);
     const labelByMetric = {
         repos: "Repositories",
@@ -13,6 +14,7 @@ export default function MetricsTable({ userProfiles, activeMetric, getMetricValu
         issues: "Issues",
         stars: "Stars",
         forks: "Forks",
+        prAcceptance: "PR Acceptance Rate",
     };
 
     return (
@@ -28,8 +30,18 @@ export default function MetricsTable({ userProfiles, activeMetric, getMetricValu
                         <tr>
                             <th className="py-3 px-4">Rank</th>
                             <th className="py-3 px-4">User</th>
-                            <th className="py-3 px-4">{labelByMetric[activeMetric]}</th>
-                            <th className="py-3 px-4">Share</th>
+                            {activeMetric === "prAcceptance" ? (
+                                <>
+                                    <th className="py-3 px-4">Opened</th>
+                                    <th className="py-3 px-4">Merged</th>
+                                    <th className="py-3 px-4">Acceptance Rate</th>
+                                    </>
+                                ) : (
+                                <>
+                                    <th className="py-3 px-4">{labelByMetric[activeMetric]}</th>
+                                    <th className="py-3 px-4">Share</th>
+                                    </>
+                                )}
                         </tr>
                         </thead>
 
@@ -74,8 +86,20 @@ export default function MetricsTable({ userProfiles, activeMetric, getMetricValu
                                         @{user.login}
                                     </td>
 
-                                    <td className="py-3 px-4">{formatMetricLabel(value, activeMetric)}</td>
-                                    <td className="py-3 px-4">{formattedPercent}</td>
+                                    {activeMetric === "prAcceptance" ? (
+                                        <>
+                                            <td className="py-3 px-4">{user.data.pullRequests}</td>
+                                            <td className="py-3 px-4">{user.data.mergedPullRequests}</td>
+                                            <td className="py-3 px-4">{value.toFixed(2)}%</td>
+                                            </>
+                                        ) : (
+                                        <>
+                                            <td className="py-3 px-4">
+                                            {formatMetricLabel(value, activeMetric)}
+                                            </td>
+                                            <td className="py-3 px-4">{formattedPercent}</td>
+                                            </>
+                                        )}
                                 </tr>
                             );
                         })}
@@ -86,11 +110,18 @@ export default function MetricsTable({ userProfiles, activeMetric, getMetricValu
             </div>
 
             <div className="w-full lg:w-1/2 h-full flex items-center justify-center">
-                <MetricsPieChart
-                    userProfiles={userProfiles}
-                    activeMetric={activeMetric}
-                    getMetricValue={getMetricValue}
-                />
+                {activeMetric === "prAcceptance" ? (
+                    <PRAcceptanceBarChart
+                        userProfiles={userProfiles}
+                        getPRAcceptance={getPRAcceptance}
+                    />
+                ) : (
+                    <MetricsPieChart
+                        userProfiles={userProfiles}
+                        activeMetric={activeMetric}
+                        getMetricValue={getMetricValue}
+                    />
+                )}
             </div>
         </div>
     );

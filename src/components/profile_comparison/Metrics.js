@@ -2,7 +2,7 @@
 import {formatMetricLabel} from "@/app/profile_comparison/formatMetricLabel";
 
 export default function Metrics({ userProfiles, activeMetric, setActiveMetric, getMetricValue, sortProfiles }) {
-    const metrics = ["repos", "contributions", "commits", "prs", "issues", "stars", "forks"];
+    const metrics = ["repos", "contributions", "commits", "prs", "issues", "stars", "forks", "prAcceptance"];
     const labelByMetric = {
         repos: "Repositories",
         contributions: "Contributions",
@@ -11,6 +11,7 @@ export default function Metrics({ userProfiles, activeMetric, setActiveMetric, g
         issues: "Issues",
         stars: "Stars",
         forks: "Forks",
+        prAcceptance: "PR Acceptance Rate",
     };
 
     return (
