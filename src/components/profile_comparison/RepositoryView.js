@@ -11,7 +11,7 @@ const SORT_OPTIONS = [
     { label: "Newest", value: "created" },
 ];
 
-export default function RepositoryView({ allRepos }) {
+export default function RepositoryView({ allRepos, maxHeight }) {
     const [sortBy, setSortBy] = useState("popularity");
 
     if (!allRepos || allRepos.length === 0) {
@@ -56,7 +56,7 @@ export default function RepositoryView({ allRepos }) {
     };
 
     return (
-        <div className="w-full h-full p-5 rounded-xl">
+        <div className="w-full h-full p-5">
             <div className="flex flex-col gap-4 mb-4">
                 <h3 className="text-lg font-bold text-gray-800">Top Repositories (Combined)</h3>
                 <div>
@@ -78,78 +78,83 @@ export default function RepositoryView({ allRepos }) {
                 </div>
             </div>
 
-            <div className="overflow-y-auto pr-1 space-y-3">
-                {sorted.map((repo, index) => (
-                    <div
-                        key={`${repo.owner}/${repo.name}`}
-                        className="bg-white border border-gray-200 rounded-md p-4 transition text-sm flex justify-between"
-                    >
-                        <div className="flex-1">
-                            <div className="flex items-center gap-3 mb-2">
-                                <span className="text-xs font-bold text-gray-500">#{index + 1}</span>
-                                <div className="relative group">
-                                    <img
-                                        src={repo.ownerAvatarUrl || `https://github.com/${repo.owner}.png`}
-                                        alt={repo.owner}
-                                        className="w-6 h-6 rounded-full border"
-                                    />
-                                    <div className="absolute z-10 hidden group-hover:flex transition-all duration-200
-                                                    opacity-0 group-hover:opacity-100 text-xs bg-white text-gray-700
-                                                    border border-gray-300 shadow px-2 py-1 rounded left-1/2
-                                                    -translate-x-1/2 bottom-full mb-1 whitespace-nowrap">
-                                        @{repo.owner}
+            <div
+                className="flex flex-col overflow-hidden"
+                style={{maxHeight: maxHeight}}
+            >
+                <div className="overflow-y-auto pe-3 -me-3 space-y-3">
+                    {sorted.map((repo, index) => (
+                        <div
+                            key={`${repo.owner}/${repo.name}`}
+                            className="bg-white border border-gray-200 rounded-md p-4 transition text-sm flex justify-between"
+                        >
+                            <div className="flex-1">
+                                <div className="flex items-center gap-3 mb-2">
+                                    <span className="text-xs font-bold text-gray-500">#{index + 1}</span>
+                                    <div className="relative group">
+                                        <img
+                                            src={repo.ownerAvatarUrl || `https://github.com/${repo.owner}.png`}
+                                            alt={repo.owner}
+                                            className="w-6 h-6 rounded-full border"
+                                        />
+                                        <div className="absolute z-10 hidden group-hover:flex transition-all duration-200
+                                                        opacity-0 group-hover:opacity-100 text-xs bg-white text-gray-700
+                                                        border border-gray-300 shadow px-2 py-1 rounded left-1/2
+                                                        -translate-x-1/2 bottom-full mb-1 whitespace-nowrap">
+                                            @{repo.owner}
+                                        </div>
+                                    </div>
+                                    <a
+                                        href={repo.url}
+                                        className="text-base text-blue-600 font-semibold hover:underline"
+                                        target="_blank"
+                                        rel="noreferrer"
+                                    >
+                                        {repo.name}
+                                    </a>
+                                </div>
+
+                                {repo.description && (
+                                    <p className="text-gray-600 text-sm mb-2">{repo.description}</p>
+                                )}
+
+                                {repo.primaryLanguage && (
+                                    <div className="flex items-center gap-2 text-xs text-gray-600 mb-1">
+                                        <span
+                                            className="w-2.5 h-2.5 rounded-full"
+                                            style={{ backgroundColor: repo.primaryLanguage.color }}
+                                        />
+                                        <span>{repo.primaryLanguage.name}</span>
+                                    </div>
+                                )}
+
+                                <div className="flex items-center gap-5 text-xs text-gray-500 mb-1">
+                                    <div className="flex items-center gap-1">
+                                        <StarIcon size={12} className="text-yellow-500" />
+                                        {repo.stargazerCount}
+                                    </div>
+                                    <div className="flex items-center gap-1">
+                                        <RepoForkedIcon size={12} />
+                                        {repo.forkCount}
                                     </div>
                                 </div>
-                                <a
-                                    href={repo.url}
-                                    className="text-base text-blue-600 font-semibold hover:underline"
-                                    target="_blank"
-                                    rel="noreferrer"
-                                >
-                                    {repo.name}
-                                </a>
-                            </div>
 
-                            {repo.description && (
-                                <p className="text-gray-600 text-sm mb-2">{repo.description}</p>
-                            )}
-
-                            {repo.primaryLanguage && (
-                                <div className="flex items-center gap-2 text-xs text-gray-600 mb-1">
-                                    <span
-                                        className="w-2.5 h-2.5 rounded-full"
-                                        style={{ backgroundColor: repo.primaryLanguage.color }}
-                                    />
-                                    <span>{repo.primaryLanguage.name}</span>
+                                <div className="flex justify-between items-end text-xs text-gray-500 mt-2">
+                                    <div className="flex items-center gap-1">
+                                        <ClockIcon size={12} /> Updated {timeAgo(repo.updatedAt)}
+                                    </div>
+                                    <span className="text-gray-400">
+                                        Created {new Date(repo.createdAt).toLocaleDateString(undefined, {
+                                        year: "numeric",
+                                        month: "short",
+                                        day: "numeric",
+                                    })}
+                                    </span>
                                 </div>
-                            )}
-
-                            <div className="flex items-center gap-5 text-xs text-gray-500 mb-1">
-                                <div className="flex items-center gap-1">
-                                    <StarIcon size={12} className="text-yellow-500" />
-                                    {repo.stargazerCount}
-                                </div>
-                                <div className="flex items-center gap-1">
-                                    <RepoForkedIcon size={12} />
-                                    {repo.forkCount}
-                                </div>
-                            </div>
-
-                            <div className="flex justify-between items-end text-xs text-gray-500 mt-2">
-                                <div className="flex items-center gap-1">
-                                    <ClockIcon size={12} /> Updated {timeAgo(repo.updatedAt)}
-                                </div>
-                                <span className="text-gray-400">
-                                    Created {new Date(repo.createdAt).toLocaleDateString(undefined, {
-                                    year: "numeric",
-                                    month: "short",
-                                    day: "numeric",
-                                })}
-                                </span>
                             </div>
                         </div>
-                    </div>
-                ))}
+                    ))}
+                </div>
             </div>
         </div>
     );

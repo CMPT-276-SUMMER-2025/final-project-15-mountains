@@ -192,8 +192,8 @@ export default function ProfileComparison() {
                                 className="bg-white border rounded-xl p-5 flex flex-col overflow-hidden"
                                 style={{maxHeight: leftHeight}}
                             >
-                                <div className="flex-1 overflow-y-auto">
-                                    <RepositoryView allRepos={allRepos}/>
+                                <div className="overflow-y-auto flex-1">
+                                    <RepositoryView allRepos={allRepos} maxHeight={leftHeight} />
                                 </div>
                             </div>
                         </div>
