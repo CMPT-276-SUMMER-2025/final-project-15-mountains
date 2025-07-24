@@ -14,6 +14,9 @@ import {
     initializeUserColor,
 } from "@/app/profile_comparison/userColorManager";
 import { ClipLoader } from "react-spinners";
+import Metrics from "@/components/profile_comparison/Metrics";
+import MetricsTable from "@/components/profile_comparison/MetricsTable";
+import RepositoryView from "@/components/profile_comparison/RepositoryView";
 
 export default function ProfileComparison() {
     const [users, setUsers] = useState([]);
@@ -21,7 +24,7 @@ export default function ProfileComparison() {
     const [showAnalysis, setShowAnalysis] = useState(false);
     const [colorChangeTrigger, setColorChangeTrigger] = useState(0);
     const [loading, setLoading] = useState(false);
-
+    const [activeMetric, setActiveMetric] = useState("commits");
     const cacheRef = useRef({});
 
     const addUser = (userObject) => {
@@ -80,6 +83,37 @@ export default function ProfileComparison() {
         setColorChangeTrigger((prev) => prev + 1);
     };
 
+    function getMetricValue(user, metric) {
+        switch (metric) {
+            case "repos":
+                return user.data.publicRepos ?? 0;
+            case "contributions":
+                return user.data.totalContributions ?? 0;
+            case "commits":
+                return user.data.totalCommits ?? 0;
+            case "prs":
+                return user.data.pullRequests ?? 0;
+            case "issues":
+                return user.data.openIssues ?? 0;
+            case "stars":
+                return user.data.totalStars ?? 0;
+            case "forks":
+                return user.data.totalForks ?? 0;
+            default:
+                return 0;
+        }
+    }
+
+    function sortProfiles(profiles, metric) {
+        return [...profiles].sort(
+            (a, b) => getMetricValue(b, metric) - getMetricValue(a, metric)
+        );
+    }
+
+    const allRepos = userProfiles.flatMap((profile) =>
+        profile.repos.map((repo) => ({ ...repo, owner: profile.login }))
+    );
+
     return (
         <div className="m-10 p-5 mt-40">
             <ComparisonHeader />
@@ -97,7 +131,6 @@ export default function ProfileComparison() {
                         >
                             {loading ? <ClipLoader size={20} color="#fff" /> : <FaArrowRight className="text-white" />}
                             {loading ? "" : "Analyze"}
-
                         </button>
                     </div>
                 </div>
@@ -118,16 +151,40 @@ export default function ProfileComparison() {
                                 </div>
                             ))}
                         </div>
-                        <div>
+                        <div className="flex flex-row gap-5">
                             <ContributionHeatmap
                                 key={colorChangeTrigger}
                                 userProfiles={userProfiles}
                                 getUserColor={getUserColorScheme}
                             />
+                            <div className="flex bg-white border border-grey-200 p-5 rounded-xl
+                                            w-full h-full items-center justify-center text-xl">
+                                <RepositoryView allRepos={allRepos} />
+                            </div>
                         </div>
+
+                        {showAnalysis && (
+                            <>
+                                <Metrics
+                                    userProfiles={userProfiles}
+                                    activeMetric={activeMetric}
+                                    setActiveMetric={setActiveMetric}
+                                    getMetricValue={getMetricValue}
+                                    sortProfiles={sortProfiles}
+                                />
+
+                                <MetricsTable
+                                    userProfiles={userProfiles}
+                                    activeMetric={activeMetric}
+                                    getMetricValue={getMetricValue}
+                                    sortProfiles={sortProfiles}
+                                />
+                            </>
+                        )}
+
                         <div className="flex flex-col items-center bg-white border border-grey-200 pt-5
                                         rounded-xl w-fit h-fit">
-                            <ContributionPieChart userProfiles={userProfiles} getUserColor={getUserColor} />
+                            <ContributionPieChart userProfiles={userProfiles} getUserColor={getUserColor}/>
                         </div>
                     </div>
                 </div>
