@@ -6,8 +6,8 @@ const SORT_OPTIONS = [
     { label: "Popularity", value: "popularity" },
     { label: "Stars", value: "stars" },
     { label: "Forks", value: "forks" },
-    { label: "Last Update", value: "updated" },
-    { label: "Creation Date", value: "created" },
+    { label: "Last Updated", value: "updated" },
+    { label: "Newest", value: "created" },
 ];
 
 export default function UserRepositories({ repos }) {
@@ -118,16 +118,16 @@ export default function UserRepositories({ repos }) {
                         <div className="flex justify-between text-xs text-gray-500 mt-1 pr-1">
                             <div className="flex items-center gap-1">
                                 <ClockIcon size={12}/>
+                                <span>Updated {timeAgo(repo.updatedAt)}</span>
+                            </div>
+                            <div>
                                 <span>
-                                {new Date(repo.createdAt).toLocaleDateString(undefined, {
+                                Created {new Date(repo.createdAt).toLocaleDateString(undefined, {
                                     year: "numeric",
                                     month: "short",
                                     day: "numeric",
                                 })}
-                            </span>
-                            </div>
-                            <div>
-                                <span>Updated {timeAgo(repo.updatedAt)}</span>
+                                </span>
                             </div>
                         </div>
                     </div>
