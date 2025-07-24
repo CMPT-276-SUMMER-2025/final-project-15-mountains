@@ -29,7 +29,7 @@ export async function POST(req) {
         `;
 
     const res = await client.chat.completions.create({
-    model: "openai/gpt-4o",
+    model: "openai/gpt-4.1-mini",
     temperature: 0.7,
     max_tokens: 300,
     messages: [
