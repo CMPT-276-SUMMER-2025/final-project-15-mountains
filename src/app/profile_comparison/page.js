@@ -146,7 +146,7 @@ export default function ProfileComparison() {
             {showAnalysis && (
                 <div className="flex bg-gray-50 rounded-lg border border-2 border-grey-400 p-3 mt-5">
                     <div className="flex flex-col gap-3">
-                        <div className="flex flex-row gap-3">
+                        <div className="flex flex-row justify-center gap-3">
                             {userProfiles.map((profile) => (
                                 <div
                                     key={profile.login}
@@ -156,28 +156,28 @@ export default function ProfileComparison() {
                                 </div>
                             ))}
                         </div>
-                        <div className="flex flex-row gap-5">
-                            <ContributionHeatmap
-                                key={colorChangeTrigger}
-                                userProfiles={userProfiles}
-                                getUserColor={getUserColorScheme}
-                            />
-                            <div className="flex bg-white border border-grey-200 p-5 rounded-xl
-                                            w-full h-full items-center justify-center text-xl">
-                                <RepositoryView allRepos={allRepos} />
+                        <div className="grid gap-5 grid-cols-2 grid-cols-[min-content_1fr] gap-5">
+                            <div className="flex flex-col">
+                                    <ContributionHeatmap
+                                        key={colorChangeTrigger}
+                                        userProfiles={userProfiles}
+                                        getUserColor={getUserColorScheme}
+                                    />
+                                    <Metrics
+                                        userProfiles={userProfiles}
+                                        activeMetric={activeMetric}
+                                        setActiveMetric={setActiveMetric}
+                                        getMetricValue={getMetricValue}
+                                        sortProfiles={sortProfiles}
+                                    />
+                            </div>
+                            <div className="bg-white border border-grey-200 rounded-xl p-5 flex flex-col h-full">
+                                <RepositoryView allRepos={allRepos}/>
                             </div>
                         </div>
 
                         {showAnalysis && (
                             <>
-                                <Metrics
-                                    userProfiles={userProfiles}
-                                    activeMetric={activeMetric}
-                                    setActiveMetric={setActiveMetric}
-                                    getMetricValue={getMetricValue}
-                                    sortProfiles={sortProfiles}
-                                />
-
                                 <MetricsTable
                                     userProfiles={userProfiles}
                                     activeMetric={activeMetric}

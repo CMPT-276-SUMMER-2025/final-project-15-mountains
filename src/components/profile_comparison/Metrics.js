@@ -14,7 +14,7 @@ export default function Metrics({ userProfiles, activeMetric, setActiveMetric, g
     };
 
     return (
-        <div className="flex flex-wrap gap-4 justify-center mt-5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-5">
             {metrics.map((metric) => {
                 const sorted = sortProfiles(userProfiles, metric);
                 const top = sorted[0];
@@ -31,7 +31,7 @@ export default function Metrics({ userProfiles, activeMetric, setActiveMetric, g
                     <button
                         key={metric}
                         onClick={() => setActiveMetric(metric)}
-                        className={`w-80 h-auto px-6 py-4 rounded-xl text-left border transition-all duration-200
+                        className={`h-auto px-6 py-4 rounded-xl text-left border transition-all duration-200
                         ${metric === activeMetric ? "bg-gray-900 text-white scale-105"
                             : "bg-white hover:bg-gray-50 text-gray-900"}`}
                     >

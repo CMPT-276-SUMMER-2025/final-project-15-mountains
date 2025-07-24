@@ -18,8 +18,8 @@ export default function ContributionHeatmap({ userProfiles, getUserColor }) {
     const fullYearTemplate = generateFullYearRangeUTC(inferredYear);
 
     return (
-        <div className="bg-white border border-gray-200 p-4 rounded-lg w-fit">
-            <div className="mt-5 flex flex-col gap-6">
+        <div className="flex flex-col p-4 bg-white border border-gray-200 rounded-lg">
+            <div className="mt-5 gap-6">
                 {userProfiles.map((profile) => {
                     const user = profile?.data;
                     const raw = user?.contributions || [];
