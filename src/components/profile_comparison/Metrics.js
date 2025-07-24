@@ -14,7 +14,7 @@ export default function Metrics({ userProfiles, activeMetric, setActiveMetric, g
     };
 
     return (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-5">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mt-5">
             {metrics.map((metric) => {
                 const sorted = sortProfiles(userProfiles, metric);
                 const top = sorted[0];

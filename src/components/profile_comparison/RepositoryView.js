@@ -56,7 +56,7 @@ export default function RepositoryView({ allRepos }) {
     };
 
     return (
-        <div className="w-full h-full p-5 rounded-xl shadow-inner border border-gray-200">
+        <div className="w-full h-full p-5 rounded-xl">
             <div className="flex flex-col gap-4 mb-4">
                 <h3 className="text-lg font-bold text-gray-800">Top Repositories (Combined)</h3>
                 <div>
