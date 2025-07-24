@@ -33,7 +33,16 @@ git clone git@github.com:CMPT-276-SUMMER-2025/final-project-15-mountains.git
 cd final-project-15-mountains/src
 npm install
 ```
+## 🔐 Set Up Environment Variables
 
+Create a `.env.local` file in the root of the project and add the following:
+
+```env
+GH_TOKEN=your_github_api_token
+AI_TOKEN=your_openai_api_token
+```
+
+Replace `your_github_api_token` and `your_openai_api_token` with your actual API keys.
 ##  Running the App Locally
 
 Start the development server:
