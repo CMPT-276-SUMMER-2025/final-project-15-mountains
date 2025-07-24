@@ -70,11 +70,11 @@ export const Header = () => {
       <h1 className="text-2xl md:text-7xl font-bold dark:text-white">
         GitGood
       </h1>
-      <p className="max-w-2xl text-base md:text-xl mt-8 dark:text-neutral-200">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+      <p className="max-w-2xl text-base md:text-xl mt-8 dark:text-neutral-200 ">
+        GitGood is an AI-powered web app designed to help developers level up their GitHub game. Whether you're a beginner looking for your first open-source issue or a seasoned coder seeking your next contribution, GitGood uses intelligent recommendations to match you with the most relevant GitHub issues based on your skills and interests.
       </p>
       <Button className="mt-10 px-8 py-4 text-lg">
-        <Link href="/issuefinder">Get Started</Link>
+        <Link href="/issue_finder">Get Started</Link>
       </Button>
       <Button onClick={() => window.scrollBy({ top: 1250, behavior: 'smooth' })} className="mt-10 ml-5 px-8 py-4 text-lg">
         Explore

@@ -1,6 +1,8 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Nav from "@/components/ui/navbar";
+import Footer from "@/components/ui/footer";
+import { ThemeProvider as NextThemesProvider } from "next-themes";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -20,10 +22,13 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased dark`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Nav></Nav>
-        {children}
+        <NextThemesProvider attribute="class" defaultTheme="system" enableSystem>
+          <Nav />
+          {children}
+          <Footer></Footer>
+        </NextThemesProvider>
       </body>
     </html>
   );

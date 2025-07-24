@@ -71,7 +71,7 @@ export default function Page() {
     }
 
     return (
-        <div className="w-full h-250">
+        <div className="w-full h-auto min-h-[100vh]">
             {/* Header */}
             <div className="flex flex-col mx-auto pt-30 text-center">
                 <h1 className="text-4xl text-center">README Viewer</h1>
