@@ -73,9 +73,8 @@ export default function PRAcceptanceBarChart({ userProfiles, getPRAcceptance }) 
                 onMouseEnter={(bar) =>
                     setTooltipData({
                         avatar: bar.data.avatar,
-                        label: bar.id,
+                        label: bar.indexValue,
                         valueRaw: bar.data.value,
-                        percent: `${bar.data.value}%`,
                         metricKey: "prAcceptance",
                     })
                 }
