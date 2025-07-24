@@ -78,7 +78,7 @@ export default function RepositoryView({ allRepos }) {
                 </div>
             </div>
 
-            <div className="overflow-y-auto max-h-[400px] pr-1 space-y-3">
+            <div className="overflow-y-auto pr-1 space-y-3">
                 {sorted.map((repo, index) => (
                     <div
                         key={`${repo.owner}/${repo.name}`}

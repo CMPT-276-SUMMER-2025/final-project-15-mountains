@@ -1,5 +1,5 @@
 "use client";
-import {useState, useRef, useEffect} from "react";
+import { useState, useRef, useEffect, useLayoutEffect } from "react";
 import ComparisonHeader from "@/components/profile_comparison/ComparisonHeader";
 import SearchBar from "@/components/profile_comparison/SearchBar";
 import UserSlot from "@/components/profile_comparison/UserSlot";
@@ -9,7 +9,6 @@ import ContributionHeatmap from "@/components/profile_comparison/ContributionHea
 import { removeUserColor } from "@/app/profile_comparison/userColorManager";
 import {
     getUserColorScheme,
-    getUserColor,
     initializeUserColor,
 } from "@/app/profile_comparison/userColorManager";
 import { ClipLoader } from "react-spinners";
@@ -25,6 +24,8 @@ export default function ProfileComparison() {
     const [loading, setLoading] = useState(false);
     const [activeMetric, setActiveMetric] = useState("commits");
     const cacheRef = useRef({});
+    const leftRef = useRef(null);
+    const [leftHeight, setLeftHeight] = useState(0);
 
     const addUser = (userObject) => {
         if (users.length >= 4) return;
@@ -119,6 +120,15 @@ export default function ProfileComparison() {
         profile.repos.map((repo) => ({ ...repo, owner: profile.login }))
     );
 
+    useLayoutEffect(() => {
+        if (!leftRef.current) return;
+        const observer = new ResizeObserver(([entry]) => {
+            setLeftHeight(entry.contentRect.height);
+        });
+        observer.observe(leftRef.current);
+        return () => observer.disconnect();
+    }, [userProfiles, colorChangeTrigger]);
+
     return (
         <div className="container mx-auto px-4 py-6 mt-40">
             <ComparisonHeader/>
@@ -156,23 +166,28 @@ export default function ProfileComparison() {
                                 </div>
                             ))}
                         </div>
-                        <div className="grid gap-5 grid-cols-2 grid-cols-[min-content_1fr] gap-5">
-                            <div className="flex flex-col">
-                                    <ContributionHeatmap
-                                        key={colorChangeTrigger}
-                                        userProfiles={userProfiles}
-                                        getUserColor={getUserColorScheme}
-                                    />
-                                    <Metrics
-                                        userProfiles={userProfiles}
-                                        activeMetric={activeMetric}
-                                        setActiveMetric={setActiveMetric}
-                                        getMetricValue={getMetricValue}
-                                        sortProfiles={sortProfiles}
-                                    />
+                        <div className="grid gap-5 grid-cols-2 grid-cols-[min-content_1fr] items-start gap-5">
+                            <div ref={leftRef} className="flex flex-col gap-6">
+                                <ContributionHeatmap
+                                    key={colorChangeTrigger}
+                                    userProfiles={userProfiles}
+                                    getUserColor={getUserColorScheme}
+                                />
+                                <Metrics
+                                    userProfiles={userProfiles}
+                                    activeMetric={activeMetric}
+                                    setActiveMetric={setActiveMetric}
+                                    getMetricValue={getMetricValue}
+                                    sortProfiles={sortProfiles}
+                                />
                             </div>
-                            <div className="bg-white border border-grey-200 rounded-xl p-5 flex flex-col h-full">
-                                <RepositoryView allRepos={allRepos}/>
+                            <div
+                                className="bg-white border rounded-xl p-5 flex flex-col overflow-hidden"
+                                style={{maxHeight: leftHeight}}
+                            >
+                                <div className="flex-1 overflow-y-auto">
+                                    <RepositoryView allRepos={allRepos}/>
+                                </div>
                             </div>
                         </div>
 
