@@ -15,8 +15,8 @@ A web app that helps developers level up their GitHub presence with AI-powered t
 ├── src                     # Source files 
 │   ├── app                 # Main application code
 │   ├── public              # Static assets (png, svg, jpeg, etc.)
+│   ├── tests               # Playwright testing files
 │   └── ...                 # Additional source components      
-├── test                    # Automated tests
 ├── tools                   # Development tools and utilities
 └── README.md               # Project overview (this file)
 ```
