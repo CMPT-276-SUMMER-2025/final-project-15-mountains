@@ -1,10 +1,13 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-
+import { usePathname } from "next/navigation";
 export default function Footer() {
+  const pathname = usePathname();
+  const hideFooter = pathname.startsWith("/chatbot");
   return (
-    <footer className="bg-white dark:bg-black border-t-2">
+    <>
+    {!hideFooter && <footer className="bg-white dark:bg-black border-t-2">
       <div className="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
         <div className="md:flex md:justify-between">
           <div className="mb-6 md:mb-0">
@@ -96,6 +99,7 @@ export default function Footer() {
           </span>
         </div>
       </div>
-    </footer>
+    </footer>}
+    </>
   );
 }

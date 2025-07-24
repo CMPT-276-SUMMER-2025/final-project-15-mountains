@@ -141,7 +141,7 @@ export default function ChatbotPage() {
     };
 
     return (
-        <div className="flex flex-col h-screen bg-black text-white">
+        <div className="flex flex-col h-screen  ">
             {/* Header */}
             <div className="flex items-center justify-center p-4 border-b border-gray-800">
                 <h1 className="text-xl font-semibold">AI Chatbot</h1>
