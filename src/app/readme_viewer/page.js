@@ -6,10 +6,11 @@ import { Input } from "@/components/ui/input";
 import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert";
 import { useEffect, useState } from "react";
 import ReactMarkdown from "react-markdown"
-import rehypeRaw from 'rehype-raw'
+import rehypeRaw from 'rehype-raw';
+import remarkGfm from 'remark-gfm';
 import { Textarea } from "@/components/ui/textarea";
 
-export default function page() {
+export default function Page() {
     const [markdown,setMarkdown] = useState();
     const [Username,setUsername] = useState();
     const [Repo,setRepo] = useState();
@@ -78,8 +79,8 @@ export default function page() {
             
                 {/* Input Section */}
                 <div className="flex grid-cols-3 gap-4 justify-center py-4">
-                    <Input className="border-black border-1 rounded-full text-center w-50" id="Username" placeholder="Username" onChange={(e) => setUsername(e.target.value)}></Input>
-                    <Input className="border-black border-1 rounded-full text-center w-50" id="Repository" placeholder="Repository" onChange={(e) => setRepo(e.target.value)}></Input>
+                    <Input className="border-black border-1 rounded-full w-50" id="Username" placeholder="Username" onChange={(e) => setUsername(e.target.value)}></Input>
+                    <Input className="border-black border-1 rounded-full w-50" id="Repository" placeholder="Repository" onChange={(e) => setRepo(e.target.value)}></Input>
                     <Button className="hover:cursor-pointer" onClick={fetchMarkdown}>Load</Button>
                 </div>
             </div>
@@ -94,7 +95,7 @@ export default function page() {
                 {/* The Left side of the Card */}
                 <div className="w-1/2 flex flex-col">
                     <div className="flex-1 h-full p-4 rounded-xl overflow-auto">
-                    <ReactMarkdown rehypePlugins={[rehypeRaw]}>{markdown}</ReactMarkdown>
+                    <ReactMarkdown rehypePlugins={[rehypeRaw]} remarkPlugins={remarkGfm}>{markdown}</ReactMarkdown>
                     </div>
                 </div>
 
