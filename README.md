@@ -30,7 +30,7 @@ Clone the repository and install dependencies:
 
 ```bash
 git clone git@github.com:CMPT-276-SUMMER-2025/final-project-15-mountains.git
-cd final-project-15-mountains
+cd final-project-15-mountains/src
 npm install
 ```
 
