@@ -43,7 +43,7 @@ function Navbar({
   const router = useRouter();
   return (
     <div
-      className={cn("fixed top-10 inset-x-0 max-w-2xl mx-auto z-50", className)}>
+      className={cn("fixed top-10 inset-x-0 max-w-2xl mx-auto z-50 text-xl", className)}>
       <Menu setActive={setActive}>
         <HoveredLink href="/">Home</HoveredLink>
           
@@ -59,13 +59,13 @@ function Navbar({
             <ProductItem
               title="Issue Finder"
               href="/issue_finder"
-              src="/nav/issue_finder.png"
+              src="/nav/issue_finder.PNG"
               description="Search for easy Github issues and use AI to help you pick"
             />
             <ProductItem
               title="Readme Viewer"
               href="/readme_viewer"
-              src="/nav/README_Viewer.png"
+              src="/nav/README_Viewer.PNG"
               description="View and make potential edits to readmes from Github "
             />
             <ProductItem
@@ -75,13 +75,9 @@ function Navbar({
               description="Compare Github profiles with friends"
             />
           </div>
-        <div className="flex flex-col space-y-4 text-sm">
-            <HoveredLink href="/issue_finder">Issue Finder</HoveredLink>
-            <HoveredLink href="/profile_comparison">Profile Comparison</HoveredLink>
-            <HoveredLink href="/readme_viewer">Readme viewer</HoveredLink>
-          </div>
 
         </MenuItem>
+        <HoveredLink href="/">About</HoveredLink>
         
       </Menu>
     </div>
@@ -91,7 +87,7 @@ function Navbar({
 
 
 export function ModeToggle() {
-  const { setTheme } = useTheme()
+  const { setTheme } = useTheme("system")
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>

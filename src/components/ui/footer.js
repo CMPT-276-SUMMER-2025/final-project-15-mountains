@@ -4,7 +4,7 @@ import Link from "next/link";
 
 export default function Footer() {
   return (
-    <footer className="bg-white dark:bg-black">
+    <footer className="bg-white dark:bg-black border-t-2">
       <div className="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
         <div className="md:flex md:justify-between">
           <div className="mb-6 md:mb-0">
@@ -16,7 +16,7 @@ export default function Footer() {
                 src="/gitgood-logo_thomasbrigham.png"
                 className="me-3"
               />
-              <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
+              <span className="self-center text-2xl font-semibold whitespace-nowrap ">
                 GitGood
               </span>
             </Link>
@@ -24,10 +24,10 @@ export default function Footer() {
 
           <div className="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
             <div>
-              <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">
+              <h2 className="mb-6 text-sm font-semibold  uppercase ">
                 AI Services
               </h2>
-              <ul className="text-gray-500 dark:text-gray-400 font-medium">
+              <ul className="  font-medium">
                 <li className="mb-4">
                   <Link href="/markdown_generator" className="hover:underline">
                     Markdown Generator
@@ -42,10 +42,10 @@ export default function Footer() {
             </div>
 
             <div>
-              <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">
+              <h2 className="mb-6 text-sm font-semibold  uppercase ">
                 GitHub Services
               </h2>
-              <ul className="text-gray-500 dark:text-gray-400 font-medium">
+              <ul className=" font-medium">
                 <li className="mb-4">
                   <Link href="/issue_finder" className="hover:underline">
                     Issue Finder
@@ -65,10 +65,10 @@ export default function Footer() {
             </div>
 
             <div>
-              <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">
+              <h2 className="mb-6 text-sm font-semibold uppercase ">
                 Other
               </h2>
-              <ul className="text-gray-500 dark:text-gray-400 font-medium">
+              <ul className=" font-medium">
                 <li className="mb-4">
                   <Link href="/" className="hover:underline">
                     Home

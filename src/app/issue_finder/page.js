@@ -91,7 +91,7 @@ export default function IssueSelector() {
     }, [highlightedIndex]);
 
     return (
-        <div className="h-[100vh]">
+        <div className="h-auto min-h-[100vh]">
         <div className="flex flex-col justify-end items-center h-60 mb-10">
             <h1 className="lg:text-7xl">Issue Finder</h1>
             <h3 className="text-md mt-5">Discover beginner-friendly GitHub issues in your favorite language.</h3> <h3> Use AI to pick the best one based on your interests and goals.</h3>
@@ -149,7 +149,7 @@ export default function IssueSelector() {
             </Alert>
             )}
 
-            <div className="border-0 bg-transparent w-200 mt-5">
+            <div className="  bg-transparent w-200 mt-5">
                 {issues.map((issue, i) => (
                 <Card onClick={() => window.open(issue.html_url, "_blank")} key={issue.id} id={`issue-${i}`} className={`p-4 hover:cursor-pointer transition-all duration-300 mb-5 ${highlightedIndex === i ? "border-2 border-green-500 scale-110 m-6 shadow-xl/20 shadow-green-600" : 
                     "border-1 hover:border-white hover:shadow-xl/20 hover:shadow-white "
