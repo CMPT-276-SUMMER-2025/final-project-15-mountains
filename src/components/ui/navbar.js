@@ -40,6 +40,7 @@ function Navbar({
   className
 }) {
   const [active, setActive] = useState(null);
+  const [active1, setActive1] = useState(null);
   const router = useRouter();
   return (
     <div
@@ -49,9 +50,20 @@ function Navbar({
           
 
         <MenuItem setActive={setActive} active={active} item="AI Services">
-          <div className="flex flex-col space-y-4 text-sm">
-            <HoveredLink href="/markdown_generator">Markdown generator</HoveredLink>
-            <HoveredLink href="/chatbot">Chatbot</HoveredLink>
+
+        <div className="  text-sm grid grid-cols-2 gap-10 p-4">
+            <ProductItem
+              title="Markdown Generator"
+              href="/markdown_generator"
+              src="/nav/markdown_generator.PNG"
+              description="Use AI to help generate markdown"
+            />
+            <ProductItem
+              title="Chatbot"
+              href="/chatbot"
+              src="/nav/chatbot.PNG"
+              description="Stuck on an issue get advice from the GitGood chatbot"
+            />
           </div>
         </MenuItem>
         <MenuItem setActive={setActive} active={active} item="Github Services">
