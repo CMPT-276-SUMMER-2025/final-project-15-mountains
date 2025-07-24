@@ -88,7 +88,13 @@ export default function ProfileComparison() {
             case "repos":
                 return user.data.publicRepos ?? 0;
             case "contributions":
-                return user.data.totalContributions ?? 0;
+                return user.data?.contributions
+                    ? user.data.contributions.reduce((sum, d) => {
+                        const year = new Date(d.date).getUTCFullYear();
+                        const inferredYear = new Date().getUTCFullYear();
+                        return year === inferredYear ? sum + d.count : sum;
+                    }, 0)
+                    : 0;
             case "commits":
                 return user.data.totalCommits ?? 0;
             case "prs":
