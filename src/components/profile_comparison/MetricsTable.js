@@ -18,14 +18,14 @@ export default function MetricsTable({ userProfiles, activeMetric, getMetricValu
     };
 
     return (
-        <div className="flex flex-col lg:flex-row gap-5 mt-5 bg-white p-6 rounded-xl border shadow-sm">
+        <div className="flex flex-col lg:flex-row gap-5 mt-5 bg-white p-6 rounded-xl border">
             <div className="w-full lg:w-1/2">
-                <h2 className="text-xl font-bold mb-4 text-gray-800">
+                <h2 className="text-xl font-bold mb-6 text-gray-800">
                     Ranking by {labelByMetric[activeMetric] ?? activeMetric}
                 </h2>
 
-                <div className="overflow-x-auto">
-                    <table className="min-w-full text-sm text-left border rounded-lg overflow-hidden">
+                <div className="justify-center overflow-x-auto border border-gray-200 rounded-lg">
+                    <table className="min-w-full text-sm text-left rounded-lg overflow-hidden">
                         <thead className="bg-gray-100 text-gray-700 uppercase tracking-wide text-xs">
                         <tr>
                             <th className="py-3 px-4">Rank</th>
