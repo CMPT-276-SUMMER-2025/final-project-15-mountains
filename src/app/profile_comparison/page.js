@@ -120,8 +120,8 @@ export default function ProfileComparison() {
     );
 
     return (
-        <div className="m-10 p-5 mt-40">
-            <ComparisonHeader />
+        <div className="container mx-auto px-4 py-6 mt-40">
+            <ComparisonHeader/>
             <div className="flex flex-col gap-15 mb-10">
                 <div className="flex justify-center">
                     <div className="flex flex-row justify-center w-1/3 gap-5">
