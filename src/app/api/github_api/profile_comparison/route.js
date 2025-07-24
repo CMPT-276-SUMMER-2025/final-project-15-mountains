@@ -51,6 +51,9 @@ export async function POST(req) {
         pullRequests {
             totalCount
         }
+        mergedPullRequests: pullRequests(states: [MERGED]) {
+            totalCount
+        }
         contributionsCollection {
           contributionCalendar {
             weeks {
@@ -123,6 +126,7 @@ export async function POST(req) {
             following: user.following?.totalCount || 0,
             openIssues: user.issues?.totalCount || 0,
             pullRequests: user.pullRequests?.totalCount || 0,
+            mergedPullRequests: user.mergedPullRequests?.totalCount || 0,
             totalContributions: calendar.totalContributions || 0,
             contributions,
             totalStars,
