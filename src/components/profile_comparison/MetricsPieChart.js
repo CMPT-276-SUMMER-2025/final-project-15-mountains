@@ -45,28 +45,20 @@ export default function MetricsPieChart({ userProfiles, activeMetric, getMetricV
                 borderWidth={1}
                 borderColor={{ from: "color", modifiers: [["darker", 0.2]] }}
                 enableArcLabels={true}
-                arcLabel={(d) => d.data.rawValue.toLocaleString()}
-                arcLabelsSkipAngle={-1}
+                arcLabel={(d) => `${d.data.rawValue}`}
+                arcLabelsSkipAngle={10}
                 arcLabelsTextColor="#fff"
-                arcLabelsComponent={({ label, style }) => (
-                    <text
-                        x={style.x}
-                        y={style.y}
-                        textAnchor="middle"
-                        dominantBaseline="central"
-                        style={{
-                            ...style.style,
-                            fill: "#fff",
-                            fontWeight: "bold",
-                            fontSize: 14,
-                        }}
-                    >
-                        {label}
-                    </text>
-                )}
                 enableArcLinkLabels={false}
                 arcLinkLabelsSkipAngle={360}
                 tooltip={() => null}
+                theme={{
+                    labels: {
+                        text: {
+                            fontSize: 16,
+                            fontWeight: 800,
+                        },
+                    },
+                }}
                 onMouseEnter={(data) => {
                     const raw = data.data.rawValue;
                     const percentValue = data.data.percent;

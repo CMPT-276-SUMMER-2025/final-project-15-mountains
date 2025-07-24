@@ -3,7 +3,6 @@ import {formatMetricLabel} from "@/app/profile_comparison/formatMetricLabel";
 
 export default function Metrics({ userProfiles, activeMetric, setActiveMetric, getMetricValue, sortProfiles }) {
     const metrics = ["repos", "contributions", "commits", "prs", "issues", "stars", "forks"];
-
     const labelByMetric = {
         repos: "Repositories",
         contributions: "Contributions",
@@ -13,6 +12,7 @@ export default function Metrics({ userProfiles, activeMetric, setActiveMetric, g
         stars: "Stars",
         forks: "Forks",
     };
+
     return (
         <div className="flex flex-wrap gap-4 justify-center mt-5">
             {metrics.map((metric) => {

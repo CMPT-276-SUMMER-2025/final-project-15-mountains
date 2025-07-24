@@ -6,10 +6,13 @@ import { formatMetricLabel } from "@/app/profile_comparison/formatMetricLabel"
 export default function MetricsTable({ userProfiles, activeMetric, getMetricValue, sortProfiles }) {
     const sorted = sortProfiles(userProfiles, activeMetric);
     const labelByMetric = {
+        repos: "Repositories",
+        contributions: "Contributions",
         commits: "Commits",
         prs: "Pull Requests",
         issues: "Issues",
         stars: "Stars",
+        forks: "Forks",
     };
 
     return (
