@@ -8,27 +8,28 @@ export default function PRAcceptanceBarChart({ userProfiles, getPRAcceptance }) 
     const [tooltipData, setTooltipData] = useState(null);
     const [cursorPos, setCursorPos] = useState({ x: 0, y: 0 });
 
-    const data = userProfiles.map((u) => {
-        const rawValue = parseFloat(getPRAcceptance(u).toFixed(1));
+    const raw = userProfiles.map((u) => {
+        const pct = parseFloat(getPRAcceptance(u).toFixed(1));
         return {
             id: `@${u.login}`,
-            value: rawValue,
-            percent: rawValue,
-            color: getUserColor(u.login),
+            value: pct,
             avatar: u.data.avatarUrl,
+            color: getUserColor(u.login),
         };
     });
+
+    const data = [...raw].sort((a, b) => b.value - a.value);
 
     return (
         <div
             className="relative w-full h-[400px] overflow-visible"
-            onMouseMove={(e) => setCursorPos({ x: e.clientX, y: e.clientY })}
+            onMouseMove={(e) => setCursorPos({x: e.clientX, y: e.clientY})}
         >
             <ResponsiveBar
                 data={data}
                 keys={["value"]}
                 indexBy="id"
-                margin={{ top: 30, right: 30, bottom: 60, left: 60 }}
+                margin={{ top: 30, right: 30, bottom: 100, left: 60 }}
                 padding={0.4}
                 colors={(d) => d.data.color}
                 borderWidth={1}
@@ -37,7 +38,29 @@ export default function PRAcceptanceBarChart({ userProfiles, getPRAcceptance }) 
                     tickValues: [0, 25, 50, 75, 100],
                     format: (v) => `${v}%`,
                 }}
-                axisBottom={{ tickRotation: -45 }}
+                axisBottom={{
+                    tickSize: 0,
+                    tickPadding: 20,
+                    tickRotation: 0,
+                    renderTick: ({ value, x, y }) => {
+                        const item = data.find((d) => d.id === value);
+                        return (
+                            <foreignObject
+                                key={value}
+                                x={x - 12}
+                                y={y + 4}
+                                width={24}
+                                height={24}
+                            >
+                                <img
+                                    src={item.avatar}
+                                    alt={value}
+                                    style={{ width: "100%", height: "100%", borderRadius: "50%" }}
+                                />
+                            </foreignObject>
+                        );
+                    },
+                }}
                 enableLabel={true}
                 label={(d) => `${d.value}%`}
                 labelSkipWidth={12}
@@ -46,15 +69,16 @@ export default function PRAcceptanceBarChart({ userProfiles, getPRAcceptance }) 
                 theme={{
                     labels: { text: { fontSize: 16, fontWeight: 800 } },
                 }}
-                onMouseEnter={(bar) => {
+                tooltip={() => null}
+                onMouseEnter={(bar) =>
                     setTooltipData({
                         avatar: bar.data.avatar,
                         label: bar.id,
                         valueRaw: bar.data.value,
                         percent: `${bar.data.value}%`,
                         metricKey: "prAcceptance",
-                    });
-                }}
+                    })
+                }
                 onMouseLeave={() => setTooltipData(null)}
             />
 
