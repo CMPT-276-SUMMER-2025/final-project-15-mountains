@@ -2,7 +2,7 @@
 import React from "react";
 import { motion } from "motion/react";
 
-
+import Link from "next/link";
 
 const transition = {
   type: "spring",
@@ -62,7 +62,7 @@ export const Menu = ({
     <nav
       // resets the state
       onMouseLeave={() => setActive(null)}
-      className="relative rounded-full border border-transparent dark:bg-black dark:border-white/[0.2] bg-white shadow-input flex justify-center space-x-4 px-8 py-6 ">
+      className="relative rounded-full border border-black dark:bg-black dark:border-white/[0.2] bg-white shadow-input flex justify-center space-x-4 px-8 py-6 ">
       {children}
     </nav>
   );
@@ -75,7 +75,7 @@ export const ProductItem = ({
   src
 }) => {
   return (
-    <a href={href} className="flex space-x-2">
+    <Link href={href} className="flex space-x-2">
       <img
         src={src}
         width={140}
@@ -90,7 +90,7 @@ export const ProductItem = ({
           {description}
         </p>
       </div>
-    </a>
+    </Link>
   );
 };
 
