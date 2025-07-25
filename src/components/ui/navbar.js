@@ -83,7 +83,7 @@ function Navbar({
             <ProductItem
               title="Profile Comparison"
               href="/profile_comparison"
-              src="/nav/profile_comp.png"
+              src="/nav/profile_comp.PNG"
               description="Compare Github profiles with friends"
             />
           </div>
