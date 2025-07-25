@@ -77,7 +77,7 @@ export const Header = () => {
         <Link href="/issue_finder">Get Started</Link>
       </Button>
       <Button onClick={() => window.scrollBy({ top: 1250, behavior: 'smooth' })} className="mt-10 ml-5 px-8 py-4 text-lg">
-        Explore
+        Explore Popular Repositories
       </Button>
     </div>
   );
