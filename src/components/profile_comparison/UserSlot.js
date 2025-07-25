@@ -7,7 +7,7 @@ import {
 } from "@/app/profile_comparison/userColorManager";
 import ColorPicker from "@/components/profile_comparison/ColorPicker"
 
-export default function userSlot({ users, removeUser, onColorChange }) {
+export default function UserSlot({ users, removeUser, onColorChange }) {
     const [colorMap, setColorMap] = useState({});
 
     useEffect(() => {

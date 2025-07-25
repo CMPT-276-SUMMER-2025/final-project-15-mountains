@@ -2,7 +2,7 @@
 import { useState, useRef, useEffect, useLayoutEffect } from "react";
 import ComparisonHeader from "@/components/profile_comparison/ComparisonHeader";
 import SearchBar from "@/components/profile_comparison/SearchBar";
-import UserSlot from "@/components/profile_comparison/userSlot";
+import UserSlot from "@/components/profile_comparison/UserSlot";
 import {FaArrowRight} from "react-icons/fa";
 import UserOverview from "@/components/profile_comparison/UserOverview";
 import ContributionHeatmap from "@/components/profile_comparison/ContributionHeatmap";
