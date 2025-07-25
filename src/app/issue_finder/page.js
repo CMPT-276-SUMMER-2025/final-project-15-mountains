@@ -149,16 +149,45 @@ export default function IssueSelector() {
             </Alert>
             )}
 
-            <div className="  bg-transparent w-200 mt-5">
+            <div className="border-white bg-transparent w-200 mt-5">
                 {issues.map((issue, i) => (
                 <Card onClick={() => window.open(issue.html_url, "_blank")} key={issue.id} id={`issue-${i}`} className={`p-4 hover:cursor-pointer transition-all duration-300 mb-5 ${highlightedIndex === i ? "border-2 border-green-500 scale-110 m-6 shadow-xl/20 shadow-green-600" : 
                     "border-1 hover:border-white hover:shadow-xl/20 hover:shadow-white "
       }`}>
-                    <a href={issue.html_url} target="_blank" className="underline font-medium text-lg text-black dark:text-white">{issue.title}</a>
-                    <div className="text-sm dark:text-gray-200 mt-2">
+        
+                    <div className="flex items-center justify-between">
+                    <h1
+                        target="_blank"
+                        className="font-semibold text-lg text-primary dark:text-white underline"
+                    >
+                        {issue.title}
+                    </h1>
+                    <span className="text-xs text-gray-400 dark:text-gray-300">
+                        {new Date(issue.created_at).toLocaleDateString()}
+                    </span>
+                    </div>
+                    <div className="text-sm dark:text-gray-200">
                         <p><strong>Repo:</strong> <a href={issue.repository.html_url} target="_blank" className="underline">{issue.repository.name}</a></p>
                         <p><strong>Repo Description:</strong> {issue.repository.description || "No description"}</p>
 
+                    </div>
+                    <div className="text-sm">
+                        <strong>Tags:</strong>
+                    {issue.labels.length > 0 && (
+                        <div className="flex flex-wrap gap-2 ">
+                        {issue.labels.map((label) => (
+                            <span
+                            key={label.name}
+                            className="px-2 py-0.5 text-xs rounded-md font-medium border text-black dark:text-white"
+                            style={{
+                                backgroundColor: `#${label.color+55}`,
+                            }}
+                            >
+                            {label.name}
+                            </span>
+                        ))}
+                        </div>
+                    )}
                     </div>
                     {highlightedIndex === i && aimessage != "" && (
                         <div className=" mt-2 p-4 border-l-4 border-green-500 bg-green-100 dark:bg-green-900/40 rounded-md shadow-md text-xs">
