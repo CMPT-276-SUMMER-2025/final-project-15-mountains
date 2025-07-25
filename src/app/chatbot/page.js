@@ -173,11 +173,11 @@ export default function ChatbotPage() {
                             {message.role === 'user' && !isGenerating && editIndex === null && (
                                 <div className="mt-1 flex justify-end w-full">
                                     <button
-                                        className="inline-flex text-xs px-2 py-1 bg-gray-700 hover:bg-gray-600 rounded transition-colors duration-150 items-center opacity-0 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto"
+                                        className="text-white inline-flex text-xs px-2 py-1  bg-gray-700 hover:bg-gray-600 rounded transition-colors duration-150 items-center opacity-0 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto"
                                         onClick={() => handleEditMessage(idx)}
                                         title="Edit message"
                                     >
-                                        <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.232 5.232l3.536 3.536M9 13l6.586-6.586a2 2 0 112.828 2.828L11.828 15.828a4 4 0 01-1.414.828l-4 1a1 1 0 01-1.213-1.213l1-4a4 4 0 01.828-1.414z" /></svg>
+                                        <svg className="w-4 h-4 mr-1 " fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.232 5.232l3.536 3.536M9 13l6.586-6.586a2 2 0 112.828 2.828L11.828 15.828a4 4 0 01-1.414.828l-4 1a1 1 0 01-1.213-1.213l1-4a4 4 0 01.828-1.414z" /></svg>
                                         Edit
                                     </button>
                                 </div>
