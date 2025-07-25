@@ -56,7 +56,7 @@ export default function ProfileComparison() {
                         body: JSON.stringify({ username: user.login }),
                     });
 
-                    if (!profileRes.ok) throw new Error(await profileRes.text());
+                    if (!profileRes.ok) throw new Error("Failed to fetch profile data");
 
                     const profileJson = await profileRes.json();
 
