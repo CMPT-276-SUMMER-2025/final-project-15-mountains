@@ -1,7 +1,7 @@
-name: Deploy to Vercel
+name: Preview Deploy to Vercel
 
 on:
-  push:
+  pull_request:
     branches: [main]
   workflow_dispatch:
 env:
@@ -26,7 +26,7 @@ jobs:
         run: |
           cd src
           npm ci
-
+          
       - name: Cache npm and Next.js build cache
         uses: actions/cache@v4
         with:
@@ -36,7 +36,7 @@ jobs:
           key: ${{ runner.os }}-nextjs-${{ hashFiles('src/package-lock.json') }}-${{ hashFiles('src/**/*.js', 'src/**/*.jsx') }}
           restore-keys: |
             ${{ runner.os }}-nextjs-${{ hashFiles('src/package-lock.json') }}-
-            
+
       - name: Install Playwright
         run: |
           cd src
@@ -46,7 +46,8 @@ jobs:
         run: |
           cd src
           npx playwright test
-  deploy:
+
+  deploy-preview:
     needs: test
     runs-on: ubuntu-latest
 
@@ -57,7 +58,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-    
+
       - name: Cache npm and Next.js build cache
         uses: actions/cache@v4
         with:
@@ -67,6 +68,7 @@ jobs:
           key: ${{ runner.os }}-nextjs-${{ hashFiles('src/package-lock.json') }}-${{ hashFiles('src/**/*.js', 'src/**/*.jsx') }}
           restore-keys: |
             ${{ runner.os }}-nextjs-${{ hashFiles('src/package-lock.json') }}-
+
 
       - name: Install dependencies
         run: |
@@ -81,9 +83,10 @@ jobs:
       - name: Install Vercel CLI
         run: npm install -g vercel
 
-      - name: Deploy to Vercel
+      - name: Preview Deploy to Vercel 
         id: deploy
         run: |
-          DEPLOYMENT_URL=$(vercel deploy --prod --token="${{ secrets.VERCEL_TOKEN }}" --yes)
+          DEPLOYMENT_URL=$(vercel deploy --token="${{ secrets.VERCEL_TOKEN }}" --yes)
           echo "deployment_url=$DEPLOYMENT_URL" >> $GITHUB_OUTPUT
-          echo "🟩🟩🟩 Deployed to: $DEPLOYMENT_URL 🟩🟩🟩"
+          echo "🟩🟩🟩   Deployed to: $DEPLOYMENT_URL   🟩🟩🟩"
+      
