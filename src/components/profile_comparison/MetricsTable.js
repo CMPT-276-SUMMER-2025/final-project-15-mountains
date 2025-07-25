@@ -18,7 +18,7 @@ export default function MetricsTable({ userProfiles, activeMetric, getMetricValu
     };
 
     return (
-        <div className="flex flex-col lg:flex-row gap-5 mt-5 bg-white p-6 rounded-xl border">
+        <div className="flex flex-col lg:flex-row gap-5 bg-white p-6 rounded-xl border">
             <div className="w-full lg:w-1/2">
                 <h2 className="text-xl font-bold mb-6 text-gray-800">
                     Ranking by {labelByMetric[activeMetric] ?? activeMetric}

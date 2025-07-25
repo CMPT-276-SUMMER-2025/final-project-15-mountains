@@ -176,7 +176,7 @@ export default function ProfileComparison() {
                         </div>
 
                         <div className="grid gap-5 grid-cols-2 grid-cols-[min-content_1fr] items-start gap-5">
-                            <div ref={leftRef} className="flex flex-col gap-6">
+                            <div ref={leftRef} className="flex flex-col gap-3">
                                 <ContributionHeatmap
                                     key={colorChangeTrigger}
                                     userProfiles={userProfiles}
