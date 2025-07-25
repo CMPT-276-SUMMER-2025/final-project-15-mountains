@@ -56,6 +56,8 @@ export default function ProfileComparison() {
                         body: JSON.stringify({ username: user.login }),
                     });
 
+                    if (!profileRes.ok) throw new Error(await profileRes.text());
+
                     const profileJson = await profileRes.json();
 
                     return {
