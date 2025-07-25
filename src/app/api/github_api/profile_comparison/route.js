@@ -7,7 +7,7 @@ export async function POST(req) {
         const GH_TOKEN = process.env.GH_TOKEN;
         if (!GH_TOKEN) {
             throw new Error("GitHub token not set");
-        }
+        } 
 
         const query = `
         query ($login: String!) {
