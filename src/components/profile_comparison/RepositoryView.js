@@ -56,9 +56,9 @@ export default function RepositoryView({ allRepos, maxHeight }) {
     };
 
     return (
-        <div className="w-full h-full p-5">
+        <div className="w-full h-full p-2">
             <div className="flex flex-col gap-4 mb-4">
-                <h3 className="text-lg font-bold text-gray-800">Top Repositories (Combined)</h3>
+                <h3 className="text-lg font-bold text-gray-800">Top Repositories</h3>
                 <div>
                     <span className="text-xs uppercase tracking-wide text-gray-500 font-semibold">Rank by:</span>
                     <div className="flex flex-wrap gap-2 mt-1">

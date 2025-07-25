@@ -19,7 +19,8 @@ export default function ContributionHeatmap({ userProfiles, getUserColor }) {
 
     return (
         <div className="flex flex-col p-4 bg-white border border-gray-200 rounded-lg">
-            <div className="mt-5 gap-6">
+            <h2 className="text-xl font-semibold mb-6">Contributions This Year</h2>
+            <div className="gap-6">
                 {userProfiles.map((profile) => {
                     const user = profile?.data;
                     const raw = user?.contributions || [];
@@ -39,7 +40,7 @@ export default function ContributionHeatmap({ userProfiles, getUserColor }) {
                     });
 
                     return (
-                        <div key={profile.login}>
+                        <div className="mb-6" key={profile.login}>
                             <ActivityCalendar
                                 data={data}
                                 blockSize={11}
