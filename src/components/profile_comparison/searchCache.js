@@ -1,7 +1,6 @@
-"use client";
 import { useState, useEffect } from "react";
 
-export function SearchCache(input, stableInput, cacheRef) {
+export function searchCache(input, stableInput, cacheRef) {
     const [results, setResults] = useState([]);
     const TTL = 1000 * 60 * 60;
 
