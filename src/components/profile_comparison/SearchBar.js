@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import { Debounce } from "@/components/profile_comparison/Debounce";
-import { searchCache } from "@/components/profile_comparison/searchCache";
+import { SearchCache } from "@/components/profile_comparison/SearchCache";
 import { FaGithub } from "react-icons/fa";
 
 export default function SearchBar({ onSelect, cache }) {
@@ -9,7 +9,7 @@ export default function SearchBar({ onSelect, cache }) {
     const [resultsVisible, setResultsVisible] = useState(false);
 
     const stableInput = Debounce(input, 500);
-    const results = searchCache(input, stableInput, cache);
+    const results = SearchCache(input, stableInput, cache);
 
     useEffect(() => {
         if (input && results.length > 0) setResultsVisible(true);

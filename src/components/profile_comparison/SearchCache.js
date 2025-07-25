@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-export function searchCache(input, stableInput, cacheRef) {
+export function SearchCache(input, stableInput, cacheRef) {
     const [results, setResults] = useState([]);
     const TTL = 1000 * 60 * 60;
 
@@ -47,20 +47,15 @@ export function searchCache(input, stableInput, cacheRef) {
         if (!stableKey || stableKey !== key) return;
 
         console.log(`[!] Fetching For: "${stableKey}" — using token`);
-        fetch(`https://api.github.com/search/users?q=${stableKey}`, {
+        fetch("/api/github_api/user_search", {
+            method: "POST",
             headers: {
-                Authorization: `token ${process.env.NEXT_PUBLIC_GITHUB_TOKEN}`,
+                "Content-Type": "application/json",
             },
+            body: JSON.stringify({ query: stableKey }),
         })
-            .then((res) => {
-                return Promise.all([
-                    res.json(),
-                    res.headers.get("X-RateLimit-Limit"),
-                    res.headers.get("X-RateLimit-Remaining"),
-                    res.headers.get("X-RateLimit-Reset"),
-                ]);
-            })
-            .then(([data, limit, remaining, reset]) => {
+            .then((res) => res.json())
+            .then(({ data, limit, remaining, reset }) => {
                 const items = data.items?.slice(0, 5) || [];
                 cacheRef.current[stableKey] = {
                     items,
@@ -68,7 +63,7 @@ export function searchCache(input, stableInput, cacheRef) {
                 };
                 localStorage.setItem("searchCache", JSON.stringify(cacheRef.current));
                 setResults(items);
-                console.log(`[!] Cache Update: "${stableKey}" — token used`);
+                console.log(`[!] Cache Update: "${stableKey}" — secure token used`);
                 console.log(`>>> Rate Limit: ${limit}/${remaining} — Reset @ ${new Date(reset * 1000).toLocaleTimeString()}`);
             })
             .catch((err) => console.error(err));
