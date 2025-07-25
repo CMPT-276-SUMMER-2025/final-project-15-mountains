@@ -102,7 +102,7 @@ export default function Page() {
 
                 {/* The Right side of the card */}
                 <div className="w-1/2 flex flex-col">
-                    <Textarea className="flex-1 resize-none h-full rounded-xl" value={decodedContent} onChange={updateText}>{decodedContent}</Textarea>
+                    <Textarea className="flex-1 resize-none h-full rounded-xl" value={decodedContent} onChange={updateText} placeholder="Start typing to see a preview of your Markdown file">{decodedContent}</Textarea>
                 </div>
                 
             </Card>
