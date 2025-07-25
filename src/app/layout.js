@@ -22,11 +22,13 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased h-dvh flex flex-col`}
       >
         <NextThemesProvider attribute="class" defaultTheme="system" enableSystem>
           <Nav />
-          {children}
+          <main className="flex-1">
+            {children}
+          </main>
           <Footer></Footer>
         </NextThemesProvider>
       </body>
