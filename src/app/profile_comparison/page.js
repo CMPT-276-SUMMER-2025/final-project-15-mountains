@@ -163,16 +163,18 @@ export default function ProfileComparison() {
             {showAnalysis && (
                 <div className="flex bg-gray-50 rounded-lg border border-2 border-grey-400 p-3 mt-5">
                     <div className="flex flex-col gap-3">
-                        <div className="flex flex-row justify-center gap-3">
+                        <div className="flex gap-4 w-full items-stretch">
                             {userProfiles.map((profile) => (
-                                <div
-                                    key={profile.login}
-                                    className="bg-white border border-grey-200 p-5 rounded-xl w-fit h-fit"
-                                >
-                                    <UserOverview userProfile={profile.data} repos={profile.repos}/>
+                                <div key={profile.login} className="flex-1 min-w-0 flex flex-col">
+                                    <UserOverview
+                                        userProfile={profile.data}
+                                        repos={profile.repos}
+                                        userCount={userProfiles.length}
+                                    />
                                 </div>
                             ))}
                         </div>
+
                         <div className="grid gap-5 grid-cols-2 grid-cols-[min-content_1fr] items-start gap-5">
                             <div ref={leftRef} className="flex flex-col gap-6">
                                 <ContributionHeatmap
@@ -193,7 +195,7 @@ export default function ProfileComparison() {
                                 style={{maxHeight: leftHeight}}
                             >
                                 <div className="overflow-y-auto flex-1">
-                                    <RepositoryView allRepos={allRepos} maxHeight={leftHeight} />
+                                    <RepositoryView allRepos={allRepos} maxHeight={leftHeight}/>
                                 </div>
                             </div>
                         </div>

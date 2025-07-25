@@ -63,7 +63,7 @@ export default function UserRepositories({ repos }) {
             <div className="flex justify-between items-center mb-2">
                 <h3 className="font-semibold text-gray-800">Repositories</h3>
                 <select
-                    className="text-sm border border-gray-300 rounded px-2 py-1"
+                    className="text-sm border border-gray-300 rounded px-1 py-1"
                     value={sortBy}
                     onChange={(e) => setSortBy(e.target.value)}
                 >
@@ -75,7 +75,7 @@ export default function UserRepositories({ repos }) {
                 </select>
             </div>
 
-            <div className="max-h-96 overflow-y-auto pr-1 space-y-2">
+            <div className="h-80 overflow-y-auto pr-1 space-y-2">
                 {sortedRepos.map((repo) => (
                     <div
                         key={repo.name}
