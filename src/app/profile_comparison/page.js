@@ -42,12 +42,19 @@ export default function ProfileComparison() {
     };
 
     const handleAnalysis = async () => {
-        if (users.length === 0) return;
+        if (users.length === 0) {
+            console.log("No users to analyze");
+            return;
+        }
+
+        console.log(`Starting analysis for ${users.length} user(s)`);
         setLoading(true);
 
         try {
             const userData = await Promise.all(
-                users.map(async (user) => {
+                users.map(async (user, index) => {
+                    console.log(`Fetching data for @${user.login}`);
+
                     const profileRes = await fetch("/api/github_api/profile_comparison", {
                         method: "POST",
                         headers: {
@@ -56,9 +63,13 @@ export default function ProfileComparison() {
                         body: JSON.stringify({ username: user.login }),
                     });
 
-                    if (!profileRes.ok) throw new Error("Failed to fetch profile data");
+                    if (!profileRes.ok) {
+                        console.error(`Failed to fetch profile for @${user.login}`, profileRes.statusText);
+                        throw new Error(`Failed to fetch profile data for ${user.login}`);
+                    }
 
                     const profileJson = await profileRes.json();
+                    console.log(`Data received for @${user.login}:`, profileJson);
 
                     return {
                         login: user.login,
@@ -68,12 +79,14 @@ export default function ProfileComparison() {
                 })
             );
 
+            console.log("Profiles fetched successfully:", userData);
             setUserProfiles(userData);
             setShowAnalysis(true);
         } catch (err) {
-            console.error(err);
+            console.error("An error occurred during analysis:", err);
         } finally {
             setLoading(false);
+            console.log("Analysis complete");
         }
     };
 
