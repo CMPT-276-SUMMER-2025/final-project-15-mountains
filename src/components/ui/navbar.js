@@ -53,10 +53,10 @@ function Navbar({
 
         <div className="  text-sm grid grid-cols-2 gap-10 p-4">
             <ProductItem
-              title="Markdown Generator"
-              href="/markdown_generator"
-              src="/nav/markdown_generator.PNG"
-              description="Use AI to help generate markdown"
+              title="Markdown Editor"
+              href="/markdown_editor"
+              src="/nav/markdown.PNG"
+              description="Use both are Readme search and our AI markdown genrator in one convient place"
             />
             <ProductItem
               title="Chatbot"
@@ -73,12 +73,6 @@ function Navbar({
               href="/issue_finder"
               src="/nav/issue_finder.PNG"
               description="Search for easy Github issues and use AI to help you pick"
-            />
-            <ProductItem
-              title="Readme Viewer"
-              href="/readme_viewer"
-              src="/nav/README_Viewer.PNG"
-              description="View and make potential edits to readmes from Github "
             />
             <ProductItem
               title="Profile Comparison"
