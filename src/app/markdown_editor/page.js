@@ -184,8 +184,8 @@ export default function Page() {
             {/* Header */}
             <div className="flex flex-col mx-auto pt-30 text-center">
                 <h1 className="text-7xl text-center">Markdown Editor</h1>
-                <p className="text-center text-md mt-5">Enter your GitHub username and the repository, to view your README markdown file.</p> 
-                <p> Ask AI to make a markdown file for you.</p>
+                <p className="text-center text-md mt-5">GitGoods all in one markdown editor view readmes from github and make local edits with a live preview of the changes</p> 
+                <p> Use AI to edit or create new markdown with whatever styling you want</p>
                 {/* Input Section */}
                 <div className="flex grid-cols-3 gap-4 justify-center py-4">
                     <Input disabled={loading} className="border-black dark:border-gray-500 border-1  w-50" id="Username" placeholder="Username" onChange={(e) => setUsername(e.target.value)}></Input>
@@ -206,7 +206,7 @@ export default function Page() {
             )}
 
             <Card className={`relative flex flex-col gap-4 p-6 min-h-[600px]  ${sizeup ? "w-full" : "w-4/6"} self-center transition-all duration-300`}>
-                <button onClick={togglesize} className="absolute right-2 top-2 z-50 cursor-pointer">
+                <button onClick={togglesize} className="absolute right-2 top-1 z-50 cursor-pointer  ">
                     {!sizeup && <ScreenFullIcon size={16} />}
                     {sizeup && <ScreenNormalIcon size={16} />}
                 </button>
@@ -219,15 +219,15 @@ export default function Page() {
                     value={message}
                     onChange={handleTextareaChange}
                     onKeyDown={handleKeyDown}
-                    placeholder="Tell AI what changes you want or how you want your markdown to look"
-                    className="min-h-[60px] max-h-[200px] resize-none pr-12"
+                    placeholder="Tell AI what changes you want: 'Edit this README with setup steps' or 'Create a GitHub issue for broken links'"
+                    className="min-h-[60px] max-h-[200px] resize-none pr-12 "
                     rows={2}
                     disabled={loading}
                     />
                     <Button
                     onClick={handleSubmit}
                     size="sm"
-                    className="absolute bottom-2 right-2 h-8 w-8 p-0"
+                    className="absolute bottom-2 right-2 h-8 w-8 p-0 cursor-pointer"
                     disabled={loading}
                     >
                     {!loading ? <Send className="h-4 w-4" /> : <svg
@@ -272,11 +272,11 @@ export default function Page() {
                 {/* The Right side of the card */}
                 <div className="w-1/2 flex flex-col rounded-2xl border-2 dark:border-gray-500">
                     <div className="self-center border-b-2 w-full text-center py-5  text-3xl dark:border-gray-500">Markdown Editor</div>
-                    <Textarea className="flex-1 resize-none h-full rounded-xl rounded-t-none border-t-0 text-white" value={markdown}  onChange={(e) => setMarkdown(e.target.value)}  placeholder="Start typing to see a preview of your Markdown file"></Textarea>
+                    <Textarea className="flex-1 resize-none h-full rounded-xl rounded-t-none border-t-0 " value={markdown}  onChange={(e) => setMarkdown(e.target.value)}  placeholder="Start typing to see a preview of your Markdown file"></Textarea>
                 </div>
                 <div className="w-1/2 flex flex-col rounded-2xl border-2 dark:border-gray-500 ">
                     <div className="self-center border-b-2 w-full text-center py-5 text-3xl dark:border-gray-500">Rendered Markdown</div>
-                    <div className="flex-1 h-full p-4 rounded-xl overflow-auto">
+                    <div className="flex-1 h-full p-4 rounded-xl overflow-auto ">
                     <ReactMarkdown rehypePlugins={[rehypeRaw]} remarkPlugins={remarkGfm} components={components}>{markdown}</ReactMarkdown>
                     </div>
                 </div>
