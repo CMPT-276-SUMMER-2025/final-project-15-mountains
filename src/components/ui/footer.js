@@ -33,7 +33,7 @@ export default function Footer() {
               <ul className="  font-medium">
                 <li className="mb-4">
                   <Link href="/markdown_generator" className="hover:underline">
-                    Markdown Generator
+                    Markdown Editor
                   </Link>
                 </li>
                 <li>
@@ -57,11 +57,6 @@ export default function Footer() {
                 <li className="mb-4">
                   <Link href="/profile_comparison" className="hover:underline">
                     Profile Comparison
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/readme_viewer" className="hover:underline">
-                    Readme Viewer
                   </Link>
                 </li>
               </ul>
