@@ -32,7 +32,7 @@ export default function Footer() {
               </h2>
               <ul className="  font-medium">
                 <li className="mb-4">
-                  <Link href="/markdown_generator" className="hover:underline">
+                  <Link href="/markdown_editor" className="hover:underline">
                     Markdown Editor
                   </Link>
                 </li>

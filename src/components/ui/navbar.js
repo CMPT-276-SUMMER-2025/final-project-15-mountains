@@ -54,7 +54,7 @@ function Navbar({
         <div className="  text-sm grid grid-cols-2 gap-10 p-4">
             <ProductItem
               title="Markdown Editor"
-              href="/markdown_generator"
+              href="/markdown_editor"
               src="/nav/markdown.PNG"
               description="Use both are Readme search and our AI markdown genrator in one convient place"
             />
