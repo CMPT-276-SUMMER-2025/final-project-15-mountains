@@ -143,6 +143,7 @@ export default function Page() {
 
     const fetchMarkdown = async () => {
          try {
+            setLoading(true);
             setErrorMessage("");
             // Catching and throwing proper Errors
             const id = await fetch(`https://api.github.com/users/${Username}`)
@@ -170,9 +171,11 @@ export default function Page() {
 
             //Setting the Markdown 
             setMarkdown(fixedContent);
+           
         } catch (err) {
             setErrorMessage(err.message);
         }
+         setLoading(false);
         
     }
 
@@ -185,9 +188,9 @@ export default function Page() {
                 <p> Ask AI to make a markdown file for you.</p>
                 {/* Input Section */}
                 <div className="flex grid-cols-3 gap-4 justify-center py-4">
-                    <Input className="border-black dark:border-gray-500 border-1  w-50" id="Username" placeholder="Username" onChange={(e) => setUsername(e.target.value)}></Input>
-                    <Input className="border-black dark:border-gray-500 border-1 w-50" id="Repository" placeholder="Repository" onChange={(e) => setRepo(e.target.value)}></Input>
-                    <Button className="hover:cursor-pointer" onClick={fetchMarkdown}>Load</Button>
+                    <Input disabled={loading} className="border-black dark:border-gray-500 border-1  w-50" id="Username" placeholder="Username" onChange={(e) => setUsername(e.target.value)}></Input>
+                    <Input disabled={loading} className="border-black dark:border-gray-500 border-1 w-50" id="Repository" placeholder="Repository" onChange={(e) => setRepo(e.target.value)}></Input>
+                    <Button disabled={loading} className="hover:cursor-pointer" onClick={fetchMarkdown}>Load</Button>
                 </div>
             
             </div>
