@@ -15,40 +15,42 @@ import { useRef } from "react";
 import { Send } from "lucide-react";
 export default function Page() {
     const [markdown,setMarkdown] = useState();
-    const [Username,setUsername] = useState();
-    const [Repo,setRepo] = useState();
-    const [decodedContent,setDecodedContent] = useState();
-    const [errorMessage,setErrorMessage] = useState("");
-    
-    
     const [sizeup, setsizeup] = useState(false);
-
+    const [errorMessage,setErrorMessage] = useState("");
+    const [loading,setLoading] = useState(false);
     const togglesize = () =>{
         setsizeup(!sizeup);
 
     }
-     const [message, setMessage] = useState('');
-  const [submissions, setSubmissions] = useState([]);
-  const textareaRef = useRef(null);
 
-  const handleSubmit = () => {
-    if (message.trim()) {
-      setSubmissions(prev => [...prev, message.trim()]);
-      setMessage('');
-      // Reset textarea height
-      if (textareaRef.current) {
-        textareaRef.current.style.height = 'auto';
-      }
-    }
-  };
+     const [message, setMessage] = useState('');
+    const textareaRef = useRef(null);
+
+    const handleSubmit = async () => {
+        if (message.trim()) {
+            const res = await fetch('/api/ai_api/issue_suggestion',{
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ prompt: userPrompt, markdown:markdown }),
+                
+            });
+            if(!res.ok){
+                set
+            }
+            setMessage('');
+      
+        if (textareaRef.current) {
+            textareaRef.current.style.height = 'auto';
+        }
+    }};
 
   const handleKeyDown = (e) => {
     if (e.key === 'Enter') {
       if (e.shiftKey) {
-        // Allow default behavior (new line)
+        
         return;
       } else {
-        // Prevent default and submit
+        
         e.preventDefault();
         handleSubmit();
       }
@@ -58,7 +60,7 @@ export default function Page() {
   const handleTextareaChange = (e) => {
     setMessage(e.target.value);
     
-    // Auto-resize textarea
+    
     if (textareaRef.current) {
       textareaRef.current.style.height = 'auto';
       textareaRef.current.style.height = textareaRef.current.scrollHeight + 'px';
