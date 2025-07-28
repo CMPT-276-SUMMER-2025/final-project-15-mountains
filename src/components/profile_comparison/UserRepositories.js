@@ -59,9 +59,9 @@ export default function UserRepositories({ repos }) {
     };
 
     return (
-        <div className="mt-4">
+        <div className="mt-2">
             <div className="flex justify-between items-center mb-2">
-                <h3 className="font-semibold text-gray-800">Repositories</h3>
+                <h3 className="text-xl font-semibold text-gray-800">Repositories</h3>
                 <select
                     className="text-sm border border-gray-300 rounded px-1 py-1"
                     value={sortBy}
@@ -75,11 +75,11 @@ export default function UserRepositories({ repos }) {
                 </select>
             </div>
 
-            <div className="h-80 overflow-y-auto pr-1 space-y-2">
+            <div className="h-80 overflow-y-auto pr-1 space-y-3">
                 {sortedRepos.map((repo) => (
                     <div
                         key={repo.name}
-                        className="p-2 bg-gray-100 rounded-md shadow-sm text-sm hover:bg-gray-200 transition"
+                        className="p-4 bg-[#FBFBFB] shadow-sm border border-gray-200 rounded-md text-sm transition"
                     >
                         <a
                             href={repo.url}
@@ -91,11 +91,11 @@ export default function UserRepositories({ repos }) {
                         </a>
 
                         {repo.description && (
-                            <p className="text-gray-600 text-sm">{repo.description}</p>
+                            <p className="text-gray-600 text-sm mt-1">{repo.description}</p>
                         )}
 
                         {repo.primaryLanguage && (
-                            <div className="flex items-center gap-1 text-xs text-gray-600 mt-1">
+                            <div className="flex items-center gap-1 text-xs text-gray-600 mt-2">
                                 <span
                                     className="w-2.5 h-2.5 rounded-full"
                                     style={{backgroundColor: repo.primaryLanguage.color}}
@@ -104,7 +104,7 @@ export default function UserRepositories({ repos }) {
                             </div>
                         )}
 
-                        <div className="flex items-center gap-4 text-xs text-gray-500 mt-1">
+                        <div className="flex items-center gap-4 text-xs text-gray-500 mt-2">
                             <div className="flex items-center gap-1">
                                 <StarIcon size={12} className="text-yellow-500"/>
                                 {repo.stargazerCount}
@@ -115,7 +115,7 @@ export default function UserRepositories({ repos }) {
                             </div>
                         </div>
 
-                        <div className="flex justify-between text-xs text-gray-500 mt-1 pr-1">
+                        <div className="flex justify-between text-xs text-gray-500 mt-2 pr-1">
                             <div className="flex items-center gap-1">
                                 <ClockIcon size={12}/>
                                 <span>Updated {timeAgo(repo.updatedAt)}</span>
