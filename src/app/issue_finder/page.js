@@ -149,7 +149,7 @@ export default function IssueSelector() {
                                     <h2 className="text-2xl font-semibold">AI Issue Selector</h2>
                                 </div>
                                 <p className="text-muted-foreground">
-                                    Can't decide? Let AI help you choose.
+                                     Need help deciding? Let AI help you choose.
                                 </p>
                             </div>
 

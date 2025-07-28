@@ -69,7 +69,7 @@ export default function AboutPage() {
           About GitGood
         </h1>
         <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed mb-8">
-          We're passionate about making open source contribution accessible to everyone. 
+          We are passionate about making open source contribution accessible to everyone. 
           GitGood combines the power of AI with the collaborative spirit of GitHub to help 
           developers find their perfect contribution opportunities.
         </p>
