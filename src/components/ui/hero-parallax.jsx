@@ -76,7 +76,7 @@ export const Header = () => {
           </Button>
           <Button 
             variant="outline" 
-            onClick={() => window.scrollBy({ top: 1250, behavior: 'smooth' })} 
+            onClick={() => window.scrollBy({ top: 1000, behavior: 'smooth' })} 
             className="px-8 py-4 text-lg font-medium hover:bg-accent transition-colors"
           >
             Explore Popular Repositories
