@@ -37,8 +37,16 @@ export default function ProfileComparison() {
     };
 
     const removeUser = (login) => {
-        setUsers(users.filter((u) => u.login !== login));
+        const updatedUsers = users.filter((u) => u.login !== login);
+        const updatedProfiles = userProfiles.filter((p) => p.login !== login);
+
+        setUsers(updatedUsers);
+        setUserProfiles(updatedProfiles);
         removeUserColor(login);
+
+        if (updatedUsers.length === 0) {
+            setShowAnalysis(false);
+        }
     };
 
     const handleAnalysis = async () => {
