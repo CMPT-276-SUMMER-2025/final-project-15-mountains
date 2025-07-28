@@ -75,11 +75,12 @@ export default function UserRepositories({ repos }) {
                 </select>
             </div>
 
-            <div className="h-80 overflow-y-auto pr-1 space-y-3">
+            <div className="h-80 overflow-y-auto space-y-3 p-1 m-1">
                 {sortedRepos.map((repo) => (
                     <div
                         key={repo.name}
-                        className="p-4 bg-[#FBFBFB] shadow-sm border border-gray-200 rounded-md text-sm transition"
+                        className="p-4 mx-1 bg-white shadow-sm border border-gray-200 rounded-md text-sm
+                                   transition duration-100 ease-in-out transform hover:scale-[1.015]"
                     >
                         <a
                             href={repo.url}

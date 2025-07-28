@@ -82,13 +82,14 @@ export default function RepositoryView({ allRepos, maxHeight }) {
             </div>
 
             <div
-                className="flex flex-col overflow-y-auto pe-3 -me-3 space-y-3"
+                className="flex flex-col overflow-y-auto pe-3 -me-3 space-y-3 p-1 m-1"
                 style={{maxHeight: maxHeight}}
             >
                 {sorted.map((repo, index) => (
                     <div
                         key={`${repo.owner}/${repo.name}`}
-                        className="bg-[#FBFBFB] shadow-sm border border-gray-200 rounded-md p-4 transition text-sm flex justify-between"
+                        className="bg-white shadow-sm border border-gray-200 rounded-md p-4 transition text-sm
+                                   duration-100 ease-in-out transform hover:scale-[1.015] flex justify-between"
                     >
                         <div className="flex-1">
                             <div className="flex items-center gap-3 mb-2">
