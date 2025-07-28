@@ -137,11 +137,11 @@ export default function ChatbotPage() {
     };
 
     return (
-        <div className="flex flex-col h-screen bg-background">
+        <div className="flex flex-col h-screen ">
             {/* Header */}
-            <div className="flex items-center justify-center p-6 border-b border-border bg-card/50 backdrop-blur-sm">
+            <div className="flex items-center justify-center p-6 border-b border-border  mt-20">
                 <div className="flex items-center space-x-3">
-                    <div className="p-2 bg-primary/10 rounded-full">
+                    <div className="p-2 rounded-full">
                         <Bot className="h-6 w-6 text-primary" />
                     </div>
                     <div>
