@@ -38,13 +38,14 @@ export default function ProfileComparison() {
 
     const removeUser = (login) => {
         const updatedUsers = users.filter((u) => u.login !== login);
-        const updatedProfiles = userProfiles.filter((p) => p.login !== login);
+        const updatedLogins = new Set(updatedUsers.map((u) => u.login));
+        const syncedProfiles = userProfiles.filter((p) => updatedLogins.has(p.login));
 
         setUsers(updatedUsers);
-        setUserProfiles(updatedProfiles);
+        setUserProfiles(syncedProfiles);
         removeUserColor(login);
 
-        if (updatedUsers.length === 0) {
+        if (syncedProfiles.length === 0) {
             setShowAnalysis(false);
         }
     };

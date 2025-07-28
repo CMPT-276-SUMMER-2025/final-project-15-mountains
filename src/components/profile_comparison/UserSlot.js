@@ -40,7 +40,7 @@ export default function UserSlot({ users, removeUser, onColorChange }) {
     };
 
     return (
-        <div className="flex flex-wrap justify-center gap-5">
+        <div className="flex flex-wrap justify-center gap-5 mb-5">
             {users.map((user, index) => {
                 colorMap[user.login] || getUserColorScheme(user.login);
                 return (
@@ -62,7 +62,7 @@ export default function UserSlot({ users, removeUser, onColorChange }) {
                             alt={user.login}
                             className="border border-gray-350 border-1 shadow-sm w-30 h-30 rounded-full"
                         />
-                        <p className="mt-2 font-semibold">
+                        <p className="font-semibold">
                             @{user.login}
                         </p>
 
