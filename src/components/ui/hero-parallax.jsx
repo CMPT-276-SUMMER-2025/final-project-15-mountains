@@ -28,7 +28,7 @@ export const HeroParallax = ({
   return (
     <div
       ref={ref}
-      className="h-[300vh] py-40 overflow-hidden antialiased relative flex flex-col self-auto [perspective:1000px] [transform-style:preserve-3d]">
+      className="h-[300vh] py-40 overflow-hidden antialiased relative flex flex-col self-auto [perspective:1000px] [transform-style:preserve-3d] ">
       <Header />
       <motion.div
         style={{
@@ -60,8 +60,8 @@ export const HeroParallax = ({
 
 export const Header = () => {
   return (
-    <div className="max-w-7xl relative mx-auto py-20 md:py-40 px-4 w-full left-0 top-0 z-500">
-      <div className="text-center space-y-8">
+    <div className="max-w-7xl relative mx-auto py-20 md:py-40 px-4 w-full left-0 top-0 z-500  flex justify-center">
+      <div className="text-center space-y-8 absolute top-0">
         <h1 className="text-gradient font-bold tracking-tight">
           GitGood
         </h1>
