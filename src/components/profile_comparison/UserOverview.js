@@ -76,7 +76,16 @@ export default function UserOverview({ userProfile, repos, userCount }) {
                         <h2 className="text-xl font-bold text-gray-800">
                             {user.name || user.login}
                         </h2>
-                        <p className="text-sm text-gray-500 flex items-center gap-1">
+                        <a
+                            title={`View @${user.login} on GitHub`}
+                            href={`https://github.com/${user.login}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-base font-semibold text-blue-600 hover:underline"
+                        >
+                            @{user.login}
+                        </a>
+                        <p className="text-sm text-gray-500 flex items-center gap-1 mt-1">
                             <FaMapMarkerAlt/>
                             {user.location || "Unknown"}
                         </p>
