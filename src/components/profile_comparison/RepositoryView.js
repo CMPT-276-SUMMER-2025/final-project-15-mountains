@@ -79,7 +79,7 @@ export default function RepositoryView({ allRepos, maxHeight }) {
             </div>
 
             <div
-                className="flex flex-col overflow-hidden"
+                className="flex flex-col"
                 style={{maxHeight: maxHeight}}
             >
                 <div className="overflow-y-auto pe-3 -me-3 space-y-3">

@@ -205,13 +205,9 @@ export default function ProfileComparison() {
                                     sortProfiles={sortProfiles}
                                 />
                             </div>
-                            <div
-                                className="bg-white border rounded-xl p-5 flex flex-col overflow-hidden"
-                                style={{maxHeight: leftHeight}}
-                            >
-                                <div className="overflow-y-auto flex-1">
-                                    <RepositoryView allRepos={allRepos} maxHeight={leftHeight}/>
-                                </div>
+
+                            <div className="bg-white border rounded-lg p-5">
+                                <RepositoryView allRepos={allRepos} maxHeight={leftHeight}/>
                             </div>
                         </div>
 
