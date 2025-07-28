@@ -121,6 +121,30 @@ export async function POST(req) {
             totalCommits += commitCount;
         }
 
+        const languageMap = new Map();
+        let totalLangCount = 0;
+
+        for (const repo of repos) {
+            const lang = repo.primaryLanguage;
+            if (!lang?.name) continue;
+
+            const prev = languageMap.get(lang.name) || { count: 0, color: lang.color };
+            languageMap.set(lang.name, {
+                count: prev.count + 1,
+                color: lang.color || prev.color || "#ccc"
+            });
+            totalLangCount++;
+        }
+
+        const topLanguages = Array.from(languageMap.entries())
+            .map(([name, { count, color }]) => ({
+                name,
+                color,
+                percentage: (count / totalLangCount) * 100
+            }))
+            .sort((a, b) => b.percentage - a.percentage)
+            .slice(0, 5);
+
         const rateLimit = json.data?.rateLimit || {};
 
         return NextResponse.json({
@@ -142,6 +166,7 @@ export async function POST(req) {
                 totalStars,
                 totalForks,
                 totalCommits,
+                topLanguages,
             },
             repos,
             rateLimit: {

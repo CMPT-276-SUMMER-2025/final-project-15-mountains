@@ -107,6 +107,37 @@ export default function UserOverview({ userProfile, repos, userCount }) {
                         </div>
                     ))}
                 </div>
+
+                {user.topLanguages && user.topLanguages.length > 0 && (
+                    <div className="mt-6">
+                        <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">
+                            Top Languages
+                        </h3>
+                        <ul className="divide-y divide-gray-100 rounded-lg border border-gray-200 overflow-hidden">
+                            {[...user.topLanguages, ...Array(5 - user.topLanguages.length).fill(null)].map((lang, i) => (
+                                <li
+                                    key={lang?.name || `empty-${i}`}
+                                    className={`flex items-center justify-between px-4 py-2 ${
+                                        lang ? "bg-white hover:bg-gray-50" : "bg-gray-50"
+                                    }`}
+                                >
+                                    <div className="flex items-center gap-2">
+                                        <div
+                                            className="w-2.5 h-2.5 rounded-full"
+                                            style={{ backgroundColor: lang?.color || "#e5e7eb" }}
+                                        />
+                                        <span className="text-sm text-gray-700 font-medium">
+                                          {lang?.name || <span className="text-gray-400 italic">—</span>}
+                                        </span>
+                                    </div>
+                                    <span className="text-sm text-gray-500 font-medium">
+                                        {lang?.percentage != null ? `${lang.percentage.toFixed(1)}%` : ""}
+                                    </span>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                )}
             </div>
 
             <div className={`${isSideBySide ? "md:w-1/2 mt-6 md:mt-0" : "mt-6"}`}>
