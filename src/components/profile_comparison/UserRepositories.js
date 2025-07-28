@@ -75,7 +75,7 @@ export default function UserRepositories({ repos }) {
                 </select>
             </div>
 
-            <div className="h-80 overflow-y-auto space-y-3 p-1 m-1">
+            <div className="h-120 overflow-y-auto space-y-3 p-1 m-1">
                 {sortedRepos.map((repo) => (
                     <div
                         key={repo.name}
