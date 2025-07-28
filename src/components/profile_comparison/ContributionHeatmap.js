@@ -19,7 +19,7 @@ export default function ContributionHeatmap({ userProfiles, getUserColor }) {
 
     return (
         <div className="flex flex-col p-4 bg-white border border-gray-200 rounded-lg">
-            <h2 className="text-xl font-semibold mb-6">Contributions This Year</h2>
+            <h2 className="text-xl font-semibold mt-2 ml-1 mb-6">Contributions This Year</h2>
             <div className="gap-6">
                 {userProfiles.map((profile) => {
                     const user = profile?.data;
