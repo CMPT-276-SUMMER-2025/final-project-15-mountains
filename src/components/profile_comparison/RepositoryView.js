@@ -99,10 +99,10 @@ export default function RepositoryView({ allRepos, maxHeight }) {
                                         alt={repo.owner}
                                         className="w-6 h-6 rounded-full border"
                                     />
-                                    <div className="absolute z-10 hidden group-hover:flex transition-all duration-200
+                                    <div className="absolute z-50 hidden group-hover:flex transition-all duration-200
                                                     opacity-0 group-hover:opacity-100 text-xs bg-white text-gray-700
                                                     border border-gray-300 shadow px-2 py-1 rounded left-1/2
-                                                    -translate-x-1/2 bottom-full mb-1 whitespace-nowrap">
+                                                    -translate-x-1/2 top-full mb-1 whitespace-nowrap">
                                         @{repo.owner}
                                     </div>
                                 </div>
