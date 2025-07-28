@@ -232,7 +232,7 @@ export default function IssueSelector() {
                             </CardHeader>
                             
                             <CardContent>
-                                {issue.labels.length > 0 && (
+                                {Array.isArray(issue.labels) && issue.labels.length > 0 && (
                                     <div className="flex items-center mb-4">
                                         <Tag className="h-4 w-4 mr-2 text-muted-foreground" />
                                         <div className="flex flex-wrap gap-2">
