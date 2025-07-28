@@ -152,9 +152,9 @@ export default function ProfileComparison() {
     };
 
     return (
-        <div className="container mx-auto px-4 py-6 mt-40">
+        <div className=" w-full py-6 mt-40">
             <ComparisonHeader/>
-            <div className="flex flex-col gap-15 mb-10">
+            <div className="flex flex-col gap-15">
                 <div className="flex justify-center">
                     <div className="flex flex-row justify-center w-1/3 gap-5">
                         <SearchBar onSelect={addUser} onRemove={removeUser} cache={cacheRef}/>
@@ -176,7 +176,7 @@ export default function ProfileComparison() {
             </div>
 
             {showAnalysis && (
-                <div className="flex bg-gray-50 rounded-lg border border-2 border-grey-400 p-3 mt-5">
+                <div className="flex border-t-2 border-gray-200 w-full bg-gray-50 p-5 px-8 mt-5">
                     <div className="flex flex-col gap-3">
                         <div className="flex gap-4 w-full items-stretch">
                             {userProfiles.map((profile) => (

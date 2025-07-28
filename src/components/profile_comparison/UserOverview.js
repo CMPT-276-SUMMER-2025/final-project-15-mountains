@@ -20,7 +20,6 @@ export default function UserOverview({ userProfile, repos, userCount }) {
     if (!user) return null;
     const isSideBySide = userCount <= 2;
 
-
     const stats = [
         {
             label: "Followers",
