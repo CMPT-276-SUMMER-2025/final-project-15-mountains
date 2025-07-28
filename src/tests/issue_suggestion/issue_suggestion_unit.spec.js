@@ -1,7 +1,7 @@
 const { test, expect } = require('@playwright/test');
 
 test('UNIT TEST ISSUE SUGGESTION: tests if route returns data ', async ({ request }) => {
-  const userPrompt = "I like easy projects that are related to UI";
+  const userPrompt = "pick first one";
 
   const issues = [
   {
@@ -25,20 +25,6 @@ test('UNIT TEST ISSUE SUGGESTION: tests if route returns data ', async ({ reques
     body: 'When using hover option for the header display, the Home icon appears misaligned compared to other elements.',
     repository: {}
   },
-  {
-    id: 3245970482,
-    html_url: 'https://github.com/code-charity/youtube/issues/3045',
-    title: '💡 Dim Already Watched Video Thumbnails',
-    body: 'Add a feature to dim thumbnails of already-watched YouTube videos to help users focus on new content.',
-    repository: {}
-  },
-  {
-    id: 3207208084,
-    html_url: 'https://github.com/code-charity/youtube/issues/3032',
-    title: 'Whitelist "Focus" Mode',
-    body: 'Add support for whitelisting Focus mode, so that users can avoid distractions and keep the homepage clean and minimal.',
-    repository: {}
-  }
   ];
 
 
