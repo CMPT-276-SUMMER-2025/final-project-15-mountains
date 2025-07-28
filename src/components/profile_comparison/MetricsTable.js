@@ -7,14 +7,15 @@ import PRAcceptanceBarChart from "@/components/profile_comparison/PRAcceptanceBa
 export default function MetricsTable({ userProfiles, activeMetric, getMetricValue, sortProfiles, getPRAcceptance }) {
     const sorted = sortProfiles(userProfiles, activeMetric);
     const labelByMetric = {
+        followers: "Followers",
         repos: "Repositories",
         contributions: "Contributions",
         commits: "Commits",
-        prs: "Pull Requests",
         issues: "Issues",
+        prs: "Pull Requests",
+        prAcceptance: "PR Acceptance Rate",
         stars: "Stars",
         forks: "Forks",
-        prAcceptance: "PR Acceptance Rate",
     };
 
     return (

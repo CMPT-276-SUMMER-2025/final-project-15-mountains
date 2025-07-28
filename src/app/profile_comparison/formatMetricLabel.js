@@ -1,4 +1,5 @@
 const singularLabels = {
+    followers: "Follower",
     repos: "Repository",
     contributions: "Contribution",
     commits: "Commit",

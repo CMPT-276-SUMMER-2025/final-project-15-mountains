@@ -100,6 +100,8 @@ export default function ProfileComparison() {
 
     function getMetricValue(user, metric) {
         switch (metric) {
+            case "followers":
+                return user.data.followers ?? 0;
             case "repos":
                 return user.data.publicRepos ?? 0;
             case "contributions":
@@ -120,7 +122,8 @@ export default function ProfileComparison() {
                 return user.data.totalStars ?? 0;
             case "forks":
                 return user.data.totalForks ?? 0;
-            case "prAcceptance":  return getPRAcceptance(user);
+            case "prAcceptance":
+                return getPRAcceptance(user);
             default:
                 return 0;
         }
@@ -164,7 +167,7 @@ export default function ProfileComparison() {
     };
 
     return (
-        <div className=" w-full py-6 mt-40">
+        <div className="w-full mt-40">
             <ComparisonHeader/>
             <div className="flex flex-col gap-15">
                 <div className="flex justify-center">
@@ -188,7 +191,7 @@ export default function ProfileComparison() {
             </div>
 
             {showAnalysis && (
-                <div className="flex border-t-2 border-gray-200 w-full bg-gray-50 p-5 px-8 mt-5">
+                <div className="flex border-t-2 border-gray-200 w-full bg-gray-50 p-8 mt-5">
                     <div className="flex flex-col gap-3">
                         <div className="flex gap-4 w-full items-stretch">
                             {userProfiles.map((profile) => (
