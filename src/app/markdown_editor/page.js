@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert";
 import { useEffect, useState } from "react";
@@ -9,10 +9,10 @@ import ReactMarkdown from "react-markdown"
 import rehypeRaw from 'rehype-raw';
 import remarkGfm from 'remark-gfm';
 import { Textarea } from "@/components/ui/textarea";
-import {ScreenFullIcon} from '@primer/octicons-react';
-import {ScreenNormalIcon} from '@primer/octicons-react';
+import { Badge } from "@/components/ui/badge";
+import { Send, Maximize2, Minimize2, Github, FileText, Eye, Loader2 } from "lucide-react";
 import { useRef } from "react";
-import { Send } from "lucide-react";
+
 export default function Page() {
     const [markdown, setMarkdown] = useState("");
     const [sizeup, setsizeup] = useState(false);
@@ -21,45 +21,46 @@ export default function Page() {
     const [aimessage, setAImessage] = useState("");
     const [Username,setUsername] = useState("");
     const [Repo,setRepo] = useState("");
-    const togglesize = () =>{
+    
+    const togglesize = () => {
         setsizeup(!sizeup);
-
     }
+    
     const components = {
-        h1: ({ node, ...props }) => <h1 className="text-4xl font-bold my-4" {...props} />,
-        h2: ({ node, ...props }) => <h2 className="text-3xl font-semibold my-3" {...props} />,
-        h3: ({ node, ...props }) => <h3 className="text-2xl font-semibold my-2" {...props} />,
-        p: ({ node, ...props }) => <p className="text-base leading-relaxed my-2" {...props} />,
+        h1: ({ node, ...props }) => <h1 className="text-4xl font-bold my-4 text-foreground" {...props} />,
+        h2: ({ node, ...props }) => <h2 className="text-3xl font-semibold my-3 text-foreground" {...props} />,
+        h3: ({ node, ...props }) => <h3 className="text-2xl font-semibold my-2 text-foreground" {...props} />,
+        p: ({ node, ...props }) => <p className="text-base leading-relaxed my-2 text-foreground" {...props} />,
         ul: ({ node, ...props }) => <ul className="list-disc list-inside pl-4 my-2" {...props} />,
         li: ({ node, ...props }) => <li className="mb-1" {...props} />,
         blockquote: ({ node, ...props }) => (
-            <blockquote className="border-l-4 pl-4 italic  my-4" {...props} />
+            <blockquote className="border-l-4 border-primary pl-4 italic my-4 bg-muted/50 p-4 rounded-r" {...props} />
         ),
         code: ({ node, ...props }) => (
-            <code className="brightness-50  px-1 py-0.5 rounded" {...props} />
+            <code className="bg-muted px-1 py-0.5 rounded text-sm font-mono" {...props} />
         ),
         pre: ({ node, ...props }) => (
-            <pre className=" text-sm p-4 overflow-x-auto rounded my-4" {...props} />
+            <pre className="bg-muted text-sm p-4 overflow-x-auto rounded my-4 font-mono" {...props} />
         ),
         a: ({ node, ...props }) => (
             <a
-            className="text-blue-600 hover:underline dark:text-blue-400"
-            target="_blank"
-            rel="noopener noreferrer"
-            {...props}
+                className="text-primary hover:underline"
+                target="_blank"
+                rel="noopener noreferrer"
+                {...props}
             />
         ),
         img: ({ node, ...props }) => (
             <img className="my-4 rounded max-w-full h-auto" alt="" {...props} />
         ),
         strong: ({ node, ...props }) => (
-            <strong className="font-bold text-black dark:text-white" {...props} />
+            <strong className="font-bold" {...props} />
         ),
         em: ({ node, ...props }) => (
-            <em className="italic text-gray-700 dark:text-gray-300" {...props} />
+            <em className="italic text-muted-foreground" {...props} />
         ),
-        hr: () => <hr className="my-6 border-t border-gray-300 dark:border-gray-600" />,
-        };
+        hr: () => <hr className="my-6 border-t border-border" />,
+    };
 
     const [message, setMessage] = useState('');
     const textareaRef = useRef(null);
@@ -100,31 +101,26 @@ export default function Page() {
         }
     };
 
-
-
-
     const handleKeyDown = (e) => {
         if (e.key === 'Enter') {
-        if (e.shiftKey) {
-            
-            return;
-        } else {
-            
-            e.preventDefault();
-            handleSubmit();
-        }
+            if (e.shiftKey) {
+                return;
+            } else {
+                e.preventDefault();
+                handleSubmit();
+            }
         }
     };
 
     const handleTextareaChange = (e) => {
         setMessage(e.target.value);
         
-        
         if (textareaRef.current) {
-        textareaRef.current.style.height = 'auto';
-        textareaRef.current.style.height = textareaRef.current.scrollHeight + 'px';
+            textareaRef.current.style.height = 'auto';
+            textareaRef.current.style.height = textareaRef.current.scrollHeight + 'px';
         }
     };
+    
     const updateText = (event) => {
         const fixedContent = fixRelativeImages(event.target.value, Username, Repo);
         setMarkdown(fixedContent);
@@ -180,112 +176,168 @@ export default function Page() {
     }
 
     return (
-        <div className="w-full h-auto min-h-[100vh] flex flex-col">
+        <div className="min-h-screen py-20 px-4">
             {/* Header */}
-            <div className="flex flex-col mx-auto pt-30 text-center">
-                <h1 className="text-7xl text-center">Markdown Editor</h1>
-                <p className="text-center text-md mt-5">GitGoods all in one markdown editor view readmes from github and make local edits with a live preview of the changes</p> 
-                <p> Use AI to edit or create new markdown with whatever styling you want</p>
-                {/* Input Section */}
-                <div className="flex grid-cols-3 gap-4 justify-center py-4">
-                    <Input disabled={loading} className="border-black dark:border-gray-500 border-1  w-50" id="Username" placeholder="Username" onChange={(e) => setUsername(e.target.value)}></Input>
-                    <Input disabled={loading} className="border-black dark:border-gray-500 border-1 w-50" id="Repository" placeholder="Repository" onChange={(e) => setRepo(e.target.value)}></Input>
-                    <Button disabled={loading} className="hover:cursor-pointer" onClick={fetchMarkdown}>Load</Button>
-                </div>
-            
+            <div className="max-w-7xl mx-auto text-center mb-16">
+                <h1 className="text-gradient font-bold mb-6">
+                    Markdown Editor
+                </h1>
+                <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed mb-8">
+                    GitGood's all-in-one markdown editor. View READMEs from GitHub and make local edits with a live preview. 
+                    Use AI to edit or create new markdown with whatever styling you want.
+                </p>
+                
+                {/* GitHub Input Section */}
+                <Card className="max-w-2xl mx-auto p-6">
+                    <CardHeader>
+                        <CardTitle className="flex items-center justify-center space-x-2">
+                            <Github className="h-5 w-5" />
+                            <span>Load from GitHub</span>
+                        </CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                        <div className="flex flex-col sm:flex-row gap-4">
+                            <Input 
+                                disabled={loading} 
+                                className="flex-1 dark:border-gray-500" 
+                                placeholder="Username" 
+                                onChange={(e) => setUsername(e.target.value)}
+                            />
+                            <Input 
+                                disabled={loading} 
+                                className="flex-1 dark:border-gray-500" 
+                                placeholder="Repository" 
+                                onChange={(e) => setRepo(e.target.value)}
+                            />
+                            <Button 
+                                disabled={loading} 
+                                onClick={fetchMarkdown}
+                                className="hover:scale-105 transition-transform duration-200"
+                            >
+                                {loading ? (
+                                    <>
+                                        <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                                        Loading...
+                                    </>
+                                ) : (
+                                    'Load README'
+                                )}
+                            </Button>
+                        </div>
+                    </CardContent>
+                </Card>
             </div>
 
             {/* Error Message */}
             {errorMessage && (
-            <Alert variant="destructive" className="mt-4 w-[600px] self-center mb-7">
-                <AlertTitle>Error</AlertTitle>
-                <AlertDescription>
-                {errorMessage}
-                </AlertDescription>
-            </Alert>
+                <div className="max-w-4xl mx-auto mb-8">
+                    <Alert variant="destructive">
+                        <AlertTitle>Error</AlertTitle>
+                        <AlertDescription>
+                            {errorMessage}
+                        </AlertDescription>
+                    </Alert>
+                </div>
             )}
 
-            <Card className={`relative flex flex-col gap-4 p-6 min-h-[600px]  ${sizeup ? "w-full" : "w-4/6"} self-center transition-all duration-300`}>
-                <button onClick={togglesize} className="absolute right-2 top-1 z-50 cursor-pointer  ">
-                    {!sizeup && <ScreenFullIcon size={16} />}
-                    {sizeup && <ScreenNormalIcon size={16} />}
-                </button>
-                
-                
-                <div className="space-y-2">
-                <div className="relative">
-                    <Textarea
-                    ref={textareaRef}
-                    value={message}
-                    onChange={handleTextareaChange}
-                    onKeyDown={handleKeyDown}
-                    placeholder="Tell AI what changes you want: 'Edit this README with setup steps' or 'Create a GitHub issue for broken links'"
-                    className="min-h-[60px] max-h-[200px] resize-none pr-12 "
-                    rows={2}
-                    disabled={loading}
-                    />
-                    <Button
-                    onClick={handleSubmit}
-                    size="sm"
-                    className="absolute bottom-2 right-2 h-8 w-8 p-0 cursor-pointer"
-                    disabled={loading}
-                    >
-                    {!loading ? <Send className="h-4 w-4" /> : <svg
-                        className="animate-spin h-4 w-4 text-green-500"
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                    >
-                        <circle
-                        className="opacity-25"
-                        cx="12"
-                        cy="12"
-                        r="10"
-                        stroke="currentColor"
-                        strokeWidth="4"
-                        />
-                        <path
-                        className="opacity-75"
-                        fill="currentColor"
-                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"
-                        />
-                    </svg>}
-                    </Button>
-                </div>
-
-    
-                </div>
-                {aimessage && (
-                        <div className=" mt-2 p-4 border-l-4 border-green-500 bg-green-100 dark:bg-green-900/40 rounded-md shadow-md text-xs">
-                            <strong className=" mb-1 text-green-800 dark:text-green-300 ">
-                            What AI did.
-                            </strong>
-                            <p className="text-gray-800 dark:text-gray-100">{aimessage}</p>
+            {/* Main Editor */}
+            <div >
+                <Card className={`transition-all duration-500 relative mx-auto ${sizeup ? "w-full" : "w-5/8"}`}>
+                    <CardHeader className="flex flex-row items-center justify-between">
+                        <CardTitle className="flex items-center space-x-2">
+                            <FileText className="h-5 w-5" />
+                            <span>Markdown Editor</span>
+                        </CardTitle>
+                        <Button
+                            variant="ghost"
+                            size="sm"
+                            onClick={togglesize}
+                            className="hover:bg-accent"
+                        >
+                            {!sizeup ? (
+                                <Maximize2 className="h-4 w-4" />
+                            ) : (
+                                <Minimize2 className="h-4 w-4" />
+                            )}
+                        </Button>
+                    </CardHeader>
+                    
+                    <CardContent className="space-y-6">
+                        {/* AI Input */}
+                        <div className="relative">
+                            <Textarea
+                                ref={textareaRef}
+                                value={message}
+                                onChange={handleTextareaChange}
+                                onKeyDown={handleKeyDown}
+                                placeholder="Tell AI what changes you want: 'Edit this README with setup steps' or 'Create a GitHub issue for broken links'"
+                                className="dark:border-gray-500 min-h-[60px] max-h-[200px] resize-none pr-12"
+                                rows={2}
+                                disabled={loading}
+                            />
+                            <Button
+                                onClick={handleSubmit}
+                                size="sm"
+                                className="absolute bottom-2 right-2 h-8 w-8 p-0"
+                                disabled={loading}
+                            >
+                                {!loading ? (
+                                    <Send className="h-4 w-4" />
+                                ) : (
+                                    <Loader2 className="h-4 w-4 animate-spin" />
+                                )}
+                            </Button>
                         </div>
+
+                        {/* AI Response */}
+                        {aimessage && (
+                            <div className="p-4 bg-primary/5 border-l-4 border-primary rounded-md">
+                                <div className="flex items-center mb-2">
+                                    <Send className="h-4 w-4 text-primary mr-2" />
+                                    <strong className="text-primary text-sm">
+                                        What AI did:
+                                    </strong>
+                                </div>
+                                <p className="text-sm text-muted-foreground">{aimessage}</p>
+                            </div>
                         )}
-                <div className="flex flex-row flex-1 space-x-5">
 
-                
-                
+                        {/* Editor and Preview */}
+                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                            {/* Markdown Editor */}
+                            <div className="space-y-3">
+                                <div className="flex items-center space-x-2">
+                                    <FileText className="h-4 w-4 text-primary" />
+                                    <h3 className="font-semibold">Editor</h3>
+                                </div>
+                                <Textarea 
+                                    className="min-h-[400px] resize-none font-mono text-sm dark:border-gray-500" 
+                                    value={markdown}  
+                                    onChange={(e) => setMarkdown(e.target.value)}  
+                                    placeholder="Start typing to see a preview of your Markdown file"
+                                />
+                            </div>
 
-
-                {/* The Right side of the card */}
-                <div className="w-1/2 flex flex-col rounded-2xl border-2 dark:border-gray-500">
-                    <div className="self-center border-b-2 w-full text-center py-5  text-3xl dark:border-gray-500">Markdown Editor</div>
-                    <Textarea className="flex-1 resize-none h-full rounded-xl rounded-t-none border-t-0 " value={markdown}  onChange={(e) => setMarkdown(e.target.value)}  placeholder="Start typing to see a preview of your Markdown file"></Textarea>
-                </div>
-                <div className="w-1/2 flex flex-col rounded-2xl border-2 dark:border-gray-500 ">
-                    <div className="self-center border-b-2 w-full text-center py-5 text-3xl dark:border-gray-500">Rendered Markdown</div>
-                    <div className="flex-1 h-full p-4 rounded-xl overflow-auto ">
-                    <ReactMarkdown rehypePlugins={[rehypeRaw]} remarkPlugins={remarkGfm} components={components}>{markdown}</ReactMarkdown>
-                    </div>
-                </div>
+                            {/* Preview */}
+                            <div className="space-y-3">
+                                <div className="flex items-center space-x-2">
+                                    <Eye className="h-4 w-4 text-primary" />
+                                    <h3 className="font-semibold">Preview</h3>
+                                </div>
+                                <div className="min-h-[400px] p-4 border rounded-md overflow-auto bg-card dark:border-gray-500">
+                                    <ReactMarkdown 
+                                        rehypePlugins={[rehypeRaw]} 
+                                        remarkPlugins={remarkGfm} 
+                                        components={components}
+                                    >
+                                        {markdown}
+                                    </ReactMarkdown>
+                                </div>
+                            </div>
+                        </div>
+                    </CardContent>
+                </Card>
             </div>
-                 
-            </Card>
-            
-        
         </div>
-  );
-
+    );
 }

@@ -83,7 +83,7 @@ function Navbar({
           </div>
 
         </MenuItem>
-        <HoveredLink href="/">About</HoveredLink>
+        <HoveredLink href="/about">About</HoveredLink>
         
       </Menu>
     </div>
