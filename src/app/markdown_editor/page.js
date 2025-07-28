@@ -183,7 +183,7 @@ export default function Page() {
                     Markdown Editor
                 </h1>
                 <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed mb-8">
-                    GitGood's all-in-one markdown editor. View READMEs from GitHub and make local edits with a live preview. 
+                    GitGoods all-in-one markdown editor. View READMEs from GitHub and make local edits with a live preview. 
                     Use AI to edit or create new markdown with whatever styling you want.
                 </p>
                 
@@ -270,7 +270,7 @@ export default function Page() {
                                 value={message}
                                 onChange={handleTextareaChange}
                                 onKeyDown={handleKeyDown}
-                                placeholder="Tell AI what changes you want: 'Edit this README with setup steps' or 'Create a GitHub issue for broken links'"
+                                placeholder="Tell AI what changes you want: Edit this README with setup steps or Create a GitHub issue for broken links"
                                 className="dark:border-gray-500 min-h-[60px] max-h-[200px] resize-none pr-12"
                                 rows={2}
                                 disabled={loading}
