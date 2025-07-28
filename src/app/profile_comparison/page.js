@@ -136,10 +136,22 @@ export default function ProfileComparison() {
         profile.repos.map((repo) => ({ ...repo, owner: profile.login }))
     );
 
+    useEffect(() => {
+        const handleResize = () => {
+            if (leftRef.current) {
+                setLeftHeight(leftRef.current.getBoundingClientRect().height);
+            }
+        };
+
+        window.addEventListener("resize", handleResize);
+        return () => window.removeEventListener("resize", handleResize);
+    }, []);
+
     useLayoutEffect(() => {
         if (!leftRef.current) return;
-        const observer = new ResizeObserver(([entry]) => {
-            setLeftHeight(entry.contentRect.height);
+        const observer = new ResizeObserver(() => {
+            const height = leftRef.current.getBoundingClientRect().height;
+            setLeftHeight(height);
         });
         observer.observe(leftRef.current);
         return () => observer.disconnect();
@@ -190,7 +202,7 @@ export default function ProfileComparison() {
                             ))}
                         </div>
 
-                        <div className="grid gap-5 grid-cols-2 grid-cols-[min-content_1fr] items-start gap-5">
+                        <div className="flex flex-row items-start gap-3">
                             <div ref={leftRef} className="flex flex-col gap-3">
                                 <ContributionHeatmap
                                     key={colorChangeTrigger}
@@ -206,8 +218,14 @@ export default function ProfileComparison() {
                                 />
                             </div>
 
-                            <div className="bg-white border rounded-lg p-5">
-                                <RepositoryView allRepos={allRepos} maxHeight={leftHeight}/>
+                            <div
+                                className="bg-white border rounded-lg p-5"
+                                style={{height: `${leftHeight}px`, overflow: 'hidden'}}
+                            >
+                                <RepositoryView
+                                    allRepos={allRepos}
+                                    maxHeight={leftHeight - 40}
+                                />
                             </div>
                         </div>
 
