@@ -26,48 +26,68 @@ export default function Metrics({ userProfiles, activeMetric, setActiveMetric, g
     };
 
     return (
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            {metrics.map((metric) => {
-                const sorted = sortProfiles(userProfiles, metric);
-                const top = sorted[0];
+        <div className="rounded-lg border border-gray-200 bg-[#fafafa] overflow-visible">
+            <div className="rounded-lg grid grid-cols-1 sm:grid-cols-3 gap-px bg-gray-200">
+                {metrics.map((metric, i) => {
+                    const sorted = sortProfiles(userProfiles, metric);
+                    const top = sorted[0];
 
-                if (!top) return null;
+                    if (!top) return null;
 
-                const topUser = {
-                    login: top.login,
-                    avatar_url: top.data.avatarUrl,
-                    value: getMetricValue(top, metric),
-                };
+                    const rawValue = getMetricValue(top, metric);
+                    const roundedValue =
+                        metric === "prAcceptance" ? parseFloat(rawValue.toFixed(1)) : rawValue;
 
-                return (
-                    <button
-                        key={metric}
-                        onClick={() => setActiveMetric(metric)}
-                        className={`h-auto px-6 py-4 rounded-xl text-left border transition-all duration-200
-                        ${metric === activeMetric ? "bg-gray-900 text-white scale-105"
-                            : "bg-white hover:bg-gray-50 text-gray-900"}`}
-                    >
-                        <div className="text-xl font-semibold mb-3 tracking-wide">
-                            {labelByMetric[metric]}
-                        </div>
+                    const topUser = {
+                        login: top.login,
+                        avatar_url: top.data.avatarUrl,
+                        value: roundedValue,
+                    };
 
-                        <div className="flex items-center gap-3">
-                            <div className="text-xl">🥇</div>
-                            <img
-                                src={topUser.avatar_url}
-                                alt={topUser.login}
-                                className="w-8 h-8 rounded-full border border-gray-300"
-                            />
-                            <div className="flex-1 overflow-hidden">
-                                <p className="text-sm font-medium truncate">@{topUser.login}</p>
-                                <p className="text-xs opacity-70">
-                                    {formatMetricLabel(topUser.value, metric)}
-                                </p>
+                    const isTopLeft = i === 0;
+                    const isTopRight = i === 2;
+                    const isBottomLeft = i === 6;
+                    const isBottomRight = i === 8;
+
+                    const cornerClass = `
+                        ${isTopLeft ? "rounded-tl-lg" : ""}
+                        ${isTopRight ? "rounded-tr-lg" : ""}
+                        ${isBottomLeft ? "rounded-bl-lg" : ""}
+                        ${isBottomRight ? "rounded-br-lg" : ""}
+                    `;
+
+                    return (
+                        <button
+                            key={metric}
+                            onClick={() => setActiveMetric(metric)}
+                            className={`h-auto px-6 py-4 text-left border transition-all duration-200
+                                ${metric === activeMetric
+                                ? "bg-gray-900 text-white scale-105"
+                                : "bg-[#fafafa] hover:bg-gray-100 text-gray-900"} ${cornerClass}`}
+                        >
+                            <div className="text-xl font-semibold mb-3 tracking-wide">
+                                {labelByMetric[metric]}
                             </div>
-                        </div>
-                    </button>
-                );
-            })}
+
+                            <div className="flex items-center gap-3">
+                                <div className="text-xl">🥇</div>
+                                <img
+                                    src={topUser.avatar_url}
+                                    alt={topUser.login}
+                                    className="w-8 h-8 rounded-full border border-gray-300"
+                                />
+                                <div className="flex-1 overflow-hidden">
+                                    <p className="text-sm font-medium truncate">@{topUser.login}</p>
+                                    <p className="text-xs opacity-70">
+                                        {formatMetricLabel(topUser.value, metric)}
+                                    </p>
+                                </div>
+                            </div>
+                        </button>
+                    );
+                })}
+            </div>
         </div>
+
     );
 }
