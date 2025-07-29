@@ -11,7 +11,7 @@ const SORT_OPTIONS = [
     { label: "Newest", value: "created" },
 ];
 
-export default function RepositoryView({ allRepos, maxHeight }) {
+export default function RepositoryView({ allRepos, maxHeight, getUserColor }) {
     const [sortBy, setSortBy] = useState("popularity");
 
     if (!allRepos || allRepos.length === 0) {
@@ -99,6 +99,9 @@ export default function RepositoryView({ allRepos, maxHeight }) {
                                         src={repo.ownerAvatarUrl || `https://github.com/${repo.owner}.png`}
                                         alt={repo.owner}
                                         className="w-6 h-6 rounded-full border"
+                                        style={{
+                                            border: `2px solid ${getUserColor?.(repo.owner)}`,
+                                        }}
                                     />
                                     <div className="absolute z-50 hidden group-hover:flex transition-all duration-200
                                                     opacity-0 group-hover:opacity-100 text-xs bg-white text-gray-700

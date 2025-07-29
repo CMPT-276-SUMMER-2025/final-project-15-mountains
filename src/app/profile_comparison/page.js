@@ -178,7 +178,7 @@ export default function ProfileComparison() {
     return (
         <div className="w-full mt-40">
             <ComparisonHeader/>
-            <div className="flex flex-col gap-15">
+            <div className="flex flex-col gap-10">
                 <div className="flex justify-center">
                     <div className="flex flex-row justify-center w-1/3 gap-5">
                         <SearchBar onSelect={addUser} onRemove={removeUser} cache={cacheRef}/>
@@ -209,6 +209,7 @@ export default function ProfileComparison() {
                                         userProfile={profile.data}
                                         repos={profile.repos}
                                         userCount={userProfiles.length}
+                                        userColor={getUserColorScheme(profile.login)[2]}
                                     />
                                 </div>
                             ))}
@@ -227,6 +228,7 @@ export default function ProfileComparison() {
                                     setActiveMetric={setActiveMetric}
                                     getMetricValue={getMetricValue}
                                     sortProfiles={sortProfiles}
+                                    getUserColor={(login) => getUserColorScheme(login)[2]}
                                 />
                             </div>
 
@@ -237,6 +239,7 @@ export default function ProfileComparison() {
                                 <RepositoryView
                                     allRepos={allRepos}
                                     maxHeight={leftHeight - 40}
+                                    getUserColor={(login) => getUserColorScheme(login)[2]}
                                 />
                             </div>
                         </div>

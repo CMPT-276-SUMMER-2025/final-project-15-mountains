@@ -55,7 +55,13 @@ export default function PRAcceptanceBarChart({ userProfiles, getPRAcceptance }) 
                                 <img
                                     src={item.avatar}
                                     alt={value}
-                                    style={{ width: "100%", height: "100%", borderRadius: "50%" }}
+                                    style={{
+                                        width: "100%",
+                                        height: "100%",
+                                        borderRadius: "50%",
+                                        border: "1.5px solid",
+                                        borderColor: getUserColor(value.replace("@", "")),
+                                    }}
                                 />
                             </foreignObject>
                         );
@@ -94,11 +100,15 @@ export default function PRAcceptanceBarChart({ userProfiles, getPRAcceptance }) 
                         src={tooltipData.avatar}
                         alt={tooltipData.label}
                         className="w-6 h-6 rounded-full border"
+                        style={{
+                            border: "1.5px solid",
+                            borderColor: getUserColor(tooltipData.label.replace("@", ""))
+                        }}
                     />
                     <div>
                         <p className="font-semibold text-black">{tooltipData.label}</p>
                         <p className="text-xs text-gray-600">
-                            {formatMetricLabel(tooltipData.valueRaw, tooltipData.metricKey)}
+                        {formatMetricLabel(tooltipData.valueRaw, tooltipData.metricKey)}
                         </p>
                         <p className="text-xs font-semibold text-black">
                             {tooltipData.percent}

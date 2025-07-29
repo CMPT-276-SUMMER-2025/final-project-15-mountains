@@ -82,14 +82,17 @@ export default function MetricsTable({ userProfiles, activeMetric, getMetricValu
                                         <img
                                             src={user.data.avatarUrl}
                                             alt={user.login}
-                                            className="w-5 h-5 rounded-full border"
+                                            className="w-5 h-5 rounded-full border border-[1.5px]"
+                                            style={{
+                                                border: `1.5px solid ${getUserColor(user.login)}`,
+                                            }}
                                         />
                                         @{user.login}
                                     </td>
 
                                     {activeMetric === "prAcceptance" ? (
                                         <>
-                                            <td className="py-3 px-4">{user.data.pullRequests}</td>
+                                        <td className="py-3 px-4">{user.data.pullRequests}</td>
                                             <td className="py-3 px-4">{user.data.mergedPullRequests}</td>
                                             <td className="py-3 px-4">{value.toFixed(2)}%</td>
                                             </>

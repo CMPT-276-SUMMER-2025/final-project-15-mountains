@@ -15,7 +15,7 @@ import {
 } from "@primer/octicons-react";
 import UserRepositories from "@/components/profile_comparison/UserRepositories"
 
-export default function UserOverview({ userProfile, repos, userCount }) {
+export default function UserOverview({ userProfile, repos, userCount, userColor }) {
     const user = userProfile;
     if (!user) return null;
     const isSideBySide = userCount <= 2;
@@ -71,6 +71,9 @@ export default function UserOverview({ userProfile, repos, userCount }) {
                         src={user.avatarUrl}
                         alt={`${user.login} avatar`}
                         className="w-16 h-16 rounded-full"
+                        style={{
+                            border: `2px solid ${userColor || "#ccc"}`,
+                        }}
                     />
                     <div>
                         <h2 className="text-xl font-bold text-gray-800">

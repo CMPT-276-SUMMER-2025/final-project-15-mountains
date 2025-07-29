@@ -1,7 +1,7 @@
 "use client";
 import {formatMetricLabel} from "@/app/profile_comparison/formatMetricLabel";
 
-export default function Metrics({ userProfiles, activeMetric, setActiveMetric, getMetricValue, sortProfiles }) {
+export default function Metrics({ userProfiles, activeMetric, setActiveMetric, getMetricValue, sortProfiles, getUserColor }) {
     const metrics = [
         "followers",
         "repos",
@@ -74,7 +74,8 @@ export default function Metrics({ userProfiles, activeMetric, setActiveMetric, g
                                 <img
                                     src={topUser.avatar_url}
                                     alt={topUser.login}
-                                    className="w-8 h-8 rounded-full border border-gray-300"
+                                    className="w-8 h-8 rounded-full border border-2"
+                                    style={{borderColor: getUserColor?.(topUser.login) || "#d1d5db"}}
                                 />
                                 <div className="flex-1 overflow-hidden">
                                     <p className="text-sm font-medium truncate">@{topUser.login}</p>

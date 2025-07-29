@@ -101,7 +101,8 @@ export default function MetricsPieChart({ userProfiles, activeMetric, getMetricV
                     <img
                         src={tooltipData.avatar}
                         alt={tooltipData.label}
-                        className="w-6 h-6 rounded-full border"
+                        className="w-6 h-6 rounded-full border border-2"
+                        style={{borderColor: getUserColor(tooltipData.label.replace("@", ""))}}
                     />
                     <div>
                         <p className="font-semibold text-black">{tooltipData.label}</p>

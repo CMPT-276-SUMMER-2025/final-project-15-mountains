@@ -60,8 +60,12 @@ export default function UserSlot({ users, removeUser, onColorChange }) {
                         <img
                             src={user.avatar_url}
                             alt={user.login}
-                            className="border border-gray-350 border-1 shadow-sm w-30 h-30 rounded-full"
+                            className="shadow-sm w-30 h-30 rounded-full"
+                            style={{
+                                border: `3px solid ${colorMap[user.login] ?? getUserColorScheme(user.login)[2]}`,
+                            }}
                         />
+
                         <p className="font-semibold">
                             @{user.login}
                         </p>
