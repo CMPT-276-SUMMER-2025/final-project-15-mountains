@@ -105,7 +105,7 @@ export default function UserRepositories({ repos }) {
                             </div>
                         )}
 
-                        <div className="flex items-center gap-4 text-xs text-gray-50 dark:text-muted-foreground mt-2">
+                        <div className="flex items-center gap-4 text-xs text-gray-500 dark:text-muted-foreground mt-2">
                             <div className="flex items-center gap-1">
                                 <StarIcon size={12} className="text-yellow-500"/>
                                 {repo.stargazerCount}
@@ -122,7 +122,7 @@ export default function UserRepositories({ repos }) {
                                 <span>Updated {timeAgo(repo.updatedAt)}</span>
                             </div>
                             <div>
-                                <span>
+                                <span className="text-gray-400 dark:text-muted-foreground">
                                 Created {new Date(repo.createdAt).toLocaleDateString(undefined, {
                                     year: "numeric",
                                     month: "short",
