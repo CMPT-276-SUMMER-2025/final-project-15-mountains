@@ -2,6 +2,8 @@
 import React from "react";
 import ActivityCalendar from "react-activity-calendar";
 import { useTheme } from "next-themes";
+import { Tooltip as ReactTooltip } from "react-tooltip";
+import "react-tooltip/dist/react-tooltip.css";
 
 export default function ContributionHeatmap({ userProfiles, getUserColorScheme }) {
     const { theme } = useTheme();
@@ -68,6 +70,20 @@ export default function ContributionHeatmap({ userProfiles, getUserColorScheme }
                                 labels={{
                                     totalCount: `${getTotalCount(raw, new Date().getUTCFullYear())} contributions in ${new Date().getUTCFullYear()}`,
                                 }}
+                                renderBlock={(block, activity) =>
+                                    React.cloneElement(block, {
+                                        "data-tooltip-id": "github-tooltip",
+                                        "data-tooltip-html":
+                                            activity.count === 0
+                                                ? `No contributions on ${formatDate(activity.date)}`
+                                                : `${activity.count} ${activity.count === 1 ? "contribution" : "contributions"} on ${formatDate(activity.date)}`
+                                    })
+                                }
+                            />
+                            <ReactTooltip
+                                id="github-tooltip"
+                                place="top"
+                                className="!bg-gray-900 !text-white !text-xs !px-2 !py-1 !rounded"
                             />
                         </div>
                     );
@@ -109,6 +125,14 @@ function getTotalCount(raw, year) {
         const dateYear = new Date(d.date).getUTCFullYear();
         return dateYear === year ? sum + d.count : sum;
     }, 0);
+}
+
+function formatDate(dateString) {
+    return new Date(dateString).toLocaleDateString("en-US", {
+        month: "short",
+        day: "numeric",
+        year: "numeric",
+    });
 }
 
 
