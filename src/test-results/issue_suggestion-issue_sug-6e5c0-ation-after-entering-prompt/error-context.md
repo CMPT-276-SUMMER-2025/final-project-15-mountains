@@ -1,0 +1,63 @@
+# Page snapshot
+
+```yaml
+- navigation:
+  - img "GitGood Logo"
+  - link "Home":
+    - /url: /
+  - button "AI Services"
+  - button "GitHub Services"
+  - link "About":
+    - /url: /about
+  - button "Toggle theme"
+- main:
+  - heading "Issue Finder" [level=1]
+  - paragraph: Discover beginner-friendly GitHub issues in your favorite language. Use AI to pick the best one based on your interests and goals.
+  - heading "Find Good First Issues" [level=2]
+  - paragraph: Select a language and search for GitHub issues.
+  - combobox: JavaScript
+  - button "Find Issues"
+  - heading "AI Issue Selector" [level=2]
+  - paragraph: Need help deciding? Let AI help you choose.
+  - textbox "Tell us what kind of issue you want..." [disabled]
+  - button "Get AI Suggestion" [disabled]
+  - alert: Error Failed to fetch issues. Please try again after a few minutes
+- contentinfo:
+  - link "GitGood Logo GitGood":
+    - /url: /
+    - img "GitGood Logo"
+    - text: GitGood
+  - paragraph: Empowering developers to contribute to open source with AI-powered tools and intelligent recommendations.
+  - heading "AI Services" [level=2]
+  - list:
+    - listitem:
+      - link "Markdown Editor":
+        - /url: /markdown_editor
+    - listitem:
+      - link "Chatbot":
+        - /url: /chatbot
+  - heading "GitHub Services" [level=2]
+  - list:
+    - listitem:
+      - link "Issue Finder":
+        - /url: /issue_finder
+    - listitem:
+      - link "Profile Comparison":
+        - /url: /profile_comparison
+  - heading "Other" [level=2]
+  - list:
+    - listitem:
+      - link "Home":
+        - /url: /
+    - listitem:
+      - link "About":
+        - /url: /about
+  - separator
+  - text: © 2025
+  - link "GitGood™":
+    - /url: /
+  - text: . All Rights Reserved.
+- alert
+- button "Open Next.js Dev Tools":
+  - img
+```
