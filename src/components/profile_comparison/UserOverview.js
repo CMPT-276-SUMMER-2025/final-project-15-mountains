@@ -132,7 +132,7 @@ export default function UserOverview({ userProfile, repos, userCount, userColor 
                                     <div className="flex items-center gap-2">
                                         <div
                                             className="w-2.5 h-2.5 rounded-full"
-                                            style={{backgroundColor: lang?.color || "#6b7280"}} // tailwind gray-500
+                                            style={{backgroundColor: lang?.color || "#6b7280"}}
                                         />
                                         <span className="text-sm font-medium">
                                           {lang?.name || (
