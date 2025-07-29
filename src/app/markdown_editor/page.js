@@ -294,6 +294,7 @@ export default function Page() {
                                 size="sm"
                                 className="absolute bottom-2 right-2 h-8 w-8 p-0 hover:cursor-pointer"
                                 disabled={loading}
+                                data-testid="submit"
                             >
                                 {!loading ? (
                                     <Send className="h-4 w-4" />
