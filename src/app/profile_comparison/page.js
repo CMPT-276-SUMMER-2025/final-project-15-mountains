@@ -176,7 +176,7 @@ export default function ProfileComparison() {
     };
 
     return (
-        <div className="w-full mt-40">
+        <div className="w-full mt-20">
             <ComparisonHeader/>
             <div className="flex flex-col gap-10">
                 <div className="flex justify-center">
@@ -195,7 +195,6 @@ export default function ProfileComparison() {
                                               "dark:hover:bg-[#3a3a3a] dark:active:bg-[#444] border-gray-300 " +
                                               "dark:border-border hover:scale-105"
                             }`}
-
                         >
                             {loading ? (
                                 <ClipLoader size={20} color="currentColor"/>
@@ -212,7 +211,7 @@ export default function ProfileComparison() {
             </div>
 
             {showAnalysis && (
-                <div className="flex border-t-2 border-gray-200 dark:border-border w-full bg-gray-50 dark:bg-background
+                <div className="flex border-t-1 border-gray-200 dark:border-border w-full bg-gray-50 dark:bg-slate-700
                                 p-8 mt-5">
                     <div className="flex flex-col gap-3">
                         <div className="flex gap-4 w-full items-stretch">

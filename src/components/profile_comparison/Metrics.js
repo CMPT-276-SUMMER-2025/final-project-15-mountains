@@ -27,7 +27,7 @@ export default function Metrics({ userProfiles, activeMetric, setActiveMetric, g
 
     return (
         <div className="rounded-lg border border-gray-200 dark:border-border bg-[#fafafa] dark:bg-muted overflow-visible">
-        <div className="rounded-lg grid grid-cols-1 sm:grid-cols-3 gap-px bg-gray-200 dark:bg-border">
+        <div className="rounded-lg grid grid-cols-1 sm:grid-cols-3 bg-gray-200 dark:bg-border">
                 {metrics.map((metric, i) => {
                     const sorted = sortProfiles(userProfiles, metric);
                     const top = sorted[0];
@@ -62,13 +62,12 @@ export default function Metrics({ userProfiles, activeMetric, setActiveMetric, g
                             onClick={() => setActiveMetric(metric)}
                             className={`h-auto px-6 py-4 text-left border transition-all duration-200
                                         ${metric === activeMetric
-                                            ? `bg-white text-gray-900 shadow-md
+                                            ? `bg-black text-white shadow-md border border-black
                                                dark:bg-background dark:text-foreground scale-105`
                                             : `bg-[#fafafa] text-gray-900 hover:bg-gray-100
                                                dark:bg-muted dark:text-foreground dark:hover:bg-muted/30`
                             } ${cornerClass}`}
                         >
-
                             <div className="text-xl font-semibold mb-3 tracking-wide">
                                 {labelByMetric[metric]}
                             </div>
@@ -82,7 +81,7 @@ export default function Metrics({ userProfiles, activeMetric, setActiveMetric, g
                                     style={{borderColor: getUserColor?.(topUser.login) || "#d1d5db"}}
                                 />
                                 <div className="flex-1 overflow-hidden">
-                                    <p className="text-sm font-medium truncate text-foreground">@{topUser.login}</p>
+                                    <p className="text-sm font-medium truncate">@{topUser.login}</p>
                                     <p className="text-xs opacity-70 dark:text-muted-foreground">
                                         {formatMetricLabel(topUser.value, metric)}
                                     </p>
