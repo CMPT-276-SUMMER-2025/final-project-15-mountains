@@ -176,7 +176,7 @@ export default function ProfileComparison() {
     };
 
     return (
-        <div className="w-full mt-20">
+        <div className="w-full mt-20 min-h-[60vh]">
             <ComparisonHeader/>
             <div className="flex flex-col gap-10">
                 <div className="flex justify-center">
@@ -187,13 +187,11 @@ export default function ProfileComparison() {
                             onClick={handleAnalysis}
                             className={`w-[160px] flex items-center gap-2 px-6 py-3 rounded-lg font-semibold border
                                         transition-transform duration-150 justify-center
-                                        text-gray-800 dark:text-white
                                         ${loading
-                                            ? "bg-gray-300 dark:bg-gray-700 border-gray-300 dark:border-gray-600 " +
-                                              "cursor-not-allowed"
-                                            : "bg-white hover:bg-gray-200 active:bg-gray-300 dark:bg-[#2a2a2a] " +
-                                              "dark:hover:bg-[#3a3a3a] dark:active:bg-[#444] border-gray-300 " +
-                                              "dark:border-border hover:scale-105"
+                                            ? "bg-gray-300 dark:bg-gray-600 text-muted-foreground " +
+                                              "border-muted cursor-not-allowed"
+                                            : "bg-primary text-primary-foreground border-primary hover:scale-105 " +
+                                               "hover:bg-primary/90"
                             }`}
                         >
                             {loading ? (
@@ -203,7 +201,6 @@ export default function ProfileComparison() {
                             )}
                             {loading ? "" : "Analyze"}
                         </button>
-
                     </div>
                 </div>
 
@@ -217,7 +214,7 @@ export default function ProfileComparison() {
                         <div className="flex gap-4 w-full items-stretch">
                             {userProfiles.map((profile) => (
                                 <div key={profile.login} className="flex-1 min-w-0 flex flex-col">
-                                    <UserOverview
+                                <UserOverview
                                         userProfile={profile.data}
                                         repos={profile.repos}
                                         userCount={userProfiles.length}

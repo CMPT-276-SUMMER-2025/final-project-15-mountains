@@ -11,7 +11,7 @@ export default function Footer() {
   return (
     <>
     {!hideFooter && (
-      <footer className="bg-card border-t border-border/50 mt-20">
+      <footer className="bg-card border-t border-border/50">
         <div className="mx-auto w-full max-w-screen-xl p-4 py-12 lg:py-16">
           <div className="md:flex md:justify-between">
             <div className="mb-8 md:mb-0">

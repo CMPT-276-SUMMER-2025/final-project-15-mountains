@@ -24,8 +24,8 @@ export default function SearchBar({ onSelect, cache }) {
 
     return (
         <div
-            className="relative flex items-center border border-border rounded px-4 py-3 bg-white
-                       dark:bg-input dark:text-foreground">
+            className="relative flex items-center border border-border border-1 rounded px-4 py-3 bg-white
+                       dark:bg-input dark:text-foreground dark:border-foreground/30">
             <FaGithub className="text-gray-700 text-xl mr-3 h-6 w-6 dark:text-muted-foreground"/>
             <input
                 type="text"
@@ -39,7 +39,6 @@ export default function SearchBar({ onSelect, cache }) {
                     setTimeout(() => setResultsVisible(false), 100);
                 }}
                 className="outline-none text-gray-800 dark:text-foreground dark:bg-transparent"
-
             />
 
             {input && (
