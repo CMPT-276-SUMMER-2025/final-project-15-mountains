@@ -5,7 +5,9 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
 import { Send, X, Edit3, Bot, User, Loader2 } from "lucide-react";
-
+import ReactMarkdown from "react-markdown"
+import rehypeRaw from 'rehype-raw';
+import remarkGfm from 'remark-gfm';
 export default function ChatbotPage() {
     const [messages, setMessages] = useState([
         {
@@ -23,6 +25,55 @@ export default function ChatbotPage() {
     const messagesEndRef = useRef(null);
     const inputRef = useRef(null);
 
+    const components = {
+        h1: ({ node, ...props }) => <h1 className="text-4xl font-bold  text-foreground" {...props} />,
+        h2: ({ node, ...props }) => <h2 className="text-3xl font-semibold  text-foreground" {...props} />,
+        h3: ({ node, ...props }) => <h3 className="text-2xl font-semibold text-foreground" {...props} />,
+        p: ({ node, ...props }) => {
+        const align = node?.properties?.align;
+
+        const isImageGroup =
+            node?.children?.every?.(child => child.tagName === "img");
+
+        return (
+            <p
+            className={`my-2 text-base leading-relaxed text-foreground ${
+                align === "center" ? "text-center" : ""
+            } ${isImageGroup ? "flex flex-wrap justify-center items-center gap-2" : ""}`}
+            {...props}
+            />
+        );
+        },
+        ul: ({ node, ...props }) => <ul className="list-disc list-inside pl-4 " {...props} />,
+        li: ({ node, ...props }) => <li className="mb-1" {...props} />,
+        blockquote: ({ node, ...props }) => (
+            <blockquote className="border-l-4 border-primary pl-4 italic bg-muted/50 p-4 rounded-r" {...props} />
+        ),
+        code: ({ node, ...props }) => (
+            <code className="bg-muted px-1 py-0.5 rounded text-sm font-mono" {...props} />
+        ),
+        pre: ({ node, ...props }) => (
+            <pre className="bg-muted text-sm p-2 overflow-x-auto rounded  font-mono" {...props} />
+        ),
+        a: ({ node, ...props }) => (
+            <a
+                className="text-primary hover:underline"
+                target="_blank"
+                rel="noopener noreferrer"
+                {...props}
+            />
+        ),
+        img: ({ node, ...props }) => (
+            <img className="inline-block my-4 rounded max-w-full h-auto" alt="" {...props} />
+        ),
+        strong: ({ node, ...props }) => (
+            <strong className="font-bold" {...props} />
+        ),
+        em: ({ node, ...props }) => (
+            <em className="italic text-muted-foreground" {...props} />
+        ),
+        hr: () => <hr className=" border-t border-border" />,
+    };
     const scrollToBottom = () => {
         messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
     };
@@ -82,10 +133,13 @@ export default function ChatbotPage() {
         setAbortController(controller);
 
         try {
-            await new Promise(resolve => setTimeout(resolve, 3000));
+            // await new Promise(resolve => setTimeout(resolve, 3000));
             
             const response = await fetch('/api/ai_api/chatbot', {
                 // TODO: implement this when we have the API endpoint
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ prompt: inputMessage, messages: messages }),
             });
 
             if (!response.ok) {
@@ -138,23 +192,14 @@ export default function ChatbotPage() {
 
     return (
         <div className="flex flex-col h-screen ">
-            {/* Header */}
-            <div className="flex items-center justify-center p-6 border-b border-border  mt-20">
-                <div className="flex items-center space-x-3">
-                    <div className="p-2 rounded-full">
-                        <Bot className="h-6 w-6 text-primary" />
-                    </div>
-                    <div>
-                        <h1 className="text-2xl font-bold text-gradient">GitGood AI Assistant</h1>
-                        <p className="text-sm text-muted-foreground">Your intelligent development companion</p>
-                    </div>
-                </div>
-            </div>
 
             {/* Messages Container */}
             <div className="flex-1 overflow-y-auto p-6">
                 <div className="max-w-4xl mx-auto space-y-6">
                     {messages.map((message, idx) => (
+                        
+
+
                         <div
                             key={message.id}
                             className={` group flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
@@ -162,11 +207,11 @@ export default function ChatbotPage() {
                             <div className={`max-w-[80%] lg:max-w-[70%] ${message.role === 'user' ? 'order-2' : 'order-1'}`}>
                                 <Card className={`${
                                     message.role === 'user'
-                                        ? 'bg-primary text-primary-foreground'
+                                        ? 'bg-primary/75 text-primary-foreground '
                                         : 'bg-card border-border'
                                 }`}>
-                                    <CardContent className="p-4">
-                                        <div className="flex items-start space-x-3">
+                                    <CardContent className="p-4 ">
+                                        <div className="flex items-start space-x-3 ">
                                             <div className={`p-2 rounded-full ${
                                                 message.role === 'user' 
                                                     ? 'bg-primary-foreground/20' 
@@ -179,8 +224,10 @@ export default function ChatbotPage() {
                                                 )}
                                             </div>
                                             <div className="flex-1 min-w-0">
-                                                <div className="whitespace-pre-wrap text-sm leading-relaxed">
+                                                <div className={`whitespace-pre-wrap text-sm leading-relaxed`}>
+                                                    <ReactMarkdown rehypePlugins={[rehypeRaw]} remarkPlugins={remarkGfm} components={components}>
                                                     {message.content}
+                                                    </ReactMarkdown>
                                                 </div>
                                                 <div className="text-xs opacity-70 mt-2">
                                                     {message.timestamp.toLocaleTimeString()}
@@ -206,6 +253,7 @@ export default function ChatbotPage() {
                                 )}
                             </div>
                         </div>
+                        
                     ))}
                 
                     {/* Loading indicator */}

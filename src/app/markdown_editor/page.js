@@ -30,7 +30,21 @@ export default function Page() {
         h1: ({ node, ...props }) => <h1 className="text-4xl font-bold my-4 text-foreground" {...props} />,
         h2: ({ node, ...props }) => <h2 className="text-3xl font-semibold my-3 text-foreground" {...props} />,
         h3: ({ node, ...props }) => <h3 className="text-2xl font-semibold my-2 text-foreground" {...props} />,
-        p: ({ node, ...props }) => <p className="text-base leading-relaxed my-2 text-foreground" {...props} />,
+        p: ({ node, ...props }) => {
+        const align = node?.properties?.align;
+
+        const isImageGroup =
+            node?.children?.every?.(child => child.tagName === "img");
+
+        return (
+            <p
+            className={`my-2 text-base leading-relaxed text-foreground ${
+                align === "center" ? "text-center" : ""
+            } ${isImageGroup ? "flex flex-wrap justify-center items-center gap-2" : ""}`}
+            {...props}
+            />
+        );
+        },
         ul: ({ node, ...props }) => <ul className="list-disc list-inside pl-4 my-2" {...props} />,
         li: ({ node, ...props }) => <li className="mb-1" {...props} />,
         blockquote: ({ node, ...props }) => (
@@ -51,7 +65,7 @@ export default function Page() {
             />
         ),
         img: ({ node, ...props }) => (
-            <img className="my-4 rounded max-w-full h-auto" alt="" {...props} />
+            <img className="inline-block my-4 rounded max-w-full h-auto" alt="" {...props} />
         ),
         strong: ({ node, ...props }) => (
             <strong className="font-bold" {...props} />
@@ -324,7 +338,7 @@ export default function Page() {
                                     <Eye className="h-4 w-4 text-primary" />
                                     <h3 className="font-semibold">Preview</h3>
                                 </div>
-                                <div className="min-h-[400px] p-4 border rounded-md overflow-auto bg-card dark:border-gray-500">
+                                <div className="min-h-[400px] p-4 border rounded-md overflow-auto bg-card dark:border-gray-500 ">
                                     <ReactMarkdown 
                                         rehypePlugins={[rehypeRaw]} 
                                         remarkPlugins={remarkGfm} 
