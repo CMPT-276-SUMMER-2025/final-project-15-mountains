@@ -1,4 +1,10 @@
-const defaultColorScheme = ["#ebedf0", "#9be9a8", "#40c463", "#30a14e", "#216e39"];
+const defaultColorScheme = [
+    "#ebedf0",
+    "#d6dadd",
+    "#b8bdc2",
+    "#8d949c",
+    "#636c76"
+];
 const userColors = new Map();
 
 export function getDefaultColorScheme() {
@@ -12,7 +18,7 @@ export function getUserColorScheme(login) {
 
 export function getUserColor(login) {
     const entry = userColors.get(login);
-    return entry ? entry.scheme[2] : "#30a14e";
+    return entry ? entry.scheme[2] : "#b8bdc2";
 }
 
 export function removeUserColor(login) {
@@ -62,7 +68,7 @@ export function generateColorScheme(baseColor) {
         lighten(0.6),
         baseColor,
         darken(0.15),
-        darken(0.3),
+        darken(0.3)
     ];
 }
 
@@ -83,7 +89,7 @@ export const predefinedColors = [
     "#1f77b4",
     "#d62728",
     "#2ca02c",
-    "#9467bd",
+    "#9d72c5",
     "#ff7f0e",
     "#8c564b",
     "#e377c2",
