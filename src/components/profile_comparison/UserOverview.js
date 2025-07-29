@@ -89,7 +89,7 @@ export default function UserOverview({ userProfile, repos, userCount, userColor 
                         >
                             @{user.login}
                         </a>
-                        <p className="text-sm text-gray-500 dark:text-blue-400 flex items-center gap-1 mt-1">
+                        <p className="text-sm text-gray-500 dark:text-gray-400 flex items-center gap-1 mt-1">
                             <FaMapMarkerAlt/>
                             {user.location || "Unknown"}
                         </p>
@@ -125,8 +125,8 @@ export default function UserOverview({ userProfile, repos, userCount, userColor 
                                     key={lang?.name || `empty-${i}`}
                                     className={`flex items-center justify-between px-4 py-2 ${
                                         lang
-                                            ? "bg-white hover:bg-gray-100 dark:bg-muted/10 dark:hover:bg-muted/40"
-                                            : "bg-gray-50 dark:bg-muted/30 text-gray-400 dark:text-muted-foreground/90"
+                                            ? "bg-white hover:bg-gray-100 dark:bg-muted/10 dark:hover:bg-slate-50/7"
+                                            : "bg-gray-50 dark:bg-slate-50/10 text-gray-400 dark:text-muted-foreground/90"
                                     }`}
                                 >
                                     <div className="flex items-center gap-2">

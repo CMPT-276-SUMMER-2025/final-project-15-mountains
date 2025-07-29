@@ -211,7 +211,7 @@ export default function ProfileComparison() {
             </div>
 
             {showAnalysis && (
-                <div className="flex border-t-1 border-gray-200 dark:border-border w-full bg-gray-50 dark:bg-slate-700
+                <div className="flex border-t-1 border-gray-200 dark:border-border w-full bg-gray-50 dark:bg-gray-900
                                 p-8 mt-5">
                     <div className="flex flex-col gap-3">
                         <div className="flex gap-4 w-full items-stretch">
@@ -244,8 +244,7 @@ export default function ProfileComparison() {
                                 />
                             </div>
 
-                            <div
-                                className="bg-white dark:bg-card border border-gray-200 dark:border-border
+                            <div className="bg-white dark:bg-card border border-gray-200 dark:border-border
                                            rounded-lg p-5"
                                 style={{height: `${leftHeight}px`, overflow: 'hidden'}}
                             >

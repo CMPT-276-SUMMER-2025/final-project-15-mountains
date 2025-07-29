@@ -61,7 +61,7 @@ export default function UserRepositories({ repos }) {
     return (
         <div className="mt-2">
             <div className="flex justify-between items-center mb-2">
-                <h3 className="text-base font-semibold text-gray-800 dark:text-foreground">Repositories</h3>
+                <h3 className="text-xl font-semibold text-gray-800 dark:text-foreground">Repositories</h3>
                 <select
                     className="text-sm border border-gray-300 dark:text-foreground rounded px-1 py-1"
                     value={sortBy}

@@ -73,7 +73,7 @@ export default function MetricsTable({ userProfiles, activeMetric, getMetricValu
                                     className={`transition-all border-t border-gray-200 dark:border-border
                                         ${i === 0
                                             ? "bg-yellow-50 dark:bg-yellow-900/30 font-semibold hover:bg-amber-100 dark:hover:bg-amber-800/40"
-                                            : "hover:bg-gray-100 dark:hover:bg-muted/30"
+                                            : "hover:bg-gray-100 dark:hover:bg-slate-50/10"
                                     }`}
 
 

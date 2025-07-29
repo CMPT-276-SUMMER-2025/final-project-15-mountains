@@ -6,7 +6,7 @@ export default function ComparisonHeader() {
             <h1 className="text-5xl font-extrabold text-gradient">
                 Profile Comparison
             </h1>
-            <p className="text-gray-500 text-lg mt-4">
+            <p className="text-muted-foreground text-lg mt-4">
                 Visualize open-source activity across multiple GitHub accounts
             </p>
         </div>

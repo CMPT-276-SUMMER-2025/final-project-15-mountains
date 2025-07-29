@@ -63,9 +63,9 @@ export default function Metrics({ userProfiles, activeMetric, setActiveMetric, g
                             className={`h-auto px-6 py-4 text-left border transition-all duration-200
                                         ${metric === activeMetric
                                             ? `bg-black text-white shadow-md border border-black
-                                               dark:bg-background dark:text-foreground scale-105`
+                                               dark:bg-slate-100 dark:text-black scale-105`
                                             : `bg-[#fafafa] text-gray-900 hover:bg-gray-100
-                                               dark:bg-muted dark:text-foreground dark:hover:bg-muted/30`
+                                               dark:bg-muted dark:text-foreground dark:hover:bg-slate-50/10`
                             } ${cornerClass}`}
                         >
                             <div className="text-xl font-semibold mb-3 tracking-wide">
@@ -82,7 +82,13 @@ export default function Metrics({ userProfiles, activeMetric, setActiveMetric, g
                                 />
                                 <div className="flex-1 overflow-hidden">
                                     <p className="text-sm font-medium truncate">@{topUser.login}</p>
-                                    <p className="text-xs opacity-70 dark:text-muted-foreground">
+                                    <p
+                                        className={`text-xs ${
+                                        metric === activeMetric
+                                            ? "opacity-80 dark:text-gray-700"
+                                            : "opacity-70 dark:text-muted-foreground"
+                                        }`}
+                                    >
                                         {formatMetricLabel(topUser.value, metric)}
                                     </p>
                                 </div>
