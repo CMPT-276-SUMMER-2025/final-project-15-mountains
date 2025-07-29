@@ -82,10 +82,13 @@ export default function ChatbotPage() {
         setAbortController(controller);
 
         try {
-            await new Promise(resolve => setTimeout(resolve, 3000));
+            // await new Promise(resolve => setTimeout(resolve, 3000));
             
             const response = await fetch('/api/ai_api/chatbot', {
                 // TODO: implement this when we have the API endpoint
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ prompt: inputMessage, messages: messages }),
             });
 
             if (!response.ok) {
