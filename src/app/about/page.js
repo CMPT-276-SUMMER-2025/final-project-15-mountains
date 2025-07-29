@@ -79,9 +79,9 @@ export default function AboutPage() {
           About GitGood
         </h1>
         <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed mb-8">
-          We are passionate about making open source contribution accessible to everyone. 
-          GitGood combines the power of AI with the collaborative spirit of GitHub to help 
-          developers find their perfect contribution opportunities.
+          We believe meaningful contributions should be within reach for every developer. GitGood blends AI with
+          GitHub&apos;s open source ecosystem to match people with the right projects, empowering them to make an impact
+          and grow their skills along the way.
         </p>
       </div>
 
@@ -91,8 +91,8 @@ export default function AboutPage() {
           <CardHeader className="text-center">
             <CardTitle className="text-3xl mb-4">Our Mission</CardTitle>
             <CardDescription className="text-lg max-w-4xl mx-auto">
-              To democratize open source contribution by providing intelligent tools that help developers 
-              of all skill levels find meaningful projects and make impactful contributions to the global 
+              To democratize open source contribution by providing intelligent tools that help developers
+              of all skill levels find meaningful projects and make impactful contributions to the global
               developer community.
             </CardDescription>
           </CardHeader>
