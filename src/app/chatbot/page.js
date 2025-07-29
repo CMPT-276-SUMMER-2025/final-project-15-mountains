@@ -28,7 +28,7 @@ export default function ChatbotPage() {
     const components = {
         h1: ({ node, ...props }) => <h1 className="text-4xl font-bold  text-foreground" {...props} />,
         h2: ({ node, ...props }) => <h2 className="text-3xl font-semibold  text-foreground" {...props} />,
-        h3: ({ node, ...props }) => <h3 className="text-2xl font-semibold text-foreground" {...props} />,
+        h3: ({ node, ...props }) => <h3 className="text-2xl font-semibold " {...props} />,
         p: ({ node, ...props }) => {
         const align = node?.properties?.align;
 
@@ -53,7 +53,7 @@ export default function ChatbotPage() {
             <code className="bg-muted px-1 py-0.5 rounded text-sm font-mono" {...props} />
         ),
         pre: ({ node, ...props }) => (
-            <pre className="bg-muted text-sm p-2 overflow-x-auto rounded  font-mono" {...props} />
+            <pre className="bg-muted dark:bg-foreground/10 text-sm p-2 overflow-x-auto rounded  font-mono" {...props} />
         ),
         a: ({ node, ...props }) => (
             <a
@@ -148,6 +148,7 @@ export default function ChatbotPage() {
 
             const data = await response.json();
             
+            
             const assistantMessage = {
                 id: Date.now() + 1,
                 role: 'assistant',
@@ -207,7 +208,7 @@ export default function ChatbotPage() {
                             <div className={`max-w-[80%] lg:max-w-[70%] ${message.role === 'user' ? 'order-2' : 'order-1'}`}>
                                 <Card className={`${
                                     message.role === 'user'
-                                        ? 'bg-primary/75 text-primary-foreground '
+                                        ? 'bg-primary/90 text-primary-foreground '
                                         : 'bg-card border-border'
                                 }`}>
                                     <CardContent className="p-4 ">
@@ -224,7 +225,7 @@ export default function ChatbotPage() {
                                                 )}
                                             </div>
                                             <div className="flex-1 min-w-0">
-                                                <div className={`whitespace-pre-wrap text-sm leading-relaxed`}>
+                                                <div className={`whitespace-pre-wrap text-sm leading-relaxed `}>
                                                     <ReactMarkdown rehypePlugins={[rehypeRaw]} remarkPlugins={remarkGfm} components={components}>
                                                     {message.content}
                                                     </ReactMarkdown>
@@ -239,12 +240,12 @@ export default function ChatbotPage() {
                                 
                                 {/* Edit button for user messages */}
                                 {message.role === 'user' && !isGenerating && editIndex === null && (
-                                    <div className="mt-2 flex justify-end">
+                                    <div className="mt-2 flex justify-end ">
                                         <Button
                                             variant="ghost"
                                             size="sm"
                                             onClick={() => handleEditMessage(idx)}
-                                            className="opacity-0 group-hover:opacity-100 transition-opacity duration-200 text-xs"
+                                            className="opacity-0 group-hover:opacity-100 transition-opacity duration-200 text-xs "
                                         >
                                             <Edit3 className="h-3 w-3 mr-1" />
                                             Edit
