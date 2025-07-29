@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server";
 import OpenAI from "openai";
-require("dotenv").config();
 
 const token = process.env.AI_TOKEN;
 
@@ -41,6 +40,5 @@ export async function POST(req) {
 
     
     const content = res.choices[0].message.content.trim();
-    // await console.log(content);
     return NextResponse.json({ response: content });
 }
