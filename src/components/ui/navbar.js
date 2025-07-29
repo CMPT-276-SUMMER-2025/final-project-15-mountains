@@ -23,9 +23,13 @@ export default function Nav() {
   };
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-md border-b border-border">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-md border-b border-border ">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        
         <div className="flex items-center justify-between h-16">
+          
+          
           <div className="flex-shrink-0 flex flex-row">
             <Image
               src="/gitgood-logo_thomasbrigham.png"
@@ -125,7 +129,7 @@ export default function Nav() {
           </div>
 
          
-          <div className="hidden md:block">
+          <div className="hidden md:block cursor-pointer ">
             <ModeToggle />
           </div>
 
@@ -212,7 +216,7 @@ export function ModeToggle() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="ghost" size="sm" className="rounded-full hover:bg-accent transition-colors">
+        <Button variant="ghost" size="sm" className=" transition-colors hover:cursor-pointer dark:hover:bg-gray-800">
           <Sun className="h-[1.2rem] w-[1.2rem] scale-100 rotate-0 transition-all dark:scale-0 dark:-rotate-90" />
           <Moon className="absolute h-[1.2rem] w-[1.2rem] scale-0 rotate-90 transition-all dark:scale-100 dark:rotate-0" />
           <span className="sr-only">Toggle theme</span>

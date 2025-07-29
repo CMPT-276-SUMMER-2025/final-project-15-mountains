@@ -212,7 +212,7 @@ export default function Page() {
                             <Button 
                                 disabled={loading} 
                                 onClick={fetchMarkdown}
-                                className="hover:scale-105 transition-transform duration-200"
+                                className="hover:scale-105 transition-transform duration-200 hover:cursor-pointer"
                             >
                                 {loading ? (
                                     <>
@@ -252,7 +252,7 @@ export default function Page() {
                             variant="ghost"
                             size="sm"
                             onClick={togglesize}
-                            className="hover:bg-accent"
+                            className="hover:bg-accent hover:cursor-pointer"
                         >
                             {!sizeup ? (
                                 <Maximize2 className="h-4 w-4" />
@@ -278,7 +278,7 @@ export default function Page() {
                             <Button
                                 onClick={handleSubmit}
                                 size="sm"
-                                className="absolute bottom-2 right-2 h-8 w-8 p-0"
+                                className="absolute bottom-2 right-2 h-8 w-8 p-0 hover:cursor-pointer"
                                 disabled={loading}
                             >
                                 {!loading ? (

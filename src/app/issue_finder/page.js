@@ -134,7 +134,7 @@ export default function IssueSelector() {
                                 <Button 
                                     onClick={fetchIssues} 
                                     disabled={loading} 
-                                    className="w-full hover:scale-105 transition-transform duration-200"
+                                    className="w-full hover:scale-103 transition-transform duration-200 hover:cursor-pointer"
                                 >
                                     {loading ? "Searching..." : "Find Issues"}
                                 </Button>
@@ -166,7 +166,7 @@ export default function IssueSelector() {
                                     onClick={getAISuggestion} 
                                     disabled={!issues.length || AIloading} 
                                     variant="outline"
-                                    className="w-full hover:scale-105 transition-transform duration-200"
+                                    className="w-full hover:scale-105 transition-transform duration-200 hover:cursor-pointer"
                                 >
                                     {AIloading ? "Loading..." : "Get AI Suggestion"}
                                 </Button>

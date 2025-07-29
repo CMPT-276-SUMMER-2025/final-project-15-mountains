@@ -77,7 +77,7 @@ export const Header = () => {
           <Button 
             variant="outline" 
             onClick={() => window.scrollBy({ top: 1000, behavior: 'smooth' })} 
-            className="px-8 py-4 text-lg font-medium hover:bg-accent transition-colors"
+            className="px-8 py-4 text-lg font-medium hover:bg-accent transition-colors hover:cursor-pointer"
           >
             Explore Popular Repositories
           </Button>
