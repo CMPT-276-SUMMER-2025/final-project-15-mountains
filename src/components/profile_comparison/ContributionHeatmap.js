@@ -41,6 +41,18 @@ export default function ContributionHeatmap({ userProfiles, getUserColor }) {
 
                     return (
                         <div className="mb-6" key={profile.login}>
+                            <div className="flex items-center gap-2 mb-3">
+                                <img
+                                    src={user.avatarUrl}
+                                    alt={profile.login}
+                                    className="w-6 h-6 rounded-full border"
+                                    style={{
+                                        borderColor: getUserColor(profile.login)?.[2] || "#999",
+                                        borderWidth: "1.5px"
+                                    }}
+                                />
+                                <span className="font-medium text-sm text-gray-800">@{profile.login}</span>
+                            </div>
                             <ActivityCalendar
                                 data={data}
                                 blockSize={11}
