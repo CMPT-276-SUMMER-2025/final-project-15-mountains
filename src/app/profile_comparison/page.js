@@ -229,7 +229,7 @@ export default function ProfileComparison() {
                                 <ContributionHeatmap
                                     key={colorChangeTrigger}
                                     userProfiles={userProfiles}
-                                    getUserColor={getUserColorScheme}
+                                    getUserColorScheme={getUserColorScheme}
                                 />
                                 <Metrics
                                     userProfiles={userProfiles}

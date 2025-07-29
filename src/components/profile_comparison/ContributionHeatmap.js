@@ -1,21 +1,12 @@
 "use client";
 import React from "react";
 import ActivityCalendar from "react-activity-calendar";
+import { useTheme } from "next-themes";
 
-export default function ContributionHeatmap({ userProfiles, getUserColor }) {
+export default function ContributionHeatmap({ userProfiles, getUserColorScheme }) {
+    const { theme } = useTheme();
+
     if (!userProfiles?.length) return null;
-
-    const todayUTC = new Date(new Date().toISOString().split("T")[0]);
-
-    const latestContributionDate = userProfiles
-        .flatMap((profile) => profile?.data?.user?.contributions || [])
-        .reduce((latest, current) => {
-            const currentDate = new Date(current.date);
-            return currentDate > latest ? currentDate : latest;
-        }, new Date(0));
-
-    const inferredYear = Math.max(latestContributionDate.getUTCFullYear(), todayUTC.getUTCFullYear());
-    const fullYearTemplate = generateFullYearRangeUTC(inferredYear);
 
     return (
         <div className="flex flex-col p-4 bg-white dark:bg-card border border-gray-200 dark:border-border rounded-lg">
@@ -26,20 +17,24 @@ export default function ContributionHeatmap({ userProfiles, getUserColor }) {
                 {userProfiles.map((profile) => {
                     const user = profile?.data;
                     const raw = user?.contributions || [];
-
-                    const counts = Object.fromEntries(
-                        raw.map((d) => [d.date, d.count])
-                    );
+                    const counts = Object.fromEntries(raw.map((d) => [d.date, d.count]));
                     const max = Math.max(...raw.map((d) => d.count), 1);
 
-                    const data = fullYearTemplate.map((day) => {
+                    const data = generateFullYearRangeUTC(new Date().getUTCFullYear()).map((day) => {
                         const count = counts[day.date] || 0;
-                        return {
-                            date: day.date,
-                            count,
-                            level: getLevel(count, max),
-                        };
+                        return { date: day.date, count, level: getLevel(count, max) };
                     });
+
+                    const scheme = getUserColorScheme(profile.login);
+                    const darkScheme = [
+                        "#1a1a1a",
+                        scheme[1],
+                        scheme[2],
+                        scheme[3],
+                        scheme[4],
+                    ];
+
+                    console.log("Theme being passed:", theme === "dark" ? darkScheme : scheme);
 
                     return (
                         <div className="mb-6" key={profile.login}>
@@ -49,7 +44,7 @@ export default function ContributionHeatmap({ userProfiles, getUserColor }) {
                                     alt={profile.login}
                                     className="w-6 h-6 rounded-full border"
                                     style={{
-                                        borderColor: getUserColor(profile.login)?.[2] || "#999",
+                                        borderColor: scheme[2] || "#999",
                                         borderWidth: "1.5px"
                                     }}
                                 />
@@ -66,11 +61,12 @@ export default function ContributionHeatmap({ userProfiles, getUserColor }) {
                                 showWeekdayLabels={true}
                                 showMonthLabels={true}
                                 theme={{
-                                    light: getUserColor(profile.login),
-                                    dark: getUserColor(profile.login),
+                                    light: scheme,
+                                    dark: darkScheme
                                 }}
+                                colorScheme={theme === "dark" ? "dark" : "light"}
                                 labels={{
-                                    totalCount: `${getTotalCount(raw, inferredYear)} contributions in ${inferredYear}`,
+                                    totalCount: `${getTotalCount(raw, new Date().getUTCFullYear())} contributions in ${new Date().getUTCFullYear()}`,
                                 }}
                             />
                         </div>
