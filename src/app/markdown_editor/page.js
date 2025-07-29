@@ -190,7 +190,7 @@ export default function Page() {
     }
 
     return (
-        <div className="min-h-screen py-20 px-4">
+        <div className="min-h-screen py-20 px-4 mb-20">
             {/* Header */}
             <div className="max-w-7xl mx-auto text-center mb-16">
                 <h1 className="text-gradient font-bold mb-6">
