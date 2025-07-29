@@ -185,22 +185,35 @@ export default function ProfileComparison() {
                         <button
                             type="submit"
                             onClick={handleAnalysis}
-                            className={`w-[160px] flex items-center gap-2 px-6 py-3 rounded-lg font-bold border-none
-                                        transition-transform duration-150 text-white justify-center
-                                        ${loading ? "bg-gray-700 cursor-not-allowed" 
-                                                  : "bg-black hover:bg-black-900 active:bg-gray-800 hover:scale-105"}`}
+                            className={`w-[160px] flex items-center gap-2 px-6 py-3 rounded-lg font-semibold border
+                                        transition-transform duration-150 justify-center
+                                        text-gray-800 dark:text-white
+                                        ${loading
+                                            ? "bg-gray-300 dark:bg-gray-700 border-gray-300 dark:border-gray-600 " +
+                                              "cursor-not-allowed"
+                                            : "bg-white hover:bg-gray-200 active:bg-gray-300 dark:bg-[#2a2a2a] " +
+                                              "dark:hover:bg-[#3a3a3a] dark:active:bg-[#444] border-gray-300 " +
+                                              "dark:border-border hover:scale-105"
+                            }`}
+
                         >
-                            {loading ? <ClipLoader size={20} color="#fff" /> : <FaArrowRight className="text-white" />}
+                            {loading ? (
+                                <ClipLoader size={20} color="currentColor"/>
+                            ) : (
+                                <FaArrowRight className="text-inherit"/>
+                            )}
                             {loading ? "" : "Analyze"}
                         </button>
+
                     </div>
                 </div>
 
-                <UserSlot users={users} removeUser={removeUser} onColorChange={handleColorUpdate} />
+                <UserSlot users={users} removeUser={removeUser} onColorChange={handleColorUpdate}/>
             </div>
 
             {showAnalysis && (
-                <div className="flex border-t-2 border-gray-200 w-full bg-gray-50 p-8 mt-5">
+                <div className="flex border-t-2 border-gray-200 dark:border-border w-full bg-gray-50 dark:bg-background
+                                p-8 mt-5">
                     <div className="flex flex-col gap-3">
                         <div className="flex gap-4 w-full items-stretch">
                             {userProfiles.map((profile) => (
@@ -233,7 +246,8 @@ export default function ProfileComparison() {
                             </div>
 
                             <div
-                                className="bg-white border rounded-lg p-5"
+                                className="bg-white dark:bg-card border border-gray-200 dark:border-border
+                                           rounded-lg p-5"
                                 style={{height: `${leftHeight}px`, overflow: 'hidden'}}
                             >
                                 <RepositoryView

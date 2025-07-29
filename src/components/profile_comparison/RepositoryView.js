@@ -15,7 +15,7 @@ export default function RepositoryView({ allRepos, maxHeight, getUserColor }) {
     const [sortBy, setSortBy] = useState("popularity");
 
     if (!allRepos || allRepos.length === 0) {
-        return <p className="text-sm text-gray-500">No repositories to display.</p>;
+        return <p className="text-sm text-gray-500 dark:text-muted-foreground">No repositories to display.</p>;
     }
 
     const sorted = [...allRepos].sort((a, b) => {
@@ -61,9 +61,11 @@ export default function RepositoryView({ allRepos, maxHeight, getUserColor }) {
             style={{maxHeight: maxHeight}}
         >
             <div className="flex flex-col gap-4 mb-4">
-                <h3 className="text-xl font-semibold text-gray-800">Repository Rankings</h3>
+                <h3 className="text-xl font-semibold text-gray-800 dark:text-foreground">Repository Rankings</h3>
                 <div>
-                    <span className="text-xs uppercase tracking-wide text-gray-500 font-semibold">Rank by:</span>
+                    <span className="text-xs uppercase tracking-wide text-gray-500 dark:text-foreground font-semibold">
+                        Rank by:
+                    </span>
                     <div className="flex flex-wrap gap-2 mt-1">
                         {SORT_OPTIONS.map((option) => (
                             <button
@@ -71,8 +73,11 @@ export default function RepositoryView({ allRepos, maxHeight, getUserColor }) {
                                 onClick={() => setSortBy(option.value)}
                                 className={`px-3 py-1.5 rounded-full text-sm font-medium border transition-all duration-200
                                 ${sortBy === option.value
-                                    ? "bg-black text-white border-black shadow-md scale-105"
-                                    : "bg-white text-gray-700 border-gray-300 hover:bg-gray-100 hover:scale-105"}`}
+                                    ? "bg-black text-white dark:bg-foreground dark:text-black border-black " +
+                                      "dark:border-foreground shadow-md scale-105"
+                                    : "bg-white dark:bg-muted/10 dark:text-muted-foreground border-gray-300 " +
+                                      "dark:border-border hover:bg-gray-100 dark:hover:bg-muted/20 hover:scale-105"
+                                }`}
                             >
                                 {option.label}
                             </button>
@@ -88,12 +93,13 @@ export default function RepositoryView({ allRepos, maxHeight, getUserColor }) {
                 {sorted.map((repo, index) => (
                     <div
                         key={`${repo.owner}/${repo.name}`}
-                        className="bg-white shadow-sm border border-gray-200 rounded-md mx-1 p-4 transition text-sm
-                                   duration-100 ease-in-out transform hover:scale-[1.015] flex justify-between"
+                        className="bg-white dark:bg-card shadow-sm border border-gray-200 dark:border-border rounded-md
+                                   mx-1 p-4 transition text-sm duration-100 ease-in-out transform hover:scale-[1.015]
+                                   flex justify-between"
                     >
                         <div className="flex-1">
                             <div className="flex items-center gap-3 mb-2">
-                                <span className="text-xs font-bold text-gray-500">#{index + 1}</span>
+                                <span className="text-xs font-bold text-gray-500 dark:text-muted-foreground">#{index + 1}</span>
                                 <div className="relative group">
                                     <img
                                         src={repo.ownerAvatarUrl || `https://github.com/${repo.owner}.png`}
@@ -104,15 +110,17 @@ export default function RepositoryView({ allRepos, maxHeight, getUserColor }) {
                                         }}
                                     />
                                     <div className="absolute z-50 hidden group-hover:flex transition-all duration-200
-                                                    opacity-0 group-hover:opacity-100 text-xs bg-white text-gray-700
-                                                    border border-gray-300 shadow px-2 py-1 rounded left-1/2
-                                                    -translate-x-1/2 top-full mb-1 whitespace-nowrap">
+                                                    opacity-0 group-hover:opacity-100 text-xs bg-white dark:bg-muted
+                                                    text-gray-700 dark:text-muted-foreground border border-gray-300
+                                                    dark:border-border shadow px-2 py-1 rounded left-1/2
+                                                    -translate-x-1/2 top-full mb-1 whitespace-nowrap"
+                                    >
                                         @{repo.owner}
                                     </div>
                                 </div>
                                 <a
                                     href={repo.url}
-                                    className="text-base text-blue-600 font-semibold hover:underline"
+                                    className="text-base text-blue-600 dark:text-blue-400 font-semibold hover:underline"
                                     target="_blank"
                                     rel="noreferrer"
                                 >
@@ -121,11 +129,14 @@ export default function RepositoryView({ allRepos, maxHeight, getUserColor }) {
                             </div>
 
                             {repo.description && (
-                                <p className="text-gray-600 text-sm mb-2">{repo.description}</p>
+                                <p className="text-gray-600 dark:text-muted-foreground text-sm mb-2">
+                                    {repo.description}
+                                </p>
                             )}
 
                             {repo.primaryLanguage && (
-                                <div className="flex items-center gap-2 text-xs text-gray-600 mb-1">
+                                <div className="flex items-center gap-2 text-xs text-gray-600
+                                                dark:text-muted-foreground mb-1">
                                     <span
                                         className="w-2.5 h-2.5 rounded-full"
                                         style={{backgroundColor: repo.primaryLanguage.color}}
@@ -134,7 +145,8 @@ export default function RepositoryView({ allRepos, maxHeight, getUserColor }) {
                                 </div>
                             )}
 
-                            <div className="flex items-center gap-5 text-xs text-gray-500 mb-1">
+                            <div className="flex items-center gap-5 text-xs text-gray-500
+                                            dark:text-muted-foreground mb-1">
                                 <div className="flex items-center gap-1">
                                     <StarIcon size={12} className="text-yellow-500"/>
                                     {repo.stargazerCount}
@@ -145,11 +157,12 @@ export default function RepositoryView({ allRepos, maxHeight, getUserColor }) {
                                 </div>
                             </div>
 
-                            <div className="flex justify-between items-end text-xs text-gray-500 mt-2">
+                            <div className="flex justify-between items-end text-xs text-gray-500
+                                            dark:text-muted-foreground mt-2">
                                 <div className="flex items-center gap-1">
                                     <ClockIcon size={12}/> Updated {timeAgo(repo.updatedAt)}
                                 </div>
-                                <span className="text-gray-400">
+                                <span className="text-gray-400 dark:text-muted-foreground">
                                     Created {new Date(repo.createdAt).toLocaleDateString(undefined, {
                                     year: "numeric",
                                     month: "short",

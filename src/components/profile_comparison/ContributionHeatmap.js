@@ -18,8 +18,10 @@ export default function ContributionHeatmap({ userProfiles, getUserColor }) {
     const fullYearTemplate = generateFullYearRangeUTC(inferredYear);
 
     return (
-        <div className="flex flex-col p-4 bg-white border border-gray-200 rounded-lg">
-            <h2 className="text-xl font-semibold mt-2 ml-1 mb-6">Contributions This Year</h2>
+        <div className="flex flex-col p-4 bg-white dark:bg-card border border-gray-200 dark:border-border rounded-lg">
+            <h2 className="text-xl font-semibold mt-2 ml-1 mb-6 text-gray-800 dark:text-foreground">
+                Contributions This Year
+            </h2>
             <div className="gap-6">
                 {userProfiles.map((profile) => {
                     const user = profile?.data;
@@ -51,7 +53,9 @@ export default function ContributionHeatmap({ userProfiles, getUserColor }) {
                                         borderWidth: "1.5px"
                                     }}
                                 />
-                                <span className="font-medium text-sm text-gray-800">@{profile.login}</span>
+                                <span className="font-medium text-sm text-gray-800 dark:text-foreground">
+                                    @{profile.login}
+                                </span>
                             </div>
                             <ActivityCalendar
                                 data={data}
@@ -63,6 +67,7 @@ export default function ContributionHeatmap({ userProfiles, getUserColor }) {
                                 showMonthLabels={true}
                                 theme={{
                                     light: getUserColor(profile.login),
+                                    dark: getUserColor(profile.login),
                                 }}
                                 labels={{
                                     totalCount: `${getTotalCount(raw, inferredYear)} contributions in ${inferredYear}`,

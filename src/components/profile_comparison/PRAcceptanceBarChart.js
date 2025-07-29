@@ -89,7 +89,8 @@ export default function PRAcceptanceBarChart({ userProfiles, getPRAcceptance }) 
 
             {tooltipData && (
                 <div
-                    className="fixed pointer-events-none z-50 px-3 py-2 bg-white border border-gray-300 rounded shadow-md flex items-center gap-2 text-sm whitespace-nowrap"
+                    className="fixed pointer-events-none z-50 px-3 py-2 bg-white dark:bg-muted border border-gray-300
+                               dark:border-border rounded shadow-md flex items-center gap-2 text-sm whitespace-nowrap"
                     style={{
                         top: cursorPos.y + 12,
                         left: cursorPos.x + 12,
@@ -106,11 +107,11 @@ export default function PRAcceptanceBarChart({ userProfiles, getPRAcceptance }) 
                         }}
                     />
                     <div>
-                        <p className="font-semibold text-black">{tooltipData.label}</p>
-                        <p className="text-xs text-gray-600">
+                        <p className="font-semibold text-black dark:text-foreground">{tooltipData.label}</p>
+                        <p className="text-xs text-gray-600 dark:text-muted-foreground">
                         {formatMetricLabel(tooltipData.valueRaw, tooltipData.metricKey)}
                         </p>
-                        <p className="text-xs font-semibold text-black">
+                        <p className="text-xs font-semibold text-black dark:text-foreground">
                             {tooltipData.percent}
                         </p>
                     </div>

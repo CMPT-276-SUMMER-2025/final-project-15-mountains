@@ -64,10 +64,11 @@ export default function UserOverview({ userProfile, repos, userCount, userColor 
     ];
 
     return (
-        <div className={`border border-gray-200 w-full bg-white rounded-lg p-4 ${isSideBySide ? "md:flex md:gap-6" : ""}`}>
+        <div className={`border border-gray-200 dark:border-border w-full bg-white dark:bg-card rounded-lg p-4 
+                        ${isSideBySide ? "md:flex md:gap-6" : ""}`}>
             <div className={isSideBySide ? "md:w-1/2" : "w-full"}>
                 <div className="flex items-center gap-4 mb-6">
-                    <img
+                <img
                         src={user.avatarUrl}
                         alt={`${user.login} avatar`}
                         className="w-16 h-16 rounded-full"
@@ -76,7 +77,7 @@ export default function UserOverview({ userProfile, repos, userCount, userColor 
                         }}
                     />
                     <div>
-                        <h2 className="text-xl font-bold text-gray-800">
+                        <h2 className="text-xl font-bold text-gray-800 dark:text-foreground">
                             {user.name || user.login}
                         </h2>
                         <a
@@ -84,26 +85,26 @@ export default function UserOverview({ userProfile, repos, userCount, userColor 
                             href={`https://github.com/${user.login}`}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="text-base font-semibold text-blue-600 hover:underline"
+                            className="text-base font-semibold text-blue-600 dark:text-blue-400 hover:underline"
                         >
                             @{user.login}
                         </a>
-                        <p className="text-sm text-gray-500 flex items-center gap-1 mt-1">
+                        <p className="text-sm text-gray-500 dark:text-blue-400 flex items-center gap-1 mt-1">
                             <FaMapMarkerAlt/>
                             {user.location || "Unknown"}
                         </p>
                     </div>
                 </div>
 
-                <div className="grid grid-cols-2 gap-4 text-sm text-gray-700">
+                <div className="grid grid-cols-2 gap-4 text-sm text-gray-700 dark:text-muted-foreground">
                     {stats.map((stat) => (
                         <div key={stat.label} className="flex items-center gap-2">
                             <div className="text-xl m-2">{stat.icon}</div>
                             <div>
-                                <div className="text-xs text-gray-500 uppercase">
+                                <div className="text-xs text-gray-500 dark:text-muted-foreground uppercase">
                                     {stat.label}
                                 </div>
-                                <div className="text-md font-medium text-gray-900">
+                                <div className="text-md font-medium text-gray-900 dark:text-foreground">
                                     {stat.value}
                                 </div>
                             </div>
@@ -113,27 +114,33 @@ export default function UserOverview({ userProfile, repos, userCount, userColor 
 
                 {user.topLanguages && user.topLanguages.length > 0 && (
                     <div className="mt-6">
-                        <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">
+                        <h3 className="text-xs font-semibold text-gray-500 dark:text-muted-foreground uppercase
+                                       tracking-wide mb-2">
                             Top Languages
                         </h3>
-                        <ul className="divide-y divide-gray-100 rounded-lg border border-gray-200 overflow-hidden">
+                        <ul className="divide-y divide-gray-100 dark:divide-muted rounded-lg border border-gray-200
+                                       dark:border-border overflow-hidden">
                             {[...user.topLanguages, ...Array(5 - user.topLanguages.length).fill(null)].map((lang, i) => (
                                 <li
                                     key={lang?.name || `empty-${i}`}
                                     className={`flex items-center justify-between px-4 py-2 ${
-                                        lang ? "bg-white hover:bg-gray-50" : "bg-gray-50"
+                                        lang
+                                            ? "bg-white hover:bg-gray-100 dark:bg-muted/10 dark:hover:bg-muted/40"
+                                            : "bg-gray-50 dark:bg-muted/30 text-gray-400 dark:text-muted-foreground/90"
                                     }`}
                                 >
                                     <div className="flex items-center gap-2">
                                         <div
                                             className="w-2.5 h-2.5 rounded-full"
-                                            style={{ backgroundColor: lang?.color || "#e5e7eb" }}
+                                            style={{backgroundColor: lang?.color || "#6b7280"}} // tailwind gray-500
                                         />
-                                        <span className="text-sm text-gray-700 font-medium">
-                                          {lang?.name || <span className="text-gray-400 italic">—</span>}
+                                        <span className="text-sm font-medium">
+                                          {lang?.name || (
+                                              <span className="italic text-gray-400 dark:text-muted-foreground/50">—</span>
+                                          )}
                                         </span>
                                     </div>
-                                    <span className="text-sm text-gray-500 font-medium">
+                                    <span className="text-sm font-medium">
                                         {lang?.percentage != null ? `${lang.percentage.toFixed(1)}%` : ""}
                                     </span>
                                 </li>

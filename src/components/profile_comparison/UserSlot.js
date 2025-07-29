@@ -40,7 +40,7 @@ export default function UserSlot({ users, removeUser, onColorChange }) {
     };
 
     return (
-        <div className="flex flex-wrap justify-center gap-5 mb-5">
+        <div className="flex flex-wrap justify-center gap-5 mb-5 text-foreground">
             {users.map((user, index) => {
                 colorMap[user.login] || getUserColorScheme(user.login);
                 return (
@@ -52,7 +52,8 @@ export default function UserSlot({ users, removeUser, onColorChange }) {
                             type="button"
                             onClick={() => removeUser(user.login)}
                             className="absolute top-2 right-2 flex items-center justify-center w-6 h-6 rounded-full
-                                   bg-gray-100 hover:bg-gray-200 text-gray-600 hover:text-red-500 transition"
+                                bg-gray-50 hover:bg-gray-200 text-gray-600 hover:text-red-500 dark:bg-muted
+                                dark:hover:bg-muted/80 dark:text-foreground dark:hover:text-red-400 transition"
                         >
                             <span className="text-sm leading-none">&times;</span>
                         </button>
@@ -66,7 +67,7 @@ export default function UserSlot({ users, removeUser, onColorChange }) {
                             }}
                         />
 
-                        <p className="font-semibold">
+                        <p className="font-semibold text-foreground">
                             @{user.login}
                         </p>
 

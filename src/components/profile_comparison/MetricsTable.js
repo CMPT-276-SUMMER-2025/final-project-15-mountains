@@ -19,15 +19,17 @@ export default function MetricsTable({ userProfiles, activeMetric, getMetricValu
     };
 
     return (
-        <div className="flex flex-col lg:flex-row gap-5 bg-white p-6 rounded-lg border">
+        <div className="flex flex-col lg:flex-row gap-5 bg-white dark:bg-card p-6 rounded-lg border border-gray-200
+                        dark:border-border">
             <div className="w-full lg:w-1/2">
-                <h2 className="text-xl font-bold mb-6 text-gray-800">
+                <h2 className="text-xl font-bold mb-6 text-gray-800 dark:text-foreground">
                     Rankings by {labelByMetric[activeMetric] ?? activeMetric}
                 </h2>
 
-                <div className="justify-center overflow-x-auto border border-gray-200 rounded-lg">
+                <div className="justify-center overflow-x-auto border border-gray-200 dark:border-border rounded-lg">
                     <table className="min-w-full text-sm text-left rounded-lg overflow-hidden">
-                        <thead className="bg-gray-100 text-gray-700 uppercase tracking-wide text-xs">
+                        <thead className="bg-gray-100 dark:bg-muted text text-gray-700 dark:text-muted-foreground
+                                          uppercase tracking-wide text-xs">
                         <tr>
                             <th className="py-3 px-4">Rank</th>
                             <th className="py-3 px-4">User</th>
@@ -68,11 +70,15 @@ export default function MetricsTable({ userProfiles, activeMetric, getMetricValu
                             return (
                                 <tr
                                     key={user.login}
-                                    className={`transition-all hover:bg-gray-50 border-t ${
-                                        i === 0 ? "bg-yellow-50 font-semibold" : ""
+                                    className={`transition-all border-t border-gray-200 dark:border-border
+                                        ${i === 0
+                                            ? "bg-yellow-50 dark:bg-yellow-900/30 font-semibold hover:bg-amber-100 dark:hover:bg-amber-800/40"
+                                            : "hover:bg-gray-100 dark:hover:bg-muted/30"
                                     }`}
+
+
                                 >
-                                    <td className="py-3 px-4">{i + 1}</td>
+                                    <td className="py-3 px-4 text-gray-800 dark:text-foreground">{i + 1}</td>
 
                                     <td className="py-3 px-4 flex items-center gap-2">
                                         <span

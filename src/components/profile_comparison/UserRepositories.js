@@ -15,7 +15,7 @@ export default function UserRepositories({ repos }) {
 
     if (!repos || repos.length === 0) {
         return (
-            <p className="text-sm text-gray-500 mt-2">No public repositories found.</p>
+            <p className="text-sm text-gray-500 dark:text-muted-foreground mt-2">No public repositories found.</p>
         );
     }
 
@@ -61,9 +61,9 @@ export default function UserRepositories({ repos }) {
     return (
         <div className="mt-2">
             <div className="flex justify-between items-center mb-2">
-                <h3 className="text-xl font-semibold text-gray-800">Repositories</h3>
+                <h3 className="text-xl font-semibold text-gray-800 dark:text-foreground">Repositories</h3>
                 <select
-                    className="text-sm border border-gray-300 rounded px-1 py-1"
+                    className="text-sm border border-gray-300 dark:text-foreground rounded px-1 py-1"
                     value={sortBy}
                     onChange={(e) => setSortBy(e.target.value)}
                 >
@@ -79,24 +79,24 @@ export default function UserRepositories({ repos }) {
                 {sortedRepos.map((repo) => (
                     <div
                         key={repo.name}
-                        className="p-4 mx-1 bg-white shadow-sm border border-gray-200 rounded-md text-sm
+                        className="p-4 mx-1 bg-white dark:bg-card shadow-sm border border-gray-200 dark:border-border rounded-md text-sm
                                    transition duration-100 ease-in-out transform hover:scale-[1.015]"
                     >
                         <a
                             href={repo.url}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="text-blue-600 text-base font-medium hover:underline"
+                            className="text-blue-600 dark:text-blue-400 text-base font-medium hover:underline"
                         >
                             {repo.name}
                         </a>
 
                         {repo.description && (
-                            <p className="text-gray-600 text-sm mt-1">{repo.description}</p>
+                            <p className="text-gray-600 dark:text-muted-foreground text-sm mt-1">{repo.description}</p>
                         )}
 
                         {repo.primaryLanguage && (
-                            <div className="flex items-center gap-1 text-xs text-gray-600 mt-2">
+                            <div className="flex items-center gap-1 text-xs text-gray-600 dark:text-muted-foreground mt-2">
                                 <span
                                     className="w-2.5 h-2.5 rounded-full"
                                     style={{backgroundColor: repo.primaryLanguage.color}}
@@ -105,7 +105,7 @@ export default function UserRepositories({ repos }) {
                             </div>
                         )}
 
-                        <div className="flex items-center gap-4 text-xs text-gray-500 mt-2">
+                        <div className="flex items-center gap-4 text-xs text-gray-50 dark:text-muted-foreground mt-2">
                             <div className="flex items-center gap-1">
                                 <StarIcon size={12} className="text-yellow-500"/>
                                 {repo.stargazerCount}
