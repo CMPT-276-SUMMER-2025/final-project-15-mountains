@@ -75,12 +75,20 @@ export default function ContributionHeatmap({ userProfiles, getUserColorScheme }
                                         placement="top"
                                         title={
                                             activity.count === 0
-                                                ? `No contributions on ${activity.date}`
+                                                ? `No contributions on ${new Date(activity.date + "T00:00:00Z")
+                                                    .toLocaleDateString("en-US", {
+                                                        month: "long",
+                                                        day: "numeric",
+                                                        timeZone: "UTC"
+                                                    })}`
                                                 : `${activity.count} ${activity.count === 1 
-                                                    ? "contribution" 
-                                                    : "contributions"} on 
-                                                        ${new Date(activity.date).toLocaleDateString("en-US",
-                                                        { month: "long", day: "numeric" })}`
+                                                    ? "contribution"
+                                                    : "contributions"} on ${new Date(activity.date + "T00:00:00Z")
+                                                    .toLocaleDateString("en-US", {
+                                                        month: "long",
+                                                        day: "numeric",
+                                                        timeZone: "UTC"
+                                                    })}`
                                         }
                                         arrow
                                         disableFocusListener
@@ -111,9 +119,9 @@ export default function ContributionHeatmap({ userProfiles, getUserColorScheme }
 function getLevel(count, max) {
     if (count === 0) return 0;
     const ratio = count / max;
-    if (ratio < 0.25) return 1;
-    if (ratio < 0.5) return 2;
-    if (ratio < 0.75) return 3;
+    if (ratio <= 0.15) return 1;
+    if (ratio <= 0.3) return 2;
+    if (ratio <= 0.45) return 3;
     return 4;
 }
 
