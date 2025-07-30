@@ -41,7 +41,12 @@ export default function AboutPage() {
   const features = [
     {
       icon: <Target className="h-8 w-8" />,
-      title: "Smart Issue Matching",
+      title: "Issue Finder",
+      description: "Find easy Github issues from open source repos in a language your comfortable in."
+    },
+    {
+      icon: <Target className="h-8 w-8" />,
+      title: "Smart Issue Suggestion",
       description: "AI-powered recommendations that match your skills with the perfect GitHub issues."
     },
     {
@@ -58,6 +63,11 @@ export default function AboutPage() {
       icon: <Zap className="h-8 w-8" />,
       title: "AI Chatbot",
       description: "Get instant help and guidance for your development challenges with our intelligent chatbot."
+    },
+    {
+      icon: <Zap className="h-8 w-8" />,
+      title: "Readme Viewer",
+      description: "Search Readmes on Github and make local edits to them with a live preview of your changes."
     }
   ];
 
@@ -69,24 +79,10 @@ export default function AboutPage() {
           About GitGood
         </h1>
         <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed mb-8">
-          We are passionate about making open source contribution accessible to everyone. 
-          GitGood combines the power of AI with the collaborative spirit of GitHub to help 
-          developers find their perfect contribution opportunities.
+          We believe meaningful contributions should be within reach for every developer. GitGood blends AI with
+          GitHub&apos;s open source ecosystem to match people with the right projects, empowering them to make an impact
+          and grow their skills along the way.
         </p>
-        <div className="flex flex-wrap justify-center gap-4">
-          <Badge variant="secondary" className="text-sm px-4 py-2">
-            AI-Powered
-          </Badge>
-          <Badge variant="secondary" className="text-sm px-4 py-2">
-            Open Source
-          </Badge>
-          <Badge variant="secondary" className="text-sm px-4 py-2">
-            Developer Tools
-          </Badge>
-          <Badge variant="secondary" className="text-sm px-4 py-2">
-            GitHub Integration
-          </Badge>
-        </div>
       </div>
 
       {/* Mission Section */}
@@ -95,8 +91,8 @@ export default function AboutPage() {
           <CardHeader className="text-center">
             <CardTitle className="text-3xl mb-4">Our Mission</CardTitle>
             <CardDescription className="text-lg max-w-4xl mx-auto">
-              To democratize open source contribution by providing intelligent tools that help developers 
-              of all skill levels find meaningful projects and make impactful contributions to the global 
+              To democratize open source contribution by providing intelligent tools that help developers
+              of all skill levels find meaningful projects and make impactful contributions to the global
               developer community.
             </CardDescription>
           </CardHeader>
@@ -105,8 +101,8 @@ export default function AboutPage() {
 
       {/* Features Section */}
       <div className="max-w-7xl mx-auto mb-20">
-        <h2 className="text-3xl font-bold text-center mb-12">What We Offer</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <h2 className="text-3xl font-bold text-center mb-12">Features We Offer</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {features.map((feature, index) => (
             <Card key={index} className="hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
               <CardHeader className="text-center">
