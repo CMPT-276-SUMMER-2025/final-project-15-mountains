@@ -136,7 +136,6 @@ export default function ChatbotPage() {
             // await new Promise(resolve => setTimeout(resolve, 3000));
             
             const response = await fetch('/api/ai_api/chatbot', {
-                // TODO: implement this when we have the API endpoint
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ prompt: inputMessage, messages: messages }),
@@ -159,9 +158,7 @@ export default function ChatbotPage() {
             setMessages(prev => [...prev, assistantMessage]);
         } catch (error) {
             if (error.name === 'AbortError') {
-                console.log('Request was cancelled');
             } else {
-                console.error('Error:', error);
                 const errorMessage = {
                     id: Date.now() + 1,
                     role: 'assistant',
