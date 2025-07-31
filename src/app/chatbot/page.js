@@ -145,7 +145,7 @@ export default function ChatbotPage() {
                 throw new Error('Failed to get response');
             }
 
-            if(!isGenerating){
+            if(controller.signal.aborted){
                 throw new Error('CancelGenerating');
             }
 
