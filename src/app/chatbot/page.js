@@ -145,6 +145,10 @@ export default function ChatbotPage() {
                 throw new Error('Failed to get response');
             }
 
+            if(!isGenerating){
+                throw new Error('CancelGenerating');
+            }
+
             const data = await response.json();
             
             
@@ -157,7 +161,7 @@ export default function ChatbotPage() {
 
             setMessages(prev => [...prev, assistantMessage]);
         } catch (error) {
-            if (error.name === 'AbortError') {
+            if (error.message === 'CancelGenerating') {
             } else {
                 const errorMessage = {
                     id: Date.now() + 1,
