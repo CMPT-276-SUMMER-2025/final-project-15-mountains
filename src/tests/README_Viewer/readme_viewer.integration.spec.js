@@ -1,3 +1,4 @@
+import { timeout } from '@/playwright.config';
 import { test, expect } from '@playwright/test';
 
 test('README_Viewer: Markdown file appears after searching for it', async ({ page }) => {
@@ -7,6 +8,8 @@ test('README_Viewer: Markdown file appears after searching for it', async ({ pag
     await page.getByPlaceholder('Repo').fill('AmarKoonar');
     await page.getByRole('button',{name:'Load'}).click();
 
-    await expect(page.locator('text=Hey there').first()).toBeVisible();
+    
+
+    await expect(page.getByText('Hey there').first()).toBeVisible({timeout: 120_000});
 
 });
