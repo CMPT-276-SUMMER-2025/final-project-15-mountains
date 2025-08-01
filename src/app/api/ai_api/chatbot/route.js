@@ -11,6 +11,13 @@ const client = new OpenAI({
 export async function POST(req) {
     const { prompt, messages } = await req.json();
 
+    const forwardedFor = req.headers.get('x-forwarded-for');
+    const ip = forwardedFor?.split(',')[0]?.trim() || 'Unknown';
+  
+    // to check which IP is sending the request - ONLY printed to console in server
+    console.log("Visitor IP:", ip);
+    console.log("Prompt: ", prompt);
+
    const systemPrompt = `
 
       You are the GitGood chatbot, an AI assistant built into the website GitGood that helps users level up their GitHub presence. 
@@ -38,7 +45,6 @@ export async function POST(req) {
 
 
       const res = await client.chat.completions.create({
-        // TODO: change to o4-mini
           model: "openai/gpt-4.1-nano",
           temperature: 0.7,
           max_tokens: 4000,

@@ -136,7 +136,6 @@ export default function ChatbotPage() {
             // await new Promise(resolve => setTimeout(resolve, 3000));
             
             const response = await fetch('/api/ai_api/chatbot', {
-                // TODO: implement this when we have the API endpoint
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ prompt: inputMessage, messages: messages }),
@@ -144,6 +143,10 @@ export default function ChatbotPage() {
 
             if (!response.ok) {
                 throw new Error('Failed to get response');
+            }
+
+            if(controller.signal.aborted){
+                throw new Error('CancelGenerating');
             }
 
             const data = await response.json();
@@ -158,10 +161,8 @@ export default function ChatbotPage() {
 
             setMessages(prev => [...prev, assistantMessage]);
         } catch (error) {
-            if (error.name === 'AbortError') {
-                console.log('Request was cancelled');
+            if (error.message === 'CancelGenerating') {
             } else {
-                console.error('Error:', error);
                 const errorMessage = {
                     id: Date.now() + 1,
                     role: 'assistant',
