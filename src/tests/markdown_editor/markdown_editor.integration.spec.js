@@ -8,5 +8,7 @@ test('README_Viewer: Markdown file appears after searching for it', async ({ pag
     
     await page.getByTestId('submit').click()
 
-    await expect(page.locator('text=John Doe')).toBeVisible({ timeout: 10000 });
+    await page.waitForResponse(resp => resp.url().includes('/api/ai_api/markdown') && resp.status() === 200);
+
+    await expect(page.getByText('John Doe').first()).toBeVisible({ timeout: 10000 });
 });
