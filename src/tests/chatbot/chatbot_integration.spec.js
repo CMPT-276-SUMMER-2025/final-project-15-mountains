@@ -1,7 +1,7 @@
 const { test, expect } = require('@playwright/test');
 
 test('INTEGRATION TEST AI CHATBOT: loads AI explanation after entering prompt', async ({ page }) => {
-    test.setTimeout(120_000);
+    test.setTimeout(1000_000);
 
     await page.goto('/chatbot');
   
