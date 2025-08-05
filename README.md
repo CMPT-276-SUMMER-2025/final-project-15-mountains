@@ -36,11 +36,12 @@ npm install
 ```
 ## 🔐 Set Up Environment Variables
 
-Create a `.env.local` file in the root of the project and add the following:
+Create a `.env.local` file in the src folder and add the following:
 
 ```env
 GH_TOKEN=your_github_api_token
 AI_TOKEN=your_openai_api_token
+NEXT_PUBLIC_GITHUB_TOKEN=your_github_api_token
 ```
 
 Replace `your_github_api_token` and `your_openai_api_token` with your actual API keys.
