@@ -17,13 +17,13 @@ export function SearchCache(input, stableInput, cacheRef) {
         cacheRef.current = pruned;
         localStorage.setItem("searchCache", JSON.stringify(pruned));
 
-        console.log(`[!] Pruned Entries: ${removed}`);
+        // console.log(`[!] Pruned Entries: ${removed}`);
         Object.entries(pruned).forEach(([key, value]) => {
-            console.log(`"${key}" expires @ ${(new Date(value.timestamp + TTL)).toLocaleTimeString()}`);
+            // console.log(`"${key}" expires @ ${(new Date(value.timestamp + TTL)).toLocaleTimeString()}`);
         });
 
-        console.log("[!] Initial Cache:");
-        console.table(cacheRef.current);
+        // console.log("[!] Initial Cache:");
+        // console.table(cacheRef.current);
     }, [cacheRef]);
 
     useEffect(() => {
@@ -40,13 +40,13 @@ export function SearchCache(input, stableInput, cacheRef) {
 
         if (isFresh) {
             setResults(cached.items || []);
-            console.log(`Cache Found "${key}"`);
+            // console.log(`Cache Found "${key}"`);
             return;
         }
 
         if (!stableKey || stableKey !== key) return;
 
-        console.log(`[!] Fetching For: "${stableKey}" — using token`);
+        // console.log(`[!] Fetching For: "${stableKey}" — using token`);
         fetch("/api/github_api/user_search", {
             method: "POST",
             headers: {
@@ -63,8 +63,8 @@ export function SearchCache(input, stableInput, cacheRef) {
                 };
                 localStorage.setItem("searchCache", JSON.stringify(cacheRef.current));
                 setResults(items);
-                console.log(`[!] Cache Update: "${stableKey}" — secure token used`);
-                console.log(`>>> Rate Limit: ${limit}/${remaining} — Reset @ ${new Date(reset * 1000).toLocaleTimeString()}`);
+                // console.log(`[!] Cache Update: "${stableKey}" — secure token used`);
+                // console.log(`>>> Rate Limit: ${limit}/${remaining} — Reset @ ${new Date(reset * 1000).toLocaleTimeString()}`);
             })
             .catch((err) => console.error(err));
     }, [input, stableInput, cacheRef]);
