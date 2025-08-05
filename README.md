@@ -1,6 +1,7 @@
 # Final Project — CMPT 276 Group 15: Mountains - GitGood
 
 A web app that helps developers level up their GitHub presence with AI-powered tools, beginner-friendly issue discovery, README feedback, and personalized GitHub growth tools.
+# link: [GitGood](https://gitgood-pink.vercel.app/)
 ```
 .
 ├── docs                    # Documentation files
@@ -14,9 +15,9 @@ A web app that helps developers level up their GitHub presence with AI-powered t
 ├── src                     # Source files 
 │   ├── app                 # Main application code
 │   ├── public              # Static assets (png, svg, jpeg, etc.)
+│   ├── components          # Ui components (Shadcn)
 │   ├── tests               # Playwright testing files
 │   └── ...                 # Additional source components      
-├── tools                   # Development tools and utilities
 └── README.md               # Project overview (this file)
 ```
 ##  Prerequisites
@@ -72,10 +73,10 @@ npm run start
 ```
 
 ## M1 - Project Report
-[CMPT 276 - Project Report - Milestone 1](m1.pdf)
+[CMPT 276 - Project Report - Milestone 1](/docs/proposal/m1.pdf)
 
 ## M0 - Project Proposal
-[Project Proposal](m0.pdf)
+[Project Proposal](/docs/proposal/m0.pdf)
 ## 📄 License
 
 MIT License
