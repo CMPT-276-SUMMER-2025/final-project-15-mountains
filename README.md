@@ -70,6 +70,12 @@ Then preview the production build:
 ```bash
 npm run start
 ```
+
+## M1 - Project Report
+[CMPT 276 - Project Report - Milestone 1](CMPT%20276%20-%20Project%20Report-%20milestone%201.pdf)
+
+## M0 - Project Proposal
+[Project Proposal](project%20proposal%20(2).pdf)
 ## 📄 License
 
 MIT License
