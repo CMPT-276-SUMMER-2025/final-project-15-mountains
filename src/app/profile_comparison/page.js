@@ -52,17 +52,17 @@ export default function ProfileComparison() {
 
     const handleAnalysis = async () => {
         if (users.length === 0) {
-            console.log("No users to analyze");
+            // console.log("No users to analyze");
             return;
         }
 
-        console.log(`Starting analysis for ${users.length} user(s)`);
+        // console.log(`Starting analysis for ${users.length} user(s)`);
         setLoading(true);
 
         try {
             const userData = await Promise.all(
                 users.map(async (user, index) => {
-                    console.log(`Fetching data for @${user.login}`);
+                    // console.log(`Fetching data for @${user.login}`);
 
                     const profileRes = await fetch("/api/github_api/profile_comparison", {
                         method: "POST",
@@ -78,7 +78,7 @@ export default function ProfileComparison() {
                     }
 
                     const profileJson = await profileRes.json();
-                    console.log(`Data received for @${user.login}:`, profileJson);
+                    // console.log(`Data received for @${user.login}:`, profileJson);
 
                     return {
                         login: user.login,
@@ -88,14 +88,14 @@ export default function ProfileComparison() {
                 })
             );
 
-            console.log("Profiles fetched successfully:", userData);
+            // console.log("Profiles fetched successfully:", userData);
             setUserProfiles(userData);
             setShowAnalysis(true);
         } catch (err) {
             console.error("An error occurred during analysis:", err);
         } finally {
             setLoading(false);
-            console.log("Analysis complete");
+            // console.log("Analysis complete");
         }
     };
 
