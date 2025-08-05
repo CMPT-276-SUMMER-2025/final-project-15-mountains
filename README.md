@@ -72,10 +72,10 @@ npm run start
 ```
 
 ## M1 - Project Report
-[CMPT 276 - Project Report - Milestone 1](CMPT 276 - Project Report- milestone 1.pdf.pdf)
+[CMPT 276 - Project Report - Milestone 1](m1.pdf)
 
 ## M0 - Project Proposal
-[Project Proposal](project proposal(2).pdf)
+[Project Proposal](m0.pdf)
 ## 📄 License
 
 MIT License
