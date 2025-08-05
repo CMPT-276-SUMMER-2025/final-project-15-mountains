@@ -4,6 +4,13 @@ export async function POST(req) {
     try {
         const { username } = await req.json();
 
+        if (!username || typeof username !== 'string' || username.trim() === '') {
+            return new NextResponse(JSON.stringify({ error: 'Username is required' }), {
+                status: 400,
+                headers: { "Content-Type": "application/json" },
+            });
+        }
+        
         const GH_TOKEN = process.env.GH_TOKEN;
         if (!GH_TOKEN) {
             throw new Error("GitHub token not set");
