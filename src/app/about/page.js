@@ -19,22 +19,22 @@ export default function AboutPage() {
       name: "Edward Lee",
       role: "DevOps Engineer",
       github: "https://github.com/euidml",
-      linkedin: "FILL_IN",
+      linkedin: "www.linkedin.com/in/edward-lee-61523a225",
       email: "ela145@sfu.ca"
     },
     {
       name: "Matthew Tsui",
       role: "QA Developer",
       github: "https://github.com/MatthewTsui2001",
-      linkedin: "FILL_IN",
-      email: "FILL_IN@example.com"
+      linkedin: "https://www.linkedin.com/in/matthewtsui123/",
+      email: "mta163@sfu.ca"
     },
     {
       name: "Thomas Brigham",
       role: "UI/UX Designer",
       github: "https://github.com/denoire",
-      linkedin: "FILL_IN",
-      email: "FILL_IN@example.com"
+      linkedin: "https://ca.linkedin.com/in/thomas-albert-brigham-0955462a7",
+      email: "tab13@sfu.ca"
     }
   ];
 
