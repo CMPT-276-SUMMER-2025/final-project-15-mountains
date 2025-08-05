@@ -19,7 +19,7 @@ export default function AboutPage() {
       name: "Edward Lee",
       role: "DevOps Engineer",
       github: "https://github.com/euidml",
-      linkedin: "www.linkedin.com/in/edward-lee-61523a225",
+      linkedin: "https://www.linkedin.com/in/edward-lee-61523a225/",
       email: "ela145@sfu.ca"
     },
     {
