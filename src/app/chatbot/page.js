@@ -294,6 +294,7 @@ export default function ChatbotPage() {
                                 placeholder="Type your message here... Ask me about GitHub issues, code problems, or anything development-related!"
                                 disabled={isGenerating}
                                 className="min-h-[60px] max-h-[120px] resize-none pr-12"
+                                data-testid="chatbot-input"
                                 rows="2"
                             />
                         </div>
@@ -312,6 +313,7 @@ export default function ChatbotPage() {
                                 <Button
                                     onClick={handleSendMessage}
                                     disabled={!inputMessage.trim()}
+                                    data-testid="chatbot-send-button"
                                     className={`px-6 py-3 ${
                                         editIndex !== null 
                                             ? 'bg-yellow-600 hover:bg-yellow-700' 
